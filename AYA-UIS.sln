@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AYA-UIS", "AYA-UIS\AYA-UIS.csproj", "{BF301F98-0F7C-4710-8613-074E08725AEC}"
 EndProject
@@ -15,11 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Abstraction", "Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Core\Services\Services.csproj", "{28D99F43-D85A-48E6-8EB2-D4E9684C3B02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Infrastructure\Presentation\Presentation.csproj", "{AE85FA96-25FD-49DD-AAD5-39E248CD8C7F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presistence", "Infrastructure\Presistence\Presistence.csproj", "{39CA353A-58C5-4BEE-93E2-6E29DF71AF83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{EF81D993-9D3D-467D-AB95-A79E5CC5498C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Infrastructure\Presentation\Presentation.csproj", "{62B43809-B86D-411A-8AB2-774E5E92EB83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,6 @@ Global
 		{28D99F43-D85A-48E6-8EB2-D4E9684C3B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28D99F43-D85A-48E6-8EB2-D4E9684C3B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28D99F43-D85A-48E6-8EB2-D4E9684C3B02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE85FA96-25FD-49DD-AAD5-39E248CD8C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE85FA96-25FD-49DD-AAD5-39E248CD8C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE85FA96-25FD-49DD-AAD5-39E248CD8C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE85FA96-25FD-49DD-AAD5-39E248CD8C7F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39CA353A-58C5-4BEE-93E2-6E29DF71AF83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39CA353A-58C5-4BEE-93E2-6E29DF71AF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39CA353A-58C5-4BEE-93E2-6E29DF71AF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +51,10 @@ Global
 		{EF81D993-9D3D-467D-AB95-A79E5CC5498C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF81D993-9D3D-467D-AB95-A79E5CC5498C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF81D993-9D3D-467D-AB95-A79E5CC5498C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62B43809-B86D-411A-8AB2-774E5E92EB83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B43809-B86D-411A-8AB2-774E5E92EB83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B43809-B86D-411A-8AB2-774E5E92EB83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B43809-B86D-411A-8AB2-774E5E92EB83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,7 +63,7 @@ Global
 		{829CE7D6-57FF-42CF-AC4E-794E4CBD73D2} = {E5A12CD8-0053-453D-A1F6-17C5E68945D1}
 		{2BDB18A1-4430-4C31-A34C-861F4AEC7E52} = {E5A12CD8-0053-453D-A1F6-17C5E68945D1}
 		{28D99F43-D85A-48E6-8EB2-D4E9684C3B02} = {E5A12CD8-0053-453D-A1F6-17C5E68945D1}
-		{AE85FA96-25FD-49DD-AAD5-39E248CD8C7F} = {8AF67779-7343-4C74-8A33-1A38C736C9D4}
 		{39CA353A-58C5-4BEE-93E2-6E29DF71AF83} = {8AF67779-7343-4C74-8A33-1A38C736C9D4}
+		{62B43809-B86D-411A-8AB2-774E5E92EB83} = {8AF67779-7343-4C74-8A33-1A38C736C9D4}
 	EndGlobalSection
 EndGlobal
