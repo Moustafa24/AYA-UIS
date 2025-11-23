@@ -6,12 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App"> </FrameworkReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\Services.Abstraction\Services.Abstraction.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\Services.Abstraction\Services.Abstraction.csproj" />
+	</ItemGroup>
 </Project>
