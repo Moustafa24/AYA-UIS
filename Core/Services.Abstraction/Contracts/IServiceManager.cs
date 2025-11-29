@@ -10,6 +10,7 @@ namespace Services.Abstraction.Contracts
     {
         public IDepartmentFeeService DepartmentFeeService { get; }
         public IAcademicSchedulesService  AcademicSchedules { get; }
-       
+
+        public IAuthenticationService AuthenticationService { get; }
     }
 }
