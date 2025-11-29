@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Contracts;
@@ -99,6 +100,8 @@ namespace Presentation.Controllers
 
 
         [HttpPost("upload")]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Add( string nameScadules, IFormFile file)
         {
             var result = await _serviceManager.AcademicSchedules.AddAsync( nameScadules,  file);
@@ -106,7 +109,7 @@ namespace Presentation.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{nameScadules}")]
         public async Task<bool> Delete(string nameScadules)
         {

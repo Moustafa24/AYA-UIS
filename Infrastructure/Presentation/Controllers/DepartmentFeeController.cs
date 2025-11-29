@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Contracts;
 using Shared.Dtos.Info_Module;
@@ -39,6 +40,7 @@ namespace Presentation.Controllers
 
         // PUT: api/DepartmentFees/{departmentName}/{gradeYear}
         [HttpPut("{departmentName}/{gradeYear}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string departmentName, string gradeYear, [FromBody] DepartmentFeeDtos dto)
         {
             await _service.UpdateByCompositeKeyAsync(departmentName, gradeYear, dto);
