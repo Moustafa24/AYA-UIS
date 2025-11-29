@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities.Identity;
@@ -18,7 +19,14 @@ namespace Presistence.Identity
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<User>()
+                   .HasIndex(u => u.Academic_Code)
+                   .IsUnique();
             
+            builder.Entity<User>()
+                   .HasIndex(u => u.UserName)
+                   .IsUnique();
+
         }
 
         public DbSet<User> User { get; set; }

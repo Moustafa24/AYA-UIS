@@ -62,6 +62,7 @@ namespace AYA_UIS.MiddelWares
             content.Response.StatusCode = ex switch
             {
                 ValidationException validationException => HandelValidationException(validationException, response),
+                UnAuthoraizedException => StatusCodes.Status401Unauthorized,
                 NotFoundException => StatusCodes.Status404NotFound,
                 (_) => StatusCodes.Status500InternalServerError
             };
