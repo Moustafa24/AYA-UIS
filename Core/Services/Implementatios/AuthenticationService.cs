@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Domain.Entities.Identity;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Services.Abstraction.Contracts;
@@ -39,6 +40,8 @@ namespace Services.Implementatios
         // LoginAsync
         public async Task<UserResultDto> LoginAsync(LoginDto loginDto)
         {
+
+
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user is null) throw new UnAuthoraizedException();
 
@@ -51,21 +54,39 @@ namespace Services.Implementatios
                 user.DisplayName,
                 await CreateTokenAsync(user),
                 user.Email,
-                roles.FirstOrDefault()
+                roles.FirstOrDefault(),
+                user.Academic_Code,
+                user.UserName
             );
         }
 
         // RegisterAsync
         public async Task<UserResultDto> RegisterAsync(RegisterDto registerDto)
         {
+            var ChekInputValidation = new List<string>();
+
+            if (await _userManager.Users.AnyAsync(u => u.Academic_Code == registerDto.Academic_Code))
+                ChekInputValidation.Add("Academic Code already exists.");
+
+            if (await _userManager.Users.AnyAsync(u => u.UserName == registerDto.UserName))
+                ChekInputValidation.Add("UserName already exists.");
+
+            if (await _userManager.Users.AnyAsync(u => u.Email == registerDto.Email))
+                ChekInputValidation.Add("Email already exists.");
+
+            if (ChekInputValidation.Any())
+                throw new ValidationException(ChekInputValidation);
+
             var user = new User
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.Email,   
+                UserName = registerDto.UserName,   
                 PhoneNumber = registerDto.PhoneNumber,
                 Academic_Code = registerDto.Academic_Code
             };
+
+
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded)
@@ -86,6 +107,8 @@ namespace Services.Implementatios
                 user.DisplayName,
                 token,
                 user.Email,
+                user.Academic_Code,
+                user.UserName,
                 roles.FirstOrDefault() 
             );
         }
