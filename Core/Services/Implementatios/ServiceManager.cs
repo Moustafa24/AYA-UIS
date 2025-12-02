@@ -5,6 +5,7 @@ using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Services.Abstraction.Contracts;
 using Services.Implementatios;
@@ -16,9 +17,10 @@ namespace Services.Implementations
     IMapper _mapper,
     IHttpContextAccessor _httpContextAccessor,
     IConfiguration _configurationn,
-    UserManager<User> _userManager,                 // ✔ صح
+    UserManager<User> _userManager,             
     IOptions<JwtOptions> _options,
-     RoleManager<IdentityRole> _roleManager          // ✔ صح
+     RoleManager<IdentityRole> _roleManager ,
+      ILogger<AuthenticationService> _logger
         ) : IServiceManager
     {
         //private readonly IUnitOfWork _unitOfWork;
@@ -38,7 +40,7 @@ namespace Services.Implementations
 
         private readonly Lazy<IDepartmentFeeService> _departmentFeeService = new Lazy<IDepartmentFeeService>(() => new DepartmentFeeService(_unitOfWork, _mapper));
         private readonly Lazy<IAcademicSchedulesService> _academicSchedules = new Lazy<IAcademicSchedulesService>(() => new AcademicSchedulesService(_unitOfWork, _mapper, _httpContextAccessor, _configurationn));
-        private readonly Lazy<IAuthenticationService> _authService = new Lazy<IAuthenticationService>(() => new AuthenticationService(_userManager, _options,  _roleManager));
+        private readonly Lazy<IAuthenticationService> _authService = new Lazy<IAuthenticationService>(() => new AuthenticationService(_userManager, _options,  _roleManager , _logger));
         public IDepartmentFeeService DepartmentFeeService => _departmentFeeService.Value;
         public IAcademicSchedulesService AcademicSchedules => _academicSchedules.Value;
 

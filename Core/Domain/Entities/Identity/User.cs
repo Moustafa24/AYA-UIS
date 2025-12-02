@@ -11,7 +11,7 @@ namespace Domain.Entities.Identity
     {
         public string DisplayName { get; set; } = string.Empty;
         public string Academic_Code { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty; 
+        public string Role { get; set; } = string.Empty ;
 
     }
 }

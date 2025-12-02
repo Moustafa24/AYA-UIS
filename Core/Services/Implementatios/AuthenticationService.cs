@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities.Identity;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Services.Abstraction.Contracts;
@@ -19,6 +21,7 @@ namespace Services.Implementatios
 {
     public class AuthenticationService : IAuthenticationService
     {
+        private readonly ILogger<AuthenticationService> _logger;
         private readonly UserManager<User> _userManager;
         private readonly IOptions<JwtOptions> _options;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -26,8 +29,10 @@ namespace Services.Implementatios
         public AuthenticationService(
             UserManager<User> userManager,
             IOptions<JwtOptions> options,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ILogger<AuthenticationService> logger)
         {
+            _logger = logger;
             _userManager = userManager;
             _options = options;
             _roleManager = roleManager;
@@ -38,6 +43,7 @@ namespace Services.Implementatios
 
 
         // LoginAsync
+        #region Before Security 
         public async Task<UserResultDto> LoginAsync(LoginDto loginDto)
         {
 
@@ -59,6 +65,9 @@ namespace Services.Implementatios
                 user.UserName
             );
         }
+        #endregion
+
+
 
         // RegisterAsync
         public async Task<UserResultDto> RegisterAsync(RegisterDto registerDto)
@@ -74,13 +83,16 @@ namespace Services.Implementatios
             if (await _userManager.Users.AnyAsync(u => u.Email == registerDto.Email))
                 ChekInputValidation.Add("Email already exists.");
 
+
             if (ChekInputValidation.Any())
                 throw new ValidationException(ChekInputValidation);
+
 
             var user = new User
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
+                Role = registerDto.Role,
                 UserName = registerDto.UserName,   
                 PhoneNumber = registerDto.PhoneNumber,
                 Academic_Code = registerDto.Academic_Code
@@ -107,48 +119,45 @@ namespace Services.Implementatios
                 user.DisplayName,
                 token,
                 user.Email,
+                roles.FirstOrDefault(),
                 user.Academic_Code,
-                user.UserName,
-                roles.FirstOrDefault() 
+                user.UserName
             );
         }
 
 
         // ResetPasswordAsync
-        public async Task<string> ResetPasswordAsync(string email, string newPassword)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
+        public async Task<string> ResetPasswordAsync(string email, string newPassword) 
+        { var user = await _userManager.FindByEmailAsync(email);
+
             if (user == null) throw new UnAuthoraizedException();
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user); 
 
-            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+            var result = await _userManager.ResetPasswordAsync(user, token, newPassword); 
 
-            return result.Succeeded ?
-                "Password Updated Successfully" :
-                string.Join(" | ", result.Errors.Select(e => e.Description));
+            return result.Succeeded ? "Password Updated Successfully" 
+                : string.Join(" | ", result.Errors.Select(e => e.Description)); 
+        
         }
 
 
         // UpdateRoleByEmailAsync
         public async Task<string> UpdateRoleByEmailAsync(string email, string newRole)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null)
-                throw new UnAuthoraizedException();
-
+            var user = await _userManager.FindByEmailAsync(email); if (user == null) throw new UnAuthoraizedException();
             // Remove old roles
-            var oldRoles = await _userManager.GetRolesAsync(user);
-            await _userManager.RemoveFromRolesAsync(user, oldRoles);
+
+            var oldRoles = await _userManager.GetRolesAsync(user); 
+            await _userManager.RemoveFromRolesAsync(user, oldRoles); 
 
             // Add new role
             var result = await _userManager.AddToRoleAsync(user, newRole);
 
-            if (!result.Succeeded)
+            if (!result.Succeeded) 
                 return "Failed to update role";
-
-            return $"Role updated to {newRole} successfully";
-        }
+            
+            return $"Role updated to {newRole} successfully"; }
 
 
         // Token ==> Encrypted String ==> Return String 
@@ -171,11 +180,16 @@ namespace Services.Implementatios
 
             // 2] Secret Key 
             //0a6d8ce9afd9c2791f4028e6308550716cbe69b4d82ab0ae7640bbd76319643a
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey));
+            var privateKey = await File.ReadAllTextAsync("Keys/private_key.pem");
+
+            var rsa = RSA.Create();
+            rsa.ImportFromPem(privateKey);
+
+            var key = new RsaSecurityKey(rsa);
 
             // 3] Algo 
 
-            var SingInCreds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var SingInCreds = new SigningCredentials(key, SecurityAlgorithms.RsaSha512);
 
             // 4] Generate Token 
 

@@ -25,8 +25,8 @@ namespace Shared.Dtos.Auth_Module
         public string? PhoneNumber { get; set; } = string.Empty;
 
         public string UserName { get; set; } = string.Empty;
-        
-        public string Role { get; set; } = "Student";
+
+        public string Role { get; set; } =  "Student";
         public string Academic_Code { get; set; } = string.Empty;
         public string DisplayName { get; set; } = string.Empty;
 

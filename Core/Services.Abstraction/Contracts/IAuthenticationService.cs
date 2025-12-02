@@ -15,7 +15,7 @@ namespace Services.Abstraction.Contracts
         Task<UserResultDto> RegisterAsync(RegisterDto registerDto);
 
      
-        Task<string> ResetPasswordAsync(string email, string newPassword);
+        Task<string> ResetPasswordAsync(string email , string newPasswoprd);
 
 
         Task<string> UpdateRoleByEmailAsync(string email, string newRole);

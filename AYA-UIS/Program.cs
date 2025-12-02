@@ -20,6 +20,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Cryptography;
+using System.Threading.RateLimiting;
 
 namespace AYA_UIS
 {
@@ -48,6 +52,12 @@ namespace AYA_UIS
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;    
 
             }).AddJwtBearer(options=> {
+
+                var publicKey = File.ReadAllText("Keys/public_key.pem");
+
+                var rsa = RSA.Create();
+                rsa.ImportFromPem(publicKey);
+
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
                 {
                     ValidateIssuer = true,
@@ -56,13 +66,19 @@ namespace AYA_UIS
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtOptions.Issuer,
                     ValidAudience = jwtOptions.Audience,
-                    IssuerSigningKey =  new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey))
+                    IssuerSigningKey = new RsaSecurityKey(rsa),
 
 
                 };
             
             });
+            
+
+            
+
+
             builder.Services.AddAuthorization();
+
             builder.Services.AddDbContext<IdentityAYADbContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"))
            );
@@ -79,12 +95,27 @@ namespace AYA_UIS
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<IdentityAYADbContext>()
             .AddDefaultTokenProviders(); 
-
-
-
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 
+            // Rate Limit 
+            builder.Services.AddRateLimiter(options =>
+            {
 
+                options.AddPolicy("PolicyLimitRate", httpContext =>
+                {
+                    return RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: httpContext.Connection.RemoteIpAddress!.ToString(),
+                        factory: key => new FixedWindowRateLimiterOptions
+                        {
+                            PermitLimit = 3,     
+                            Window = TimeSpan.FromMinutes(1),
+                            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                            QueueLimit = 2                   
+                        });
+                });
+            });
+
+            
 
             #endregion
 
@@ -130,6 +161,26 @@ namespace AYA_UIS
                   });
 
 
+
+            //builder.Services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Lockout.MaxFailedAccessAttempts = 5;
+            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+            //    options.Lockout.AllowedForNewUsers = true;
+            //});
+
+            //builder.Services.AddRateLimiter(options =>
+            //{
+            //    options.AddFixedWindowLimiter("LoginPolicy", o =>
+            //    {
+            //        o.Window = TimeSpan.FromSeconds(30);
+            //        o.PermitLimit = 5;
+            //        o.QueueLimit = 0;
+            //    });
+            //});
+
+
+
             #endregion
 
             var app = builder.Build();
@@ -152,6 +203,11 @@ namespace AYA_UIS
             app.UseHttpsRedirection();
             app.MapControllers();
             app.UseStaticFiles();
+            //app.UseRateLimiter();
+            //app.MapPost("/Login", (HttpContext context) =>
+            //{
+            //}).RequireRateLimiting("LoginPolicy");
+
             app.Run();
         }
     }
