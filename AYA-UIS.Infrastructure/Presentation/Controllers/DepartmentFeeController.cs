@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AYA_UIS.Application.Commands.DepartmentFees;
+using AYA_UIS.Application.Queries.DepartmentFees;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Services.Abstraction.Contracts;
 using Shared.Dtos.Info_Module;
 
 namespace Presentation.Controllers
@@ -14,18 +11,18 @@ namespace Presentation.Controllers
     [Route("api/[controller]")]
     public class DepartmentFeesController : ControllerBase
     {
-        private readonly IDepartmentFeeService _service;
+        private readonly IMediator _mediator;
 
-        public DepartmentFeesController(IDepartmentFeeService service)
+        public DepartmentFeesController(IMediator mediator)
         {
-            _service = service;
+            _mediator = mediator;
         }
 
         // GET: api/DepartmentFees
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DepartmentFeeDtos>>> GetAll()
         {
-            var result = await _service.GetAllDepartmentFeeAsync();
+            var result = await _mediator.Send(new GetAllDepartmentFeesQuery());
             return Ok(result);
         }
 
@@ -33,7 +30,7 @@ namespace Presentation.Controllers
         [HttpGet("{departmentName}/{gradeYear}")]
         public async Task<ActionResult<DepartmentFeeDtos>> GetByCompositeKey(string departmentName, string gradeYear)
         {
-            var result = await _service.GetDepartmentFeeByCompositeKeyAsync(departmentName, gradeYear);
+            var result = await _mediator.Send(new GetDepartmentFeeByCompositeKeyQuery(departmentName, gradeYear));
             if (result == null) return NotFound();
             return Ok(result);
         }
@@ -43,7 +40,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string departmentName, string gradeYear, [FromBody] DepartmentFeeDtos dto)
         {
-            await _service.UpdateByCompositeKeyAsync(departmentName, gradeYear, dto);
+            await _mediator.Send(new UpdateDepartmentFeeCommand(departmentName, gradeYear, dto));
             return NoContent();
         }
 

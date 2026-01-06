@@ -16,8 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Presentation\Presentation.csproj" />
-    <ProjectReference Include="..\Infrastructure\Presistence\Presistence.csproj" />
+    <ProjectReference Include="..\AYA-UIS.Infrastructure\Presentation\Presentation.csproj" />
+    <ProjectReference Include="..\AYA-UIS.Infrastructure\Presistence\Presistence.csproj" />
+    <ProjectReference Include="..\AYA-UIS.Application\AYA-UIS.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

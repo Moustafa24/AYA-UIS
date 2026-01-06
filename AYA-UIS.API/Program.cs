@@ -123,6 +123,10 @@ namespace AYA_UIS
             {
                 options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidationErrorResponse;
             });
+            
+            // MediatR for CQRS
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AYA_UIS.Application.AssemblyReference).Assembly));
+            
             builder.Services.AddAutoMapper(cfg => { }, typeof(AssemblyRefrenceServ).Assembly);
             builder.Services.AddScoped<IDepartmentFeeService, DepartmentFeeService>();
             builder.Services.AddScoped<IServiceManager, ServiceManager>();

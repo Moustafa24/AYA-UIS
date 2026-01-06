@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Services\Services.csproj" />
+    <ProjectReference Include="..\..\AYA-UIS.Core\Services\Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
