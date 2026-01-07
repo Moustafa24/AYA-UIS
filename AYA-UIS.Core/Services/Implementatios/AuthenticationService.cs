@@ -92,7 +92,6 @@ namespace Services.Implementatios
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                Role = registerDto.Role,
                 UserName = registerDto.UserName,   
                 PhoneNumber = registerDto.PhoneNumber,
                 Academic_Code = registerDto.Academic_Code
@@ -108,8 +107,10 @@ namespace Services.Implementatios
             }
 
             
-            if (await _roleManager.RoleExistsAsync(registerDto.Role))
-                await _userManager.AddToRoleAsync(user, registerDto.Role);
+            // Add default role as "Student" if no role specified
+            var defaultRole = "Student";
+            if (await _roleManager.RoleExistsAsync(defaultRole))
+                await _userManager.AddToRoleAsync(user, defaultRole);
 
           
             var roles = await _userManager.GetRolesAsync(user);
