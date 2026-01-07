@@ -14,30 +14,51 @@ namespace Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableRateLimiting("PolicyLimitRate")]
     public class AuthenticationController (IServiceManager _serviceManager):ControllerBase
     {
 
         // Post =>  Register 
         [HttpPost("Register")]
-        [EnableRateLimiting("PolicyLimitRate")]
+
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserResultDto>> RegisterAsync(RegisterDto registerDto)
-        => await _serviceManager.AuthenticationService.RegisterAsync(registerDto);
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+            await _serviceManager.AuthenticationService.RegisterAsync(registerDto);
+            
+            return Ok();
+        }
 
         // Post = >  Login 
-        [EnableRateLimiting("PolicyLimitRate")]
         [HttpPost("Login")]
         public async Task<ActionResult<UserResultDto>> LoginAsync(LoginDto loginDto)
-            => await _serviceManager.AuthenticationService.LoginAsync(loginDto);
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+
+            var userResult = await _serviceManager.AuthenticationService.LoginAsync(loginDto);
+            return Ok(userResult);
+        }
 
 
         [HttpPut("reset-password")]
-        [EnableRateLimiting("PolicyLimitRate")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ResetPasswordByAdmin(ResetPasswordDto resetPasswordDto)
-        => Ok(await _serviceManager.AuthenticationService.ResetPasswordAsync(resetPasswordDto.Email , resetPasswordDto.NewPassword));
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
 
-
+            var result = await _serviceManager.AuthenticationService.ResetPasswordAsync(resetPasswordDto.Email , resetPasswordDto.NewPassword);
+            return Ok(result);
+        }
 
     }
 }
