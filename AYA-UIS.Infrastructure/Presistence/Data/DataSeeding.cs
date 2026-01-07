@@ -30,6 +30,7 @@ public class DataSeeding : IDataSeeding
 
     public async Task SeedIdentityDataAsync()
     {
+        // Seed roles
         string[] roleNames = { "Admin", "Instructor", "Student" };
         foreach (var roleName in roleNames)
         {
@@ -38,23 +39,26 @@ public class DataSeeding : IDataSeeding
                 var role = new IdentityRole { Name = roleName };
                 await _roleManager.CreateAsync(role);
             }
+        }
 
-            if (!_userManager.Users.Any())
+        // Seed admin user if no users exist
+        if (!_userManager.Users.Any())
+        {
+            var adminUser = new User()
             {
-                var adminUser = new User()
-                {
-                    DisplayName = "Moustafa Ezzat",
-                    Email = "MoustafaEzzat@gmail.com",
-                    UserName = "Moustafa02",
-                    PhoneNumber = "01557703382",
-                    Academic_Code = "2203071"
-
-                };
-                await _userManager.CreateAsync(adminUser, "Moustafa@123");
+                DisplayName = "Moustafa Ezzat",
+                Email = "MoustafaEzzat@gmail.com",
+                UserName = "Moustafa02",
+                PhoneNumber = "01557703382",
+                Academic_Code = "2203071"
+            };
+            
+            var result = await _userManager.CreateAsync(adminUser, "Moustafa@123");
+            
+            if (result.Succeeded)
+            {
                 await _userManager.AddToRoleAsync(adminUser, "Admin");
-
             }
-
         }
     }
 }

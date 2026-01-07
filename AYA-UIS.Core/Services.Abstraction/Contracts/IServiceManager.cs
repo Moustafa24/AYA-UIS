@@ -12,5 +12,6 @@ namespace Services.Abstraction.Contracts
         public IAcademicSchedulesService  AcademicSchedules { get; }
 
         public IAuthenticationService AuthenticationService { get; }
+        public IRoleService RoleService { get; }
     }
 }

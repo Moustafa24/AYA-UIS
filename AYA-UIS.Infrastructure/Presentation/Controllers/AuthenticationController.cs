@@ -37,12 +37,6 @@ namespace Presentation.Controllers
         public async Task<IActionResult> ResetPasswordByAdmin(ResetPasswordDto resetPasswordDto)
         => Ok(await _serviceManager.AuthenticationService.ResetPasswordAsync(resetPasswordDto.Email , resetPasswordDto.NewPassword));
 
-        [HttpPut("update-role")]
-        [EnableRateLimiting("PolicyLimitRate")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateRoleByEmail(UpdateRoleDto updateRoleDto)
-        => Ok(await _serviceManager.AuthenticationService.UpdateRoleByEmailAsync(updateRoleDto.Email, updateRoleDto.NewRole));
-        
 
 
     }

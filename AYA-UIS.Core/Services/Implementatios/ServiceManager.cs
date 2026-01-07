@@ -41,9 +41,11 @@ namespace Services.Implementations
         private readonly Lazy<IDepartmentFeeService> _departmentFeeService = new Lazy<IDepartmentFeeService>(() => new DepartmentFeeService(_unitOfWork, _mapper));
         private readonly Lazy<IAcademicSchedulesService> _academicSchedules = new Lazy<IAcademicSchedulesService>(() => new AcademicSchedulesService(_unitOfWork, _mapper, _httpContextAccessor, _configurationn));
         private readonly Lazy<IAuthenticationService> _authService = new Lazy<IAuthenticationService>(() => new AuthenticationService(_userManager, _options,  _roleManager , _logger));
+        private readonly Lazy<IRoleService> _roleService = new Lazy<IRoleService>(() => new RoleService(_roleManager, _userManager));
+        
         public IDepartmentFeeService DepartmentFeeService => _departmentFeeService.Value;
         public IAcademicSchedulesService AcademicSchedules => _academicSchedules.Value;
-
         public IAuthenticationService AuthenticationService => _authService.Value;
+        public IRoleService RoleService => _roleService.Value;
     }
 }

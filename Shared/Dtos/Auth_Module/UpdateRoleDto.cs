@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Shared.Dtos.Auth_Module
 {
-    public class UpdateRoleDto
+    public record UpdateRoleDto
     {
-        public string Email { get; set; } = string.Empty;
-        public string NewRole { get; set; } = string.Empty ;
+        [Required]
+        public string NewRoleName { get; set; } = string.Empty;
     }
 }
