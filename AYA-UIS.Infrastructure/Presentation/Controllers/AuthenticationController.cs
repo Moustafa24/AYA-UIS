@@ -29,8 +29,8 @@ namespace Presentation.Controllers
                 return BadRequest(new { errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
             }
             await _serviceManager.AuthenticationService.RegisterAsync(registerDto);
-            
-            return Ok();
+
+            return Ok($"Email {registerDto.Email} Already Created ");
         }
 
         // Post = >  Login 

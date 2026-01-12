@@ -1,4 +1,4 @@
-using Domain.Entities.Identity;
+﻿using Domain.Entities.Identity;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -84,96 +84,35 @@ namespace Services.Implementations
             return await _roleManager.DeleteAsync(role);
         }
 
-        public async Task<IdentityResult> AssignRoleByEmailAsync(AssignRoleByEmailDto dto)
+        public async Task<IdentityResult> UpdateUserRoleByEmailAsync(UpdateUserRoleByEmailDto dto)
         {
             var user = await _userManager.FindByEmailAsync(dto.Email);
+
             if (user == null)
             {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"User with email '{dto.Email}' not found." 
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Description = $"User with email '{dto.Email}' not found."
                 });
             }
 
-            if (!await _roleManager.RoleExistsAsync(dto.RoleName))
+            if (!await _roleManager.RoleExistsAsync(dto.NewRoleName))
             {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"Role '{dto.RoleName}' does not exist." 
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Description = $"Role '{dto.NewRoleName}' does not exist."
                 });
             }
 
-            if (await _userManager.IsInRoleAsync(user, dto.RoleName))
+            // 1️⃣ remove all current roles
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            if (currentRoles.Any())
             {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"User already has role '{dto.RoleName}'." 
-                });
+                await _userManager.RemoveFromRolesAsync(user, currentRoles);
             }
 
-            return await _userManager.AddToRoleAsync(user, dto.RoleName);
-        }
-
-        public async Task<IdentityResult> AssignRoleByUsernameAsync(AssignRoleByUsernameDto dto)
-        {
-            var user = await _userManager.FindByNameAsync(dto.Username);
-            if (user == null)
-            {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"User with username '{dto.Username}' not found." 
-                });
-            }
-
-            if (!await _roleManager.RoleExistsAsync(dto.RoleName))
-            {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"Role '{dto.RoleName}' does not exist." 
-                });
-            }
-
-            if (await _userManager.IsInRoleAsync(user, dto.RoleName))
-            {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"User already has role '{dto.RoleName}'." 
-                });
-            }
-
-            return await _userManager.AddToRoleAsync(user, dto.RoleName);
-        }
-
-        public async Task<IdentityResult> AssignRoleByAcademicCodeAsync(AssignRoleByAcademicCodeDto dto)
-        {
-            var user = await _userManager.Users
-                .FirstOrDefaultAsync(u => u.Academic_Code == dto.AcademicCode);
-                
-            if (user == null)
-            {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"User with academic code '{dto.AcademicCode}' not found." 
-                });
-            }
-
-            if (!await _roleManager.RoleExistsAsync(dto.RoleName))
-            {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"Role '{dto.RoleName}' does not exist." 
-                });
-            }
-
-            if (await _userManager.IsInRoleAsync(user, dto.RoleName))
-            {
-                return IdentityResult.Failed(new IdentityError 
-                { 
-                    Description = $"User already has role '{dto.RoleName}'." 
-                });
-            }
-
-            return await _userManager.AddToRoleAsync(user, dto.RoleName);
+            // 2️⃣ add new role
+            return await _userManager.AddToRoleAsync(user, dto.NewRoleName);
         }
 
         public async Task<IEnumerable<string>> GetUserRolesAsync(string userId)
@@ -184,5 +123,59 @@ namespace Services.Implementations
 
             return await _userManager.GetRolesAsync(user);
         }
+
+        public async Task<IdentityResult> UpdateUserRoleByAcademicCodeAsync(UpdateUserRoleDto dto)
+        {
+            var user = await _userManager.Users
+                .FirstOrDefaultAsync(u => u.Academic_Code == dto.AcademicCode);
+
+            if (user == null)
+            {
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Description = $"User with academic code '{dto.AcademicCode}' not found."
+                });
+            }
+
+            if (!await _roleManager.RoleExistsAsync(dto.NewRoleName))
+            {
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Description = $"Role '{dto.NewRoleName}' does not exist."
+                });
+            }
+
+            // 1️⃣ remove all current roles
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            if (currentRoles.Any())
+            {
+                await _userManager.RemoveFromRolesAsync(user, currentRoles);
+            }
+
+            // 2️⃣ add new role
+            return await _userManager.AddToRoleAsync(user, dto.NewRoleName);
+        }
+
+        public async Task<UserRoleInfoDto> GetUserRoleInfoByAcademicCodeAsync(string academicCode)
+        {
+            var user = await _userManager.Users
+                .FirstOrDefaultAsync(u => u.Academic_Code == academicCode);
+
+            if (user == null)
+                throw new NotFoundException(
+                    $"User with academic code '{academicCode}' not found."
+                );
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            return new UserRoleInfoDto
+            {
+                UserName = user.UserName!,
+                Email = user.Email!,
+                Roles = roles
+            };
+        }
+
+
     }
 }

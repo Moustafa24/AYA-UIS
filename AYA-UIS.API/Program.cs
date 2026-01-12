@@ -1,4 +1,4 @@
-
+﻿
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -201,6 +201,7 @@ namespace AYA_UIS
 
             var scope = app.Services.CreateScope();
             var dataSeeder = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
+            await dataSeeder.SeedDataInfoAsync();
             await dataSeeder.SeedIdentityDataAsync();
             app.UseAuthentication();
             app.UseAuthorization();

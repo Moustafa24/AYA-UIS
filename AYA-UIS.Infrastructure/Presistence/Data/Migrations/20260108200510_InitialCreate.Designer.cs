@@ -12,7 +12,7 @@ using Presistence.Data;
 namespace Presistence.Data.Migrations
 {
     [DbContext(typeof(AYA_UIS_InfoDbContext))]
-    [Migration("20251118175136_InitialCreate")]
+    [Migration("20260108200510_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -40,6 +40,10 @@ namespace Presistence.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameScadules")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

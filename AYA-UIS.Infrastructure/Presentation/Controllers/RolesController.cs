@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Contracts;
 using Shared.Dtos.Auth_Module;
@@ -21,6 +22,8 @@ namespace Presentation.Controllers
         /// Get all roles
         /// </summary>
         [HttpGet]
+        [Authorize(Roles = "Admin")]
+
         public async Task<ActionResult<IEnumerable<RoleDto>>> GetAllRoles()
         {
             var roles = await _serviceManager.RoleService.GetAllRolesAsync();
@@ -31,6 +34,8 @@ namespace Presentation.Controllers
         /// Get role by ID
         /// </summary>
         [HttpGet("{roleId}")]
+        [Authorize(Roles = "Admin")]
+
         public async Task<ActionResult<RoleDto>> GetRoleById(string roleId)
         {
             var role = await _serviceManager.RoleService.GetRoleByIdAsync(roleId);
@@ -44,6 +49,8 @@ namespace Presentation.Controllers
         /// Get role by name
         /// </summary>
         [HttpGet("by-name/{roleName}")]
+        [Authorize(Roles = "Admin")]
+
         public async Task<ActionResult<RoleDto>> GetRoleByName(string roleName)
         {
             var role = await _serviceManager.RoleService.GetRoleByNameAsync(roleName);
@@ -57,10 +64,12 @@ namespace Presentation.Controllers
         /// Create a new role
         /// </summary>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+
         public async Task<ActionResult<RoleDto>> CreateRole([FromBody] CreateRoleDto createRoleDto)
         {
             var result = await _serviceManager.RoleService.CreateRoleAsync(createRoleDto);
-            
+
             if (!result.Succeeded)
                 return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
 
@@ -72,10 +81,12 @@ namespace Presentation.Controllers
         /// Update an existing role
         /// </summary>
         [HttpPut("{roleId}")]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> UpdateRole(string roleId, [FromBody] UpdateRoleDto updateRoleDto)
         {
             var result = await _serviceManager.RoleService.UpdateRoleAsync(roleId, updateRoleDto);
-            
+
             if (!result.Succeeded)
                 return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
 
@@ -86,10 +97,12 @@ namespace Presentation.Controllers
         /// Delete a role
         /// </summary>
         [HttpDelete("{roleId}")]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> DeleteRole(string roleId)
         {
             var result = await _serviceManager.RoleService.DeleteRoleAsync(roleId);
-            
+
             if (!result.Succeeded)
                 return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
 
@@ -97,62 +110,66 @@ namespace Presentation.Controllers
         }
 
         /// <summary>
-        /// Assign role to user by email
+        /// Update user role by email
         /// </summary>
-        [HttpPost("assign-by-email")]
-        public async Task<IActionResult> AssignRoleByEmail([FromBody] AssignRoleByEmailDto dto)
+        [HttpPut("update-user-role-by-email")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateUserRoleByEmail([FromBody] UpdateUserRoleByEmailDto dto)
         {
-            var result = await _serviceManager.RoleService.AssignRoleByEmailAsync(dto);
-            
+            var result = await _serviceManager.RoleService
+                .UpdateUserRoleByEmailAsync(dto);
+
             if (!result.Succeeded)
                 return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
 
-            return Ok(new { message = $"Role '{dto.RoleName}' assigned successfully to user with email '{dto.Email}'." });
+            return Ok(new
+            {
+                message = $"User role updated successfully to '{dto.NewRoleName}'."
+            });
         }
 
+
+
         /// <summary>
-        /// Assign role to user by username
+        /// Update user role by academic code
         /// </summary>
-        [HttpPost("assign-by-username")]
-        public async Task<IActionResult> AssignRoleByUsername([FromBody] AssignRoleByUsernameDto dto)
+        [HttpPut("update-user-role{academicCode}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleDto dto)
         {
-            var result = await _serviceManager.RoleService.AssignRoleByUsernameAsync(dto);
-            
+            var result = await _serviceManager.RoleService
+                .UpdateUserRoleByAcademicCodeAsync(dto);
+
             if (!result.Succeeded)
                 return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
 
-            return Ok(new { message = $"Role '{dto.RoleName}' assigned successfully to user with username '{dto.Username}'." });
+            return Ok(new
+            {
+                message = $"User role updated successfully to '{dto.NewRoleName}'."
+            });
         }
 
         /// <summary>
-        /// Assign role to user by academic code
+        /// Get user role info by academic code
         /// </summary>
-        [HttpPost("assign-by-academic-code")]
-        public async Task<IActionResult> AssignRoleByAcademicCode([FromBody] AssignRoleByAcademicCodeDto dto)
-        {
-            var result = await _serviceManager.RoleService.AssignRoleByAcademicCodeAsync(dto);
-            
-            if (!result.Succeeded)
-                return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
-
-            return Ok(new { message = $"Role '{dto.RoleName}' assigned successfully to user with academic code '{dto.AcademicCode}'." });
-        }
-
-        /// <summary>
-        /// Get all roles for a specific user
-        /// </summary>
-        [HttpGet("user/{userId}")]
-        public async Task<ActionResult<IEnumerable<string>>> GetUserRoles(string userId)
+        [HttpGet("user-role-info/{academicCode}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<UserRoleInfoDto>> GetUserRoleInfoByAcademicCode(string academicCode)
         {
             try
             {
-                var roles = await _serviceManager.RoleService.GetUserRolesAsync(userId);
-                return Ok(roles);
+                var result = await _serviceManager.RoleService
+                    .GetUserRoleInfoByAcademicCodeAsync(academicCode);
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 return NotFound(new { message = ex.Message });
             }
         }
+
+
     }
 }
+

@@ -11,13 +11,19 @@ namespace Services.Abstraction.Contracts
         Task<IdentityResult> CreateRoleAsync(CreateRoleDto createRoleDto);
         Task<IdentityResult> UpdateRoleAsync(string roleId, UpdateRoleDto updateRoleDto);
         Task<IdentityResult> DeleteRoleAsync(string roleId);
-        
+
         // Assign role methods
-        Task<IdentityResult> AssignRoleByEmailAsync(AssignRoleByEmailDto dto);
-        Task<IdentityResult> AssignRoleByUsernameAsync(AssignRoleByUsernameDto dto);
-        Task<IdentityResult> AssignRoleByAcademicCodeAsync(AssignRoleByAcademicCodeDto dto);
-        
+        Task<IdentityResult> UpdateUserRoleByEmailAsync(UpdateUserRoleByEmailDto dto);
+
         // Get user roles
         Task<IEnumerable<string>> GetUserRolesAsync(string userId);
+
+        // UpdateUserRoleByAcademicCode
+        Task<IdentityResult> UpdateUserRoleByAcademicCodeAsync(UpdateUserRoleDto dto);
+
+        // Get User Role Info By AcademicCode
+        Task<UserRoleInfoDto> GetUserRoleInfoByAcademicCodeAsync(string academicCode);
+
+
     }
 }

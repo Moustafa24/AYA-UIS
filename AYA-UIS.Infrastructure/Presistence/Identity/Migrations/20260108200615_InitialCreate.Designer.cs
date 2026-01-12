@@ -12,7 +12,7 @@ using Presistence.Identity;
 namespace Presistence.Identity.Migrations
 {
     [DbContext(typeof(IdentityAYADbContext))]
-    [Migration("20251127225405_InitialCreate")]
+    [Migration("20260108200615_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -238,15 +238,19 @@ namespace Presistence.Identity.Migrations
 
                     b.Property<string>("Academic_Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasIndex("Academic_Code")
+                        .IsUnique()
+                        .HasFilter("[Academic_Code] IS NOT NULL");
+
+                    b.HasIndex("UserName")
+                        .IsUnique()
+                        .HasFilter("[UserName] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("User");
                 });

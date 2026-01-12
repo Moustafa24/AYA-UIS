@@ -28,6 +28,7 @@ namespace Presentation.Controllers
 
         // GET: api/DepartmentFees/{departmentName}/{gradeYear}
         [HttpGet("{departmentName}/{gradeYear}")]
+
         public async Task<ActionResult<DepartmentFeeDtos>> GetByCompositeKey(string departmentName, string gradeYear)
         {
             var result = await _mediator.Send(new GetDepartmentFeeByCompositeKeyQuery(departmentName, gradeYear));
