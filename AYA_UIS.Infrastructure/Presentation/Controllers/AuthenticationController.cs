@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using AYA_UIS.Core.Abstractions.Contracts;
+using AYA_UIS.Application.Contracts;
 using Shared.Dtos.Auth_Module;
 
 namespace Presentation.Controllers

@@ -20,10 +20,10 @@ namespace Domain.Contracts
         Task AddAsync(TEntity entity);
 
         //Remove
-        void Delete(TEntity entity);
+        Task Delete(TEntity entity);
 
         //Update
-        void Update(TEntity entity);
+        Task Update(TEntity entity);
     }
 }
 

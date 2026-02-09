@@ -11,7 +11,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\AYA_UIS.Core\Abstractions\Abstraction.csproj" />
 	  <ProjectReference Include="..\..\AYA_UIS.Application\AYA_UIS.Application.csproj" />
 	</ItemGroup>
 

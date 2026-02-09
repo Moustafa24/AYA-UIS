@@ -1,6 +1,6 @@
 using MediatR;
-using Shared.Dtos.Info_Module;
+using Shared.Dtos.Info_Module.DepartmentFeeDtos;
 
 namespace AYA_UIS.Application.Queries.DepartmentFees;
 
-public record GetAllDepartmentFeesQuery : IRequest<IEnumerable<DepartmentFeeDtos>>;
+public record GetAllDepartmentFeesQuery : IRequest<IEnumerable<DepartmentFeeDto>>;

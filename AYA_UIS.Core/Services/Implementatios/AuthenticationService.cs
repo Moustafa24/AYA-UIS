@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using AYA_UIS.Core.Abstractions.Contracts;
+using AYA_UIS.Application.Contracts;
 using AYA_UIS.Core.Domain.Entities.Identity;
 using AYA_UIS.Shared.Exceptions;
 using Microsoft.AspNetCore.Identity;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Shared.Dtos.Info_Module;
+using Shared.Dtos.Info_Module.AcademicSheduleDtos;
 
 namespace AYA_UIS.Core.Abstractions.Contracts
 {

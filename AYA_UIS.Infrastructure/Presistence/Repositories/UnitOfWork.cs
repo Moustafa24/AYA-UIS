@@ -12,10 +12,17 @@ namespace Presistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-
         private readonly AYA_UIS_InfoDbContext _dbContext;
-        //private Dictionary<string, object> _repositories; 
-        private ConcurrentDictionary<string, object> _repositories;
+        private readonly ConcurrentDictionary<string, object> _repositories;
+
+        private IDepartmentRepository? _departments;
+        private ICourseRepository? _courses;
+        private IAcademicScheduleRepository? _academicSchedules;
+        private IDepartmentFeeRepository? _departmentFees;
+        private IFeeRepository? _fees;
+        private IStudyYearRepository? _studyYears;
+        private IRegistrationRepository? _registrations;
+        private ICourseUploadsRepository? _courseUploads;
 
         public UnitOfWork(AYA_UIS_InfoDbContext dbContext)
         {
@@ -23,11 +30,42 @@ namespace Presistence.Repositories
             _repositories = new();
         }
 
-        
-        public IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : BaseEntities<TKey>
-        => (IGenericRepository<TEntity, TKey>)_repositories.GetOrAdd(typeof(TEntity).Name, (_) => new GenericRepository<TEntity, TKey>(_dbContext));
-        public async Task<int> SaveChangeAsync()
-        =>await _dbContext.SaveChangesAsync();
+        public IDepartmentRepository Departments
+            => _departments ??= new DepartmentRepository(_dbContext);
 
+        public ICourseRepository Courses
+            => _courses ??= new CourseRepository(_dbContext);
+
+        public IAcademicScheduleRepository AcademicSchedules
+            => _academicSchedules ??= new AcademicScheduleRepository(_dbContext);
+
+        public IDepartmentFeeRepository DepartmentFees
+            => _departmentFees ??= new DepartmentFeeRepository(_dbContext);
+
+        public IFeeRepository Fees
+            => _fees ??= new FeeRepository(_dbContext);
+
+        public IStudyYearRepository StudyYears
+            => _studyYears ??= new StudyYearRepository(_dbContext);
+
+        public IRegistrationRepository Registrations
+            => _registrations ??= new RegistrationRepository(_dbContext);
+
+        public ICourseUploadsRepository CourseUploads
+            => _courseUploads ??= new CourseUploadsRepository(_dbContext);
+
+        public IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : BaseEntities<TKey>
+            => (IGenericRepository<TEntity, TKey>)_repositories.GetOrAdd(
+                typeof(TEntity).Name,
+                _ => new GenericRepository<TEntity, TKey>(_dbContext));
+
+        public async Task<int> SaveChangesAsync()
+            => await _dbContext.SaveChangesAsync();
+
+        public void Dispose()
+        {
+            _dbContext.Dispose();
+            GC.SuppressFinalize(this);
+        }
     }
 }

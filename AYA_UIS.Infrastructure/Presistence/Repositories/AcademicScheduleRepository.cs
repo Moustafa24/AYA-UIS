@@ -1,0 +1,28 @@
+using AYA_UIS.Core.Domain.Entities.Models;
+using Domain.Contracts;
+using Microsoft.EntityFrameworkCore;
+using Presistence.Data;
+
+namespace Presistence.Repositories
+{
+    public class AcademicScheduleRepository : GenericRepository<AcademicSchedule, int>, IAcademicScheduleRepository
+    {
+        public AcademicScheduleRepository(AYA_UIS_InfoDbContext dbContext) : base(dbContext)
+        {
+        }
+
+        public async Task<AcademicSchedule?> GetByTitleAsync(string title)
+        {
+            return await _dbContext.AcademicSchedules
+                .FirstOrDefaultAsync(a => a.Title.Contains(title));
+        }
+
+        public async Task<IEnumerable<AcademicSchedule>> GetAllWithDetailsAsync()
+        {
+            return await _dbContext.AcademicSchedules
+                .Include(a => a.Department)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+    }
+}

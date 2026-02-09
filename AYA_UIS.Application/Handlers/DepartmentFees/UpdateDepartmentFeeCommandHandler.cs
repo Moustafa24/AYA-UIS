@@ -1,27 +1,49 @@
 using AYA_UIS.Application.Commands.DepartmentFees;
+using AutoMapper;
+using AYA_UIS.Core.Domain.Entities.Models;
+using AYA_UIS.Shared.Exceptions;
+using Domain.Contracts;
 using MediatR;
-using AYA_UIS.Core.Abstractions.Contracts;
 
 namespace AYA_UIS.Application.Handlers.DepartmentFees;
 
 public class UpdateDepartmentFeeCommandHandler : IRequestHandler<UpdateDepartmentFeeCommand, Unit>
 {
-    private readonly IDepartmentFeeService _service;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public UpdateDepartmentFeeCommandHandler(IDepartmentFeeService service)
+    public UpdateDepartmentFeeCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _service = service;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
     public async Task<Unit> Handle(
         UpdateDepartmentFeeCommand request, 
         CancellationToken cancellationToken)
     {
-        await _service.UpdateByCompositeKeyAsync(
-            request.DepartmentName, 
-            request.GradeYear, 
-            request.Dto);
-            
+        var departmentFee = await _unitOfWork.DepartmentFees
+            .GetByCompositeKeyAsync(request.DepartmentName, request.GradeYear);
+
+        if (departmentFee is null)
+            throw new NotFoundException(
+                $"Department fee for '{request.DepartmentName}' year {request.GradeYear} not found.");
+
+        // Update fees
+        departmentFee.Fees.Clear();
+        foreach (var feeDto in request.Fees)
+        {
+            departmentFee.Fees.Add(new Fee
+            {
+                Type = feeDto.Type,
+                Amount = feeDto.Amount,
+                DepartmentFeeId = departmentFee.Id
+            });
+        }
+
+        await _unitOfWork.DepartmentFees.Update(departmentFee);
+        await _unitOfWork.SaveChangesAsync();
+
         return Unit.Value;
     }
 }

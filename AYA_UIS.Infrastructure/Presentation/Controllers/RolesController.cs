@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using AYA_UIS.Core.Abstractions.Contracts;
+using AYA_UIS.Application.Contracts;
 using Shared.Dtos.Auth_Module;
 
 namespace Presentation.Controllers

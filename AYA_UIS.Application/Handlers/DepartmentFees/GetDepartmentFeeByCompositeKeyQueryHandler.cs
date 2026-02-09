@@ -1,26 +1,35 @@
 using AYA_UIS.Application.Queries.DepartmentFees;
+using AutoMapper;
+using AYA_UIS.Shared.Exceptions;
+using Domain.Contracts;
 using MediatR;
-using AYA_UIS.Core.Abstractions.Contracts;
-using Shared.Dtos.Info_Module;
+using Shared.Dtos.Info_Module.DepartmentFeeDtos;
 
 namespace AYA_UIS.Application.Handlers.DepartmentFees;
 
 public class GetDepartmentFeeByCompositeKeyQueryHandler 
-    : IRequestHandler<GetDepartmentFeeByCompositeKeyQuery, DepartmentFeeDtos>
+    : IRequestHandler<GetDepartmentFeeByCompositeKeyQuery, DepartmentFeeDto>
 {
-    private readonly IDepartmentFeeService _service;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public GetDepartmentFeeByCompositeKeyQueryHandler(IDepartmentFeeService service)
+    public GetDepartmentFeeByCompositeKeyQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _service = service;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
-    public async Task<DepartmentFeeDtos> Handle(
+    public async Task<DepartmentFeeDto> Handle(
         GetDepartmentFeeByCompositeKeyQuery request, 
         CancellationToken cancellationToken)
     {
-        return await _service.GetDepartmentFeeByCompositeKeyAsync(
-            request.DepartmentName, 
-            request.GradeYear);
+        var departmentFee = await _unitOfWork.DepartmentFees
+            .GetByCompositeKeyAsync(request.DepartmentName, request.GradeYear);
+
+        if (departmentFee is null)
+            throw new NotFoundException(
+                $"Department fee for '{request.DepartmentName}' year {request.GradeYear} not found.");
+
+        return _mapper.Map<DepartmentFeeDto>(departmentFee);
     }
 }

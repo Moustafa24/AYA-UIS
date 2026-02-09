@@ -18,8 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj" />
-    <ProjectReference Include="..\AYA_UIS.Core\Abstractions\Abstraction.csproj" />
-    <ProjectReference Include="..\AYA_UIS.Infrastructure\Presistence\Presistence.csproj" />
+    <ProjectReference Include="..\AYA_UIS.Core\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

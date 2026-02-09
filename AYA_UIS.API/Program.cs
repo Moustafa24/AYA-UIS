@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Presistence.Data;
 using Presistence.Repositories;
-using AYA_UIS.Core.Abstractions.Contracts;
+using AYA_UIS.Application.Contracts;
 
 using AYA_UIS.MiddelWares;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +23,8 @@ using System.Security.Cryptography;
 using System.Threading.RateLimiting;
 using AYA_UIS.Core.Domain.Entities.Identity;
 using AYA_UIS.Core.Services.Implementations;
+using AYA_UIS.Application.Mapping;
+using Infrastructure.Services;
 
 namespace AYA_UIS
 {
@@ -126,9 +128,21 @@ namespace AYA_UIS
             // MediatR for CQRS
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AYA_UIS.Application.AssemblyReference).Assembly));
             
-            builder.Services.AddScoped<IDepartmentFeeService, DepartmentFeeService>();
-            builder.Services.AddScoped<IServiceManager, ServiceManager>();
+            // AutoMapper
+            builder.Services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<MappingProfile>();
+            });
+
+            // Unit of Work & Repositories
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Service Manager (Auth + Roles)
+            builder.Services.AddScoped<IServiceManager, ServiceManager>();
+
+            // Infrastructure Services
+            builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
+            
             builder.Services.AddHttpContextAccessor();
 
 

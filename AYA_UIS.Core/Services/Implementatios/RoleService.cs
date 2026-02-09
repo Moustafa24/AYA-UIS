@@ -2,7 +2,7 @@
 using AYA_UIS.Shared.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using AYA_UIS.Core.Abstractions.Contracts;
+using AYA_UIS.Application.Contracts;
 using Shared.Dtos.Auth_Module;
 
 namespace AYA_UIS.Core.Services.Implementations

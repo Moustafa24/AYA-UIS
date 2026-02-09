@@ -1,9 +1,11 @@
 using MediatR;
-using Shared.Dtos.Info_Module;
+using Shared.Dtos.Info_Module.DepartmentFeeDtos;
+using Shared.Dtos.Info_Module.FeeDtos;
 
 namespace AYA_UIS.Application.Commands.DepartmentFees;
 
 public record UpdateDepartmentFeeCommand(
-    string DepartmentName, 
-    string GradeYear, 
-    DepartmentFeeDtos Dto) : IRequest<Unit>;
+    string DepartmentName,
+    int GradeYear,
+    List<FeeDto> Fees
+) : IRequest<Unit>;

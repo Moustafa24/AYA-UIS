@@ -9,14 +9,14 @@ namespace AYA_UIS.Application.Commands.AcademicSchedules
 {
     public class UpdateAcademicScheduleCommand : IRequest<Unit>
     {
-        public string ScheduleName { get; set; }
-        public string FileName { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public IFormFile File { get; set; }
 
-        public UpdateAcademicScheduleCommand(string scheduleName, string fileName, IFormFile file)
+        public UpdateAcademicScheduleCommand(string title, string description, IFormFile file)
         {
-            ScheduleName = scheduleName;
-            FileName = fileName;
+            Title = title;
+            Description = description;
             File = file;
         }
     }

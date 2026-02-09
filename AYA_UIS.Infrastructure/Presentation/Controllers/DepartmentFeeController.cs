@@ -3,7 +3,8 @@ using AYA_UIS.Application.Queries.DepartmentFees;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Dtos.Info_Module;
+using Shared.Dtos.Info_Module.DepartmentFeeDtos;
+using Shared.Dtos.Info_Module.FeeDtos;
 
 namespace Presentation.Controllers
 {
@@ -20,7 +21,7 @@ namespace Presentation.Controllers
 
         // GET: api/DepartmentFees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DepartmentFeeDtos>>> GetAll()
+        public async Task<ActionResult<IEnumerable<DepartmentFeeDto>>> GetAll()
         {
             var result = await _mediator.Send(new GetAllDepartmentFeesQuery());
             return Ok(result);
@@ -28,8 +29,7 @@ namespace Presentation.Controllers
 
         // GET: api/DepartmentFees/{departmentName}/{gradeYear}
         [HttpGet("{departmentName}/{gradeYear}")]
-
-        public async Task<ActionResult<DepartmentFeeDtos>> GetByCompositeKey(string departmentName, string gradeYear)
+        public async Task<ActionResult<DepartmentFeeDto>> GetByCompositeKey(string departmentName, int gradeYear)
         {
             var result = await _mediator.Send(new GetDepartmentFeeByCompositeKeyQuery(departmentName, gradeYear));
             if (result == null) return NotFound();
@@ -39,13 +39,10 @@ namespace Presentation.Controllers
         // PUT: api/DepartmentFees/{departmentName}/{gradeYear}
         [HttpPut("{departmentName}/{gradeYear}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Update(string departmentName, string gradeYear, [FromBody] DepartmentFeeDtos dto)
+        public async Task<IActionResult> Update(string departmentName, int gradeYear, [FromBody] List<FeeDto> fees)
         {
-            await _mediator.Send(new UpdateDepartmentFeeCommand(departmentName, gradeYear, dto));
+            await _mediator.Send(new UpdateDepartmentFeeCommand(departmentName, gradeYear, fees));
             return NoContent();
         }
-
     }
-
-
 }

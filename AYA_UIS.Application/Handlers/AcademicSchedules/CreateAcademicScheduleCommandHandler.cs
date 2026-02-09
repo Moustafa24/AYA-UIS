@@ -1,22 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AYA_UIS.Application.Commands.AcademicSchedules;
-using CloudinaryDotNet;
+using AYA_UIS.Application.Contracts;
+using AYA_UIS.Core.Domain.Entities.Models;
+using Domain.Contracts;
 using MediatR;
-using AYA_UIS.Core.Abstractions.Contracts;
 
 namespace AYA_UIS.Application.Handlers.AcademicSchedules
 {
     public class CreateAcademicScheduleCommandHandler : IRequestHandler<CreateAcademicScheduleCommand, Unit>
     {
-        private readonly IServiceManager _serviceManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ICloudinaryService _cloudinaryService;
 
-        public CreateAcademicScheduleCommandHandler(IServiceManager serviceManager, ICloudinaryService cloudinaryService)
+        public CreateAcademicScheduleCommandHandler(IUnitOfWork unitOfWork, ICloudinaryService cloudinaryService)
         {
-            _serviceManager = serviceManager;
+            _unitOfWork = unitOfWork;
             _cloudinaryService = cloudinaryService;
         }
 
@@ -24,7 +21,20 @@ namespace AYA_UIS.Application.Handlers.AcademicSchedules
         {
             var fileId = Guid.NewGuid().ToString();
             var fileUrl = await _cloudinaryService.UploadAcademicScheduleAsync(request.File, fileId, cancellationToken);
-            await _serviceManager.AcademicSchedules.AddAsync(request.Title, request.Description, fileId, fileUrl, request.UploadedByUserId);
+
+            var entity = new AcademicSchedule
+            {
+                Title = request.Title,
+                FileId = fileId,
+                Url = fileUrl,
+                Description = request.Description,
+                UploadedByUserId = request.UploadedByUserId,
+                ScheduleDate = DateTime.UtcNow
+            };
+
+            await _unitOfWork.AcademicSchedules.AddAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+
             return Unit.Value;
         }
     }

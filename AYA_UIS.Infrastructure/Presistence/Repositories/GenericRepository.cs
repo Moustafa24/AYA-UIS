@@ -11,15 +11,20 @@ using Presistence.Data;
 
 namespace Presistence.Repositories
 {
-    public class GenericRepository<TEntity, TKey>(AYA_UIS_InfoDbContext _dbContext)
-        : IGenericRepository<TEntity, TKey> where TEntity : BaseEntities<TKey>
+    public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey>
+        where TEntity : BaseEntities<TKey>
     {
+        protected readonly AYA_UIS_InfoDbContext _dbContext;
+
+        public GenericRepository(AYA_UIS_InfoDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         // Get All
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            var result = _dbContext.Set<TEntity>().AsQueryable();
-            return await result.AsNoTracking().ToListAsync();
+            return await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
         } 
 
         // Add
@@ -29,15 +34,17 @@ namespace Presistence.Repositories
         }
 
         // Update
-        public void Update(TEntity entity)
+        public Task Update(TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);
+            return Task.CompletedTask;
         }
 
         // Delete
-        public void Delete(TEntity entity)
+        public Task Delete(TEntity entity)
         {
             _dbContext.Set<TEntity>().Remove(entity);
+            return Task.CompletedTask;
         }
 
         // Get By Id
@@ -45,6 +52,5 @@ namespace Presistence.Repositories
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
-
     }
 }

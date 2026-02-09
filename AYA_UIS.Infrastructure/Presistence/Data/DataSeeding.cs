@@ -4,20 +4,24 @@ using Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Presistence.Data;
+using Presistence.Identity;
 using Shared.Dtos.Auth_Module;
 
 public class DataSeeding : IDataSeeding
 {
     private readonly AYA_UIS_InfoDbContext _dbContext;
+    private readonly IdentityAYADbContext _identityDbContext;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<User> _userManager;
 
     public DataSeeding(
         AYA_UIS_InfoDbContext dbContext,
+        IdentityAYADbContext identityDbContext,
         RoleManager<IdentityRole> roleManager,
         UserManager<User> userManager)
     {
         _dbContext = dbContext;
+        _identityDbContext = identityDbContext;
         _roleManager = roleManager;
         _userManager = userManager;
     }
@@ -31,74 +35,50 @@ public class DataSeeding : IDataSeeding
                 await _dbContext.Database.MigrateAsync();
 
 
-            // ================= Study Years =================
-            if (!_dbContext.StudyYears.Any())
-            {
-                var studyYears = new List<StudyYear>
-        {
-            new() { Year = 1 },
-            new() { Year = 2 },
-            new() { Year = 3 },
-            new() { Year = 4 },
-            new() { Year = 5 } // للهندسة فقط
-        };
-
-                await _dbContext.StudyYears.AddRangeAsync(studyYears);
-                await _dbContext.SaveChangesAsync();
-            }
-
             // ================= Departments =================
             if (!_dbContext.Departments.Any())
             {
                 var departments = new List<Department>
-        {
-            new() { Name = "Computer Science" },
-            new() {  Name = "Business English" },
-            new() { Name = "Business Arabic" },
-            new() { Name = "Journalism" },
-            new() { Name = "Engineering" }
-        };
+                {
+                    new() { Name = "Computer Science", Code = "CS" },
+                    new() { Name = "Business English", Code = "BE" },
+                    new() { Name = "Business Arabic", Code = "BA" },
+                    new() { Name = "Journalism", Code = "JR" },
+                    new() { Name = "Engineering", Code = "ENG" }
+                };
 
                 await _dbContext.Departments.AddRangeAsync(departments);
+                await _dbContext.SaveChangesAsync();
+            }
+
+            // ================= Study Years (per department) =================
+            if (!_dbContext.StudyYears.Any())
+            {
+                var departments = await _dbContext.Departments.ToListAsync();
+                var studyYears = new List<StudyYear>();
+
+                foreach (var dept in departments)
+                {
+                    int maxYears = dept.Name == "Engineering" ? 5 : 4;
+                    for (int y = 1; y <= maxYears; y++)
+                    {
+                        studyYears.Add(new StudyYear { Year = y, DepartmentId = dept.Id });
+                    }
+                }
+
+                await _dbContext.StudyYears.AddRangeAsync(studyYears);
                 await _dbContext.SaveChangesAsync();
             }
 
             // ================= Department Fees =================
             if (!_dbContext.DepartmentFees.Any())
             {
-                var fees = new List<DepartmentFee>
-        {
-            // CS (4 years)
-            new() { DepartmentId = 1, StudyYearId = 1 },
-            new() { DepartmentId = 1, StudyYearId = 2 },
-            new() { DepartmentId = 1, StudyYearId = 3 },
-            new() { DepartmentId = 1, StudyYearId = 4 },
-
-            // Business English (4 years)
-            new() { DepartmentId = 2, StudyYearId = 1 },
-            new() { DepartmentId = 2, StudyYearId = 2 },
-            new() { DepartmentId = 2, StudyYearId = 3 },
-            new() { DepartmentId = 2, StudyYearId = 4 },
-
-            // Business Arabic (4 years)
-            new() { DepartmentId = 3, StudyYearId = 1 },
-            new() { DepartmentId = 3, StudyYearId = 2 },
-            new() { DepartmentId = 3, StudyYearId = 3 },
-            new() { DepartmentId = 3, StudyYearId = 4 },
-
-            // Journalism (4 years)
-            new() { DepartmentId = 4, StudyYearId = 1 },
-            new() { DepartmentId = 4, StudyYearId = 2 },
-            new() { DepartmentId = 4, StudyYearId = 3 },
-            new() { DepartmentId = 4, StudyYearId = 4 },
-
-            // Engineering (5 years)
-            new() { DepartmentId = 5, StudyYearId = 1 },
-            new() { DepartmentId = 5, StudyYearId = 2 },
-            new() { DepartmentId = 5, StudyYearId = 3 },
-            new() { DepartmentId = 5, StudyYearId = 4 },
-            new() { DepartmentId = 5, StudyYearId = 5 }
-        };
+                var studyYears = await _dbContext.StudyYears.ToListAsync();
+                var fees = studyYears.Select(sy => new DepartmentFee
+                {
+                    DepartmentId = sy.DepartmentId,
+                    StudyYearId = sy.Id
+                }).ToList();
 
                 await _dbContext.DepartmentFees.AddRangeAsync(fees);
                 await _dbContext.SaveChangesAsync();
@@ -113,6 +93,11 @@ public class DataSeeding : IDataSeeding
 
     public async Task SeedIdentityDataAsync()
     {
+        // Ensure Identity database is migrated
+        var pendingMigrations = await _identityDbContext.Database.GetPendingMigrationsAsync();
+        if (pendingMigrations.Any())
+            await _identityDbContext.Database.MigrateAsync();
+
         // Seed roles
         string[] roleNames = { "Admin", "Instructor", "Student" };
         foreach (var roleName in roleNames)

@@ -1,24 +1,28 @@
 using AYA_UIS.Application.Queries.DepartmentFees;
+using AutoMapper;
+using Domain.Contracts;
 using MediatR;
-using AYA_UIS.Core.Abstractions.Contracts;
-using Shared.Dtos.Info_Module;
+using Shared.Dtos.Info_Module.DepartmentFeeDtos;
 
 namespace AYA_UIS.Application.Handlers.DepartmentFees;
 
 public class GetAllDepartmentFeesQueryHandler 
-    : IRequestHandler<GetAllDepartmentFeesQuery, IEnumerable<DepartmentFeeDtos>>
+    : IRequestHandler<GetAllDepartmentFeesQuery, IEnumerable<DepartmentFeeDto>>
 {
-    private readonly IDepartmentFeeService _service;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public GetAllDepartmentFeesQueryHandler(IDepartmentFeeService service)
+    public GetAllDepartmentFeesQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _service = service;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
-    public async Task<IEnumerable<DepartmentFeeDtos>> Handle(
+    public async Task<IEnumerable<DepartmentFeeDto>> Handle(
         GetAllDepartmentFeesQuery request, 
         CancellationToken cancellationToken)
     {
-        return await _service.GetAllDepartmentFeeAsync();
+        var departmentFees = await _unitOfWork.DepartmentFees.GetAllWithDetailsAsync();
+        return _mapper.Map<IEnumerable<DepartmentFeeDto>>(departmentFees);
     }
 }
