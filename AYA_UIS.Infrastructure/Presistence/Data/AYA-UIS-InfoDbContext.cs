@@ -27,7 +27,7 @@ namespace Presistence.Data
         public DbSet<Fee> Fees { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Registration> Registrations { get; set; }
-        public DbSet<CourseUploads> CourseUploads { get; set; }
+        public DbSet<CourseUpload> CourseUploads { get; set; }
 
     }
 }

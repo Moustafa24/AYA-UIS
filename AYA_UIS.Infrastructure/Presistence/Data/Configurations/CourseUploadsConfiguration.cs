@@ -4,21 +4,23 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Presistence.Data.Configurations
 {
-    public class CourseUploadsConfiguration : IEntityTypeConfiguration<CourseUploads>
+    public class CourseUploadsConfiguration : IEntityTypeConfiguration<CourseUpload>
     {
-        public void Configure(EntityTypeBuilder<CourseUploads> builder)
+        public void Configure(EntityTypeBuilder<CourseUpload> builder)
         {
             builder.HasKey(cu => cu.Id);
 
             builder.HasOne(cu => cu.Course)
-                   .WithMany(c => c.CourseUploads)
+                   .WithMany(c => c.CourseUpload)
                    .HasForeignKey(cu => cu.CourseId)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(cu => cu.UploadedBy)
-                   .WithMany(u => u.CourseUploads)
-                   .HasForeignKey(cu => cu.UploadedByUserId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            // User lives in a separate Identity database, so no FK constraint
+            builder.Ignore(cu => cu.UploadedBy);
+
+            builder.Property(cu => cu.UploadedByUserId)
+                   .IsRequired()
+                   .HasMaxLength(450);
 
             builder.Property(cu => cu.Title)
                    .IsRequired()

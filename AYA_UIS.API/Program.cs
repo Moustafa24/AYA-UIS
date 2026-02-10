@@ -140,6 +140,9 @@ namespace AYA_UIS
             // Service Manager (Auth + Roles)
             builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
+            // Configure Cloudinary Settings
+            builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+
             // Infrastructure Services
             builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
             

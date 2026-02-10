@@ -21,7 +21,7 @@ namespace AYA_UIS.Application.Handlers.Departments
 
         public async Task<Response<IEnumerable<DepartmentDto>>> Handle(GetAllDepartmentsQuery request, CancellationToken cancellationToken)
         {
-            var departments = await _unitOfWork.Departments.GetAllWithDetailsAsync();
+            var departments = await _unitOfWork.Departments.GetAllAsync();
             var result = _mapper.Map<IEnumerable<DepartmentDto>>(departments);
             return Response<IEnumerable<DepartmentDto>>.SuccessResponse(result);
         }

@@ -10,10 +10,12 @@ namespace Presistence.Data.Configurations
         {
             builder.HasKey(r => r.Id);
 
-            builder.HasOne(r => r.User)
-                   .WithMany(u => u.Registrations)
-                   .HasForeignKey(r => r.UserId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            // User lives in a separate Identity database, so no FK constraint
+            builder.Ignore(r => r.User);
+
+            builder.Property(r => r.UserId)
+                   .IsRequired()
+                   .HasMaxLength(450);
 
             builder.HasOne(r => r.Course)
                    .WithMany(c => c.Registrations)

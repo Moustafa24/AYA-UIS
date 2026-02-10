@@ -28,24 +28,21 @@ namespace Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var query = new GetAllAcademicSchedulesQuery();
-            var result = await _mediator.Send(query);
+            var result = await _mediator.Send(new GetAllAcademicSchedulesQuery());
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute]int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var query = new GetAcademicScheduleByIdQuery(id);
-            var result = await _mediator.Send(query);
+            var result = await _mediator.Send(new GetAcademicScheduleByIdQuery(id));
             return Ok(result);
         }
 
-        [HttpGet("{scheduleTitle}")]
-        public async Task<IActionResult> GetByTitle([FromRoute]string scheduleTitle)
+        [HttpGet("{title}")]
+        public async Task<IActionResult> GetByTitle([FromRoute]string title)
         {
-            var query = new GetAcademicScheduleByTitleQuery(scheduleTitle);
-            var result = await _mediator.Send(query);
+            var result = await _mediator.Send(new GetAcademicScheduleByTitleQuery(title));
             return Ok(result);
         }
 

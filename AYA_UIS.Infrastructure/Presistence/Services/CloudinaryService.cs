@@ -20,7 +20,9 @@ public class CloudinaryService : ICloudinaryService
 {
     private readonly Cloudinary _cloudinary;
     private const long MaxFileSizeBytes = 2 * 1024 * 1024; // 2MB
+    private const long MaxCourseFileSizeBytes = 10 * 1024 * 1024; // 10MB
     private readonly string[] _allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp", ".pdf", ".doc", ".docx", ".xls", ".xlsx" };
+    private readonly string[] _allowedCourseExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp", ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".txt", ".csv", ".zip", ".rar" };
 
     public CloudinaryService(IOptions<CloudinarySettings> settings)
     {
@@ -84,6 +86,48 @@ public class CloudinaryService : ICloudinaryService
         return uploadResult.SecureUrl.ToString();
     }
 
+    public async Task<string> UploadCourseFileAsync(IFormFile file, string fileId, string courseName, CancellationToken cancellationToken = default)
+    {
+        ValidateCourseFile(file);
+
+        var safeName = courseName.Replace(" ", "_").ToLowerInvariant();
+        var folder = $"akhbaracademy/course_uploads/{safeName}";
+
+        var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+        var isImage = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" }.Contains(extension);
+
+        if (isImage)
+        {
+            var imageParams = new ImageUploadParams
+            {
+                File = new FileDescription(file.FileName, file.OpenReadStream()),
+                Folder = folder,
+                PublicId = $"course_{fileId}_{Guid.NewGuid()}",
+            };
+
+            var imageResult = await _cloudinary.UploadAsync(imageParams, cancellationToken);
+
+            if (imageResult.Error != null)
+                throw new InvalidOperationException($"File upload failed: {imageResult.Error.Message}");
+
+            return imageResult.SecureUrl.ToString();
+        }
+
+        var rawParams = new RawUploadParams
+        {
+            File = new FileDescription(file.FileName, file.OpenReadStream()),
+            Folder = folder,
+            PublicId = $"course_{fileId}_{Guid.NewGuid()}",
+        };
+
+        var rawResult = await _cloudinary.UploadLargeAsync(rawParams, cancellationToken: cancellationToken);
+
+        if (rawResult.Error != null)
+            throw new InvalidOperationException($"File upload failed: {rawResult.Error.Message}");
+
+        return rawResult.SecureUrl.ToString();
+    }
+
     public async Task<bool> DeleteImageAsync(string publicId, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(publicId))
@@ -111,6 +155,25 @@ public class CloudinaryService : ICloudinaryService
         if (!_allowedExtensions.Contains(extension))
         {
             throw new ArgumentException($"File type '{extension}' is not allowed. Allowed types: {string.Join(", ", _allowedExtensions)}");
+        }
+    }
+
+    private void ValidateCourseFile(IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+        {
+            throw new ArgumentException("File is required");
+        }
+
+        if (file.Length > MaxCourseFileSizeBytes)
+        {
+            throw new ArgumentException($"File size exceeds the maximum limit of 10MB. Current size: {file.Length / 1024.0 / 1024.0:F2}MB");
+        }
+
+        var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+        if (!_allowedCourseExtensions.Contains(extension))
+        {
+            throw new ArgumentException($"File type '{extension}' is not allowed. Allowed types: {string.Join(", ", _allowedCourseExtensions)}");
         }
     }
 }

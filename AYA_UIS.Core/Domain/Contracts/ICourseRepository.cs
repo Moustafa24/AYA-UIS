@@ -4,7 +4,7 @@ namespace Domain.Contracts
 {
     public interface ICourseRepository : IGenericRepository<Course, int>
     {
-        Task<IEnumerable<Course>> GetByDepartmentIdAsync(int departmentId);
-        Task<Course?> GetByIdWithDetailsAsync(int id);
+        public Task<Course?> GetCourseUplaodsAsync(int id);
+        public Task<Course?> GetYearCourseRegistrationAsync(int id, int yearId);
     }
 }

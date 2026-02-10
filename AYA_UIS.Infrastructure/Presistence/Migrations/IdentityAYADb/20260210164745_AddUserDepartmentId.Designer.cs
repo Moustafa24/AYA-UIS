@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Presistence.Identity;
 
@@ -11,9 +12,11 @@ using Presistence.Identity;
 namespace Presistence.Migrations.IdentityAYADb
 {
     [DbContext(typeof(IdentityAYADbContext))]
-    partial class IdentityAYADbContextModelSnapshot : ModelSnapshot
+    [Migration("20260210164745_AddUserDepartmentId")]
+    partial class AddUserDepartmentId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

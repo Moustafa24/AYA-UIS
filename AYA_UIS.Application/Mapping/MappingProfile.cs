@@ -1,6 +1,8 @@
 using AutoMapper;
 using AYA_UIS.Core.Domain.Entities.Models;
 using Shared.Dtos.Info_Module.AcademicSheduleDtos;
+using Shared.Dtos.Info_Module.CourseDtos;
+using Shared.Dtos.Info_Module.CourseUploadDtos;
 using Shared.Dtos.Info_Module.DepartmentDtos;
 using Shared.Dtos.Info_Module.DepartmentFeeDtos;
 using Shared.Dtos.Info_Module.FeeDtos;
@@ -28,6 +30,15 @@ namespace AYA_UIS.Application.Mapping
 
             // Fee mappings
             CreateMap<Fee, FeeDto>().ReverseMap();
+
+            //Course mappings
+            CreateMap<Course, CourseDto>().ReverseMap();
+            CreateMap<CreateCourseDto, Course>();
+            //CreateMap<UpdateCourseDto, Course>();
+
+            //CourseUpload mappings
+            CreateMap<CourseUpload, CourseUploadDto>().ReverseMap();
+            CreateMap<CreateCourseUploadDto, CourseUpload>();
         }
     }
 }

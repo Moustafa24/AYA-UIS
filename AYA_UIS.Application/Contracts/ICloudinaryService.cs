@@ -6,6 +6,7 @@ namespace AYA_UIS.Application.Contracts
     {
         Task<string> UploadUserProfilePictureAsync(IFormFile file, string userId, CancellationToken cancellationToken = default);
         Task<string> UploadAcademicScheduleAsync(IFormFile file, string scheduleId, CancellationToken cancellationToken = default);
+        Task<string> UploadCourseFileAsync(IFormFile file, string fileId, string courseName, CancellationToken cancellationToken = default);
         Task<bool> DeleteImageAsync(string publicId, CancellationToken cancellationToken = default);
     }
 }

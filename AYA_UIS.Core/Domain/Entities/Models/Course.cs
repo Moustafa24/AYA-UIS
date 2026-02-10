@@ -13,6 +13,6 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public int DepartmentId { get; set; }
         public Department Department { get; set; } = null!;
         public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
-        public ICollection<CourseUploads> CourseUploads { get; set; } = new List<CourseUploads>();
+        public ICollection<CourseUpload> CourseUpload { get; set; } = new List<CourseUpload>();
     }
 }

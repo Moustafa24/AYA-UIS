@@ -15,10 +15,12 @@ namespace Presistence.Data.Configurations
                    .HasForeignKey(a => a.DepartmentId)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(a => a.UploadedBy)
-                   .WithMany(u => u.AcademicSchedules)
-                   .HasForeignKey(a => a.UploadedByUserId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            // User lives in a separate Identity database, so no FK constraint
+            builder.Ignore(a => a.UploadedBy);
+
+            builder.Property(a => a.UploadedByUserId)
+                   .IsRequired()
+                   .HasMaxLength(450);
 
             builder.Property(a => a.Title)
                    .IsRequired()

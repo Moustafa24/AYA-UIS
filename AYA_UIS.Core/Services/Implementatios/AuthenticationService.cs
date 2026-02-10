@@ -174,6 +174,7 @@ namespace AYA_UIS.Core.Services.Implementations
 
             var claims = new List<Claim>()
             {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Name , user.DisplayName),
                 new Claim (ClaimTypes.Email , user.Email),
             };

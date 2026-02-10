@@ -31,7 +31,8 @@ namespace Presistence.Identity
             builder.Entity<User>()
                    .Ignore(u => u.Registrations)
                    .Ignore(u => u.AcademicSchedules)
-                   .Ignore(u => u.CourseUploads);
+                   .Ignore(u => u.CourseUpload)
+                   .Ignore(u => u.Department);
 
         }
 

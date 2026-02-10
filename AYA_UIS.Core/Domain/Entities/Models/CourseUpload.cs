@@ -8,7 +8,7 @@ using AYA_UIS.Core.Domain.Entities.Models;
 
 namespace AYA_UIS.Core.Domain.Entities.Models
 {
-    public class CourseUploads : BaseEntities<int>
+    public class CourseUpload : BaseEntities<int>
     {
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
