@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Presistence.Data;
 using Presistence.Repositories;
 using AYA_UIS.Application.Contracts;
-
 using AYA_UIS.MiddelWares;
 using Microsoft.AspNetCore.Mvc;
 using AYA_UIS.Factories;
@@ -145,6 +144,9 @@ namespace AYA_UIS
 
             // Infrastructure Services
             builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
+            
+            // GPA Calculation Service
+            builder.Services.AddScoped<IGpaCalculationService, GpaCalculationService>();
             
             builder.Services.AddHttpContextAccessor();
 

@@ -62,7 +62,7 @@ public class DataSeeding : IDataSeeding
                     int maxYears = dept.Name == "Engineering" ? 5 : 4;
                     for (int y = 1; y <= maxYears; y++)
                     {
-                        studyYears.Add(new StudyYear { Year = y, DepartmentId = dept.Id });
+                        studyYears.Add(new StudyYear { StartYear = y, EndYear = y + 1, DepartmentId = dept.Id });
                     }
                 }
 

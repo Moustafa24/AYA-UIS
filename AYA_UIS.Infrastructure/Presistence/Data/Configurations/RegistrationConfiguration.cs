@@ -26,6 +26,11 @@ namespace Presistence.Data.Configurations
                    .WithMany(sy => sy.Registrations)
                    .HasForeignKey(r => r.StudyYearId)
                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(r => r.Semester)
+                   .WithMany(s => s.Registrations)
+                   .HasForeignKey(r => r.SemesterId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

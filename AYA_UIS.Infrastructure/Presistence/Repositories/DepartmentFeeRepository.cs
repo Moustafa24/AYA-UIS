@@ -18,7 +18,7 @@ namespace Presistence.Repositories
                 .Include(df => df.StudyYear)
                 .Include(df => df.Fees)
                 .FirstOrDefaultAsync(df => df.Department.Name == departmentName
-                    && df.StudyYear.Year == studyYear);
+                    && df.StudyYear.StartYear == studyYear);
         }
 
         public async Task<IEnumerable<DepartmentFee>> GetAllWithDetailsAsync()

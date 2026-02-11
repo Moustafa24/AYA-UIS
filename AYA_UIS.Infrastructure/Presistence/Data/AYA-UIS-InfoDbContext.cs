@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AYA_UIS.Core.Domain.Entities.Models;
+using Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Presistence.Data.Configurations;
 
@@ -22,12 +23,15 @@ namespace Presistence.Data
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<StudyYear> StudyYears { get; set; }
+        public DbSet<Semester> Semesters { get; set; }
         public DbSet<DepartmentFee> DepartmentFees { get; set; }
         public DbSet<AcademicSchedule> AcademicSchedules { get; set; }
         public DbSet<Fee> Fees { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CoursePrerequisite> CoursePrerequisites { get; set; }
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<CourseUpload> CourseUploads { get; set; }
+        public DbSet<SemesterGPA> SemesterGPAs { get; set; }
 
     }
 }

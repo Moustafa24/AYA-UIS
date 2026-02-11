@@ -26,7 +26,8 @@ namespace AYA_UIS.Application.Mapping
             // DepartmentFee mappings
             CreateMap<DepartmentFee, DepartmentFeeDto>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Department.Name))
-                .ForMember(d => d.Year, opt => opt.MapFrom(s => s.StudyYear.Year));
+                .ForMember(d => d.StartYear, opt => opt.MapFrom(s => s.StudyYear.StartYear))
+                .ForMember(d => d.EndYear, opt => opt.MapFrom(s => s.StudyYear.EndYear));
 
             // Fee mappings
             CreateMap<Fee, FeeDto>().ReverseMap();
