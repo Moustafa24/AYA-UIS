@@ -1,70 +1,200 @@
-# Getting Started with Create React App
+# AYA-UIS Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React application for the AYA University Information System, designed with scalability and maintainability in mind.
 
-## Available Scripts
+## 🏗️ Project Structure
+
+```
+src/
+├── components/              # Reusable UI components
+│   ├── common/             # Generic components (Button, Modal, etc.)
+│   ├── layout/             # Layout components (Header, Sidebar, etc.)
+│   └── forms/              # Form-specific components
+├── pages/                  # Page-level components
+│   ├── auth/               # Authentication pages (Login, Register)
+│   ├── dashboard/          # Dashboard pages
+│   ├── departments/        # Department management pages
+│   ├── courses/            # Course management pages
+│   ├── fees/               # Fee management pages
+│   └── schedules/          # Schedule management pages
+├── hooks/                  # Custom React hooks
+├── services/               # API service layer
+├── contexts/               # React contexts for state management
+├── utils/                  # Utility functions and helpers
+├── styles/                 # Global styles and themes
+├── types/                  # TypeScript type definitions
+├── constants/              # Application constants
+└── assets/                 # Static assets
+    ├── images/             # Images and graphics
+    └── icons/              # Icon files
+```
+
+## 🚀 Architecture Principles
+
+### Component Organization
+- **Atomic Design**: Components organized from simple to complex
+- **Feature-Based Structure**: Pages grouped by functionality
+- **DRY Principle**: Reusable components in `common/` directory
+
+### State Management
+- **React Context**: For global application state
+- **Custom Hooks**: For stateful logic encapsulation
+- **Local State**: Component-specific state with useState
+
+### Code Organization
+- **Services Layer**: API calls abstracted into service functions
+- **Type Safety**: TypeScript interfaces and types
+- **Constants**: Centralized configuration and constants
+
+## 🎯 Development Guidelines
+
+### Naming Conventions
+- **Components**: PascalCase (`UserProfile.jsx`)
+- **Hooks**: camelCase with `use` prefix (`useAuth.js`)
+- **Services**: camelCase with descriptive names (`authService.js`)
+- **Constants**: UPPER_SNAKE_CASE (`API_BASE_URL`)
+
+### File Structure
+- Each component in its own file
+- Index files for clean imports
+- Co-locate styles with components when component-specific
+
+### Code Standards
+- Use functional components with hooks
+- Implement proper error handling
+- Follow React best practices
+- Maintain consistent code formatting
+
+## 🔧 Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
 
 ### `npm run build`
+Builds the app for production to the `build` folder.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm run lint`
+Runs ESLint to check for code quality issues.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run format`
+Formats code using Prettier.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🔗 Integration with Backend
 
-### `npm run eject`
+The frontend communicates with the AYA-UIS .NET Core API:
+- **Base URL**: `http://localhost:5282` (development)
+- **Authentication**: JWT token-based
+- **API Format**: RESTful JSON API
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Service Layer Structure
+```javascript
+// Example service structure
+src/
+├── services/
+│   ├── api.js              # Base API configuration
+│   ├── authService.js      # Authentication services
+│   ├── departmentService.js# Department CRUD operations
+│   ├── courseService.js    # Course management services
+│   ├── feeService.js       # Fee management services
+│   └── scheduleService.js  # Schedule management services
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🎨 UI/UX Approach
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Design System
+- Consistent color palette and typography
+- Reusable component library
+- Responsive design principles
+- Accessibility considerations
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### User Experience
+- Intuitive navigation
+- Fast loading times
+- Error handling and user feedback
+- Progressive web app capabilities
 
-## Learn More
+## 📱 Responsive Design
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application is designed to work across devices:
+- **Desktop**: Full-featured interface
+- **Tablet**: Adapted layouts
+- **Mobile**: Touch-optimized interface
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🚀 Future Enhancements
 
-### Code Splitting
+### Phase 1 (Current)
+- ✅ Project structure setup
+- ⏳ Authentication implementation
+- ⏳ Department management
+- ⏳ Course management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Phase 2 (Planned)
+- Advanced reporting dashboard
+- Real-time notifications
+- Dark mode support
+- Progressive Web App features
 
-### Analyzing the Bundle Size
+### Phase 3 (Future)
+- Mobile app (React Native)
+- Advanced analytics
+- Internationalization
+- Performance optimizations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🔧 Development Setup
 
-### Making a Progressive Web App
+1. **Prerequisites**
+   ```bash
+   Node.js 18+ and npm
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-### Advanced Configuration
+3. **Environment setup**
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local with your configuration
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4. **Start development server**
+   ```bash
+   npm start
+   ```
 
-### Deployment
+## 🧪 Testing Strategy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Testing Approach
+- **Unit Tests**: Component testing with React Testing Library
+- **Integration Tests**: API integration testing
+- **E2E Tests**: User workflow testing (planned)
 
-### `npm run build` fails to minify
+### Testing Commands
+```bash
+npm test                    # Run all tests
+npm run test:watch         # Run tests in watch mode
+npm run test:coverage      # Run tests with coverage report
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📦 Build and Deployment
+
+### Production Build
+```bash
+npm run build              # Create production build
+npm run preview            # Preview production build locally
+```
+
+### Deployment Options
+- Static hosting (Netlify, Vercel)
+- Docker containerization
+- CI/CD pipeline integration
+
+---
+
+*Built with React ⚛️ for modern university management*
