@@ -1,0 +1,179 @@
+.App {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.app-header {
+  text-align: center;
+  background-color: #282c34;
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.app-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2em;
+}
+
+.app-header p {
+  margin: 0 0 20px 0;
+  color: #aaa;
+}
+
+.app-header button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.app-header button:hover:not(:disabled) {
+  background-color: #4fa8c5;
+}
+
+.app-header button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+.test-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.test-section h3 {
+  color: #282c34;
+  margin-top: 0;
+}
+
+.test-section p {
+  color: #666;
+  font-size: 14px;
+  word-break: break-all;
+  font-family: monospace;
+}
+
+.workouts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.workout-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.workout-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.workout-card h3 {
+  margin: 0 0 15px 0;
+  color: #282c34;
+  border-bottom: 2px solid #61dafb;
+  padding-bottom: 10px;
+}
+
+.workout-info {
+  margin-bottom: 15px;
+}
+
+.workout-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.workout-info strong {
+  color: #282c34;
+}
+
+.image-container {
+  margin-top: 15px;
+}
+
+.image-container img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+}
+
+.image-status {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.status-badge.loading {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.status-badge.success {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-badge.warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+.image-urls {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  font-family: monospace;
+}
+
+.image-urls p {
+  margin: 5px 0;
+  word-break: break-all;
+  color: #666;
+}
+
+.no-data {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  padding: 40px;
+}
