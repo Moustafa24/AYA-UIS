@@ -6,5 +6,6 @@ namespace Domain.Contracts
     {
         public Task<Course?> GetCourseUplaodsAsync(int id);
         public Task<Course?> GetYearCourseRegistrationAsync(int id, int yearId);
+        public Task<IEnumerable<CoursePrerequisite>> GetPrerequisitesAsync(int courseId);
     }
 }

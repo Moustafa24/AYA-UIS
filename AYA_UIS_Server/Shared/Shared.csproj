@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AYA_UIS.Core\Domain\Domain.csproj" />
+  </ItemGroup>
+
 </Project>

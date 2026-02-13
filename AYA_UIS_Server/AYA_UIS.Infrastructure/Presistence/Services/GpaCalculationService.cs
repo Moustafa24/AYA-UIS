@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AYA_UIS.Application.Contracts;
 using AYA_UIS.Core.Domain.Entities.Models;
-using Domain.enums;
+using AYA_UIS.Core.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Presistence.Data;
 

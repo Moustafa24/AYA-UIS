@@ -12,6 +12,7 @@ namespace Domain.Contracts
         IStudyYearRepository StudyYears { get; }
         IRegistrationRepository Registrations { get; }
         ICourseUploadsRepository CourseUploads { get; }
+        ISemesterRepository Semesters { get; }
 
         Task<int> SaveChangesAsync();
 

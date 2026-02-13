@@ -1,4 +1,4 @@
-namespace Domain.enums
+namespace AYA_UIS.Core.Domain.Enums
 {
     public enum Statuses
     {

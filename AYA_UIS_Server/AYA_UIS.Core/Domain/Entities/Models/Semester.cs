@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AYA_UIS.Core.Domain.Entities;
 using AYA_UIS.Core.Domain.Entities.Models;
-using Domain.enums;
+using AYA_UIS.Core.Domain.Enums;
 
-namespace Domain.Entities.Models
+namespace AYA_UIS.Core.Domain.Entities.Models
 {
     public class Semester : BaseEntities<int>
     {
-        public SemseterEnums Title { get; set; }
+        public SemesterEnums Title { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int DepartmentId { get; set; }

@@ -1,7 +1,6 @@
 using System;
 using AYA_UIS.Core.Domain.Entities;
 using AYA_UIS.Core.Domain.Entities.Identity;
-using Domain.Entities.Models;
 
 namespace AYA_UIS.Core.Domain.Entities.Models
 {

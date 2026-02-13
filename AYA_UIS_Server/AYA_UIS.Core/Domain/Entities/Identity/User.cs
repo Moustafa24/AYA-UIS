@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AYA_UIS.Core.Domain.Entities.Models;
-using Domain.enums;
+using AYA_UIS.Core.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace AYA_UIS.Core.Domain.Entities.Identity
@@ -12,6 +12,7 @@ namespace AYA_UIS.Core.Domain.Entities.Identity
     public class User : IdentityUser
     {
         public string DisplayName { get; set; } = string.Empty;
+        public string ProfilePicture { get; set; } = string.Empty;
         public string Academic_Code { get; set; } = string.Empty;
         public Levels Level { get; set; } // if he study eng will prep year any other will start from first year
         public int TotalCredits { get; set; } // the total credits that the student has registered for in the current study year

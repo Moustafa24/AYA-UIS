@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Presistence.Data;
 using Presistence.Identity;
 using Shared.Dtos.Auth_Module;
+using AYA_UIS.Core.Domain.Enums;
 
 public class DataSeeding : IDataSeeding
 {
@@ -70,6 +71,44 @@ public class DataSeeding : IDataSeeding
                 await _dbContext.SaveChangesAsync();
             }
 
+            // ================= Semesters =================
+            if (!_dbContext.Semesters.Any())
+            {
+                var departments = await _dbContext.Departments.ToListAsync();
+                var semesters = new List<Semester>();
+                int baseYear = 2024; // Starting academic year
+
+                foreach (var dept in departments)
+                {
+                    var deptStudyYears = await _dbContext.StudyYears.Where(sy => sy.DepartmentId == dept.Id).ToListAsync();
+                    foreach (var studyYear in deptStudyYears)
+                    {
+                        int currentYear = baseYear + (studyYear.StartYear - 1); // Convert academic level to calendar year
+                        
+                        // Semester1 (Fall)
+                        semesters.Add(new Semester
+                        {
+                            Title = SemesterEnums.Semester1,
+                            StartDate = new DateTime(currentYear, 9, 1),
+                            EndDate = new DateTime(currentYear, 12, 31),
+                            DepartmentId = dept.Id
+                        });
+
+                        // Semester2 (Spring)
+                        semesters.Add(new Semester
+                        {
+                            Title = SemesterEnums.Semester2,
+                            StartDate = new DateTime(currentYear + 1, 1, 1),
+                            EndDate = new DateTime(currentYear + 1, 5, 31),
+                            DepartmentId = dept.Id
+                        });
+                    }
+                }
+
+                await _dbContext.Semesters.AddRangeAsync(semesters);
+                await _dbContext.SaveChangesAsync();
+            }
+
             // ================= Department Fees =================
             if (!_dbContext.DepartmentFees.Any())
             {
@@ -82,6 +121,146 @@ public class DataSeeding : IDataSeeding
 
                 await _dbContext.DepartmentFees.AddRangeAsync(fees);
                 await _dbContext.SaveChangesAsync();
+            }
+
+            // ================= Courses =================
+            if (!_dbContext.Courses.Any())
+            {
+                var csDepartment = await _dbContext.Departments.FirstOrDefaultAsync(d => d.Code == "CS");
+                if (csDepartment != null)
+                {
+                    var courses = new List<Course>
+                    {
+                        // Year 1
+                        new Course { Code = "CS101", Name = "Introduction to Computer Science", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS102", Name = "Programming Fundamentals I", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS103", Name = "Programming Fundamentals II", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS104", Name = "Computer Organization", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "MATH101", Name = "Discrete Mathematics", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "MATH102", Name = "Calculus I", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "ENG101", Name = "English Communication", Credits = 2, DepartmentId = csDepartment.Id },
+                        new Course { Code = "PHY101", Name = "Physics I", Credits = 3, DepartmentId = csDepartment.Id },
+
+                        // Year 2
+                        new Course { Code = "CS201", Name = "Data Structures", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS202", Name = "Algorithms", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS203", Name = "Object-Oriented Programming", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS204", Name = "Database Systems", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS205", Name = "Web Development", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "MATH201", Name = "Linear Algebra", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "STAT201", Name = "Statistics", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "ENG201", Name = "Technical Writing", Credits = 2, DepartmentId = csDepartment.Id },
+
+                        // Year 3
+                        new Course { Code = "CS301", Name = "Software Engineering", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS302", Name = "Operating Systems", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS303", Name = "Computer Networks", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS304", Name = "Artificial Intelligence", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS305", Name = "Machine Learning", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS306", Name = "Cybersecurity", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS307", Name = "Mobile App Development", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "MATH301", Name = "Numerical Methods", Credits = 3, DepartmentId = csDepartment.Id },
+
+                        // Year 4
+                        new Course { Code = "CS401", Name = "Advanced Algorithms", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS402", Name = "Distributed Systems", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS403", Name = "Computer Graphics", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS404", Name = "Big Data Analytics", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS405", Name = "Cloud Computing", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS406", Name = "Blockchain Technology", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS407", Name = "IoT and Embedded Systems", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS408", Name = "Capstone Project I", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS409", Name = "Capstone Project II", Credits = 4, DepartmentId = csDepartment.Id },
+                        new Course { Code = "BUS401", Name = "Entrepreneurship", Credits = 2, DepartmentId = csDepartment.Id },
+
+                        // Elective Courses
+                        new Course { Code = "CS501", Name = "Advanced Machine Learning", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS502", Name = "Deep Learning", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS503", Name = "Natural Language Processing", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS504", Name = "Computer Vision", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS505", Name = "Quantum Computing", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS506", Name = "Game Development", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS507", Name = "DevOps", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS508", Name = "Ethical Hacking", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS509", Name = "Data Mining", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS510", Name = "Parallel Computing", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS511", Name = "Compiler Design", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS512", Name = "Human-Computer Interaction", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS513", Name = "Software Testing", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS514", Name = "Cryptography", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS515", Name = "Augmented Reality", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS516", Name = "Virtual Reality", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS517", Name = "Bioinformatics", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS518", Name = "Robotics", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS519", Name = "Digital Signal Processing", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS520", Name = "Information Retrieval", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS521", Name = "Network Security", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS522", Name = "Advanced Databases", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS523", Name = "Microservices Architecture", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS524", Name = "Serverless Computing", Credits = 3, DepartmentId = csDepartment.Id },
+                        new Course { Code = "CS525", Name = "Edge Computing", Credits = 3, DepartmentId = csDepartment.Id }
+                    };
+
+                    await _dbContext.Courses.AddRangeAsync(courses);
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+
+            // ================= Course Prerequisites =================
+            if (!_dbContext.CoursePrerequisites.Any())
+            {
+                var csDepartment = await _dbContext.Departments.FirstOrDefaultAsync(d => d.Code == "CS");
+                if (csDepartment != null)
+                {
+                    var courses = await _dbContext.Courses.Where(c => c.DepartmentId == csDepartment.Id).ToDictionaryAsync(c => c.Code, c => c.Id);
+                    
+                    var prerequisites = new List<CoursePrerequisite>();
+                    
+                    // Only add prerequisites for courses that exist in the database
+                    var prerequisiteDefinitions = new[]
+                    {
+                        new { CourseCode = "CS103", PrereqCode = "CS102" },
+                        new { CourseCode = "CS201", PrereqCode = "CS103" },
+                        new { CourseCode = "CS202", PrereqCode = "CS201" },
+                        new { CourseCode = "CS203", PrereqCode = "CS102" },
+                        new { CourseCode = "CS204", PrereqCode = "CS103" },
+                        new { CourseCode = "CS401", PrereqCode = "CS202" },
+                        new { CourseCode = "CS301", PrereqCode = "CS201" },
+                        new { CourseCode = "CS302", PrereqCode = "CS201" },
+                        new { CourseCode = "CS303", PrereqCode = "CS201" },
+                        new { CourseCode = "CS304", PrereqCode = "CS201" },
+                        new { CourseCode = "CS305", PrereqCode = "CS304" },
+                        new { CourseCode = "CS306", PrereqCode = "CS201" },
+                        new { CourseCode = "CS408", PrereqCode = "CS301" },
+                        new { CourseCode = "CS408", PrereqCode = "CS302" },
+                        new { CourseCode = "CS409", PrereqCode = "CS408" },
+                        new { CourseCode = "CS501", PrereqCode = "CS305" },
+                        new { CourseCode = "CS502", PrereqCode = "CS501" },
+                        new { CourseCode = "CS503", PrereqCode = "CS305" },
+                        new { CourseCode = "CS504", PrereqCode = "CS305" },
+                        new { CourseCode = "CS508", PrereqCode = "CS306" },
+                        new { CourseCode = "CS521", PrereqCode = "CS306" },
+                        new { CourseCode = "CS522", PrereqCode = "CS204" }
+                    };
+
+                    foreach (var prereq in prerequisiteDefinitions)
+                    {
+                        if (courses.ContainsKey(prereq.CourseCode) && courses.ContainsKey(prereq.PrereqCode))
+                        {
+                            prerequisites.Add(new CoursePrerequisite 
+                            { 
+                                CourseId = courses[prereq.CourseCode], 
+                                PrerequisiteCourseId = courses[prereq.PrereqCode] 
+                            });
+                        }
+                    }
+
+                    if (prerequisites.Any())
+                    {
+                        await _dbContext.CoursePrerequisites.AddRangeAsync(prerequisites);
+                        await _dbContext.SaveChangesAsync();
+                    }
+                }
             }
         }
         catch (Exception ex)

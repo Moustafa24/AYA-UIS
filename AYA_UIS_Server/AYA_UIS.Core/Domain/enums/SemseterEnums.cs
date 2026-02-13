@@ -1,6 +1,6 @@
-namespace Domain.enums
+namespace AYA_UIS.Core.Domain.Enums
 {
-    public enum SemseterEnums
+    public enum SemesterEnums
     {
         Semester1,
         Semester2,

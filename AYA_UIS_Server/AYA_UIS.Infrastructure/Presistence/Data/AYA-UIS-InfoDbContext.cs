@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AYA_UIS.Core.Domain.Entities.Models;
-using Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Presistence.Data.Configurations;
 

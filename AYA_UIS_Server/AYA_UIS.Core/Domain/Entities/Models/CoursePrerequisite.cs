@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AYA_UIS.Core.Domain.Entities.Models;
 
-namespace Domain.Entities.Models
+namespace AYA_UIS.Core.Domain.Entities.Models
 {
     public class CoursePrerequisite
     {

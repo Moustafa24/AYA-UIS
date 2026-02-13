@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AYA_UIS.Core.Domain.Enums;
 using AYA_UIS.Core.Domain.Entities;
 using AYA_UIS.Core.Domain.Entities.Identity;
-using Domain.Entities.Models;
-using Domain.enums;
 
 namespace AYA_UIS.Core.Domain.Entities.Models
 {
@@ -13,7 +12,7 @@ namespace AYA_UIS.Core.Domain.Entities.Models
     {
         public Statuses Status { get; set; }
         public string? Reason { get; set; } // the reason for pending or canceling the registration
-        public Grads Grade { get; set; }
+        public Grads Grade { get; set; } // null if the course is not yet completed, otherwise it holds the grade received
         public string UserId { get; set; } = string.Empty;
         public User User { get; set; } = null!;
         public int CourseId { get; set; }

@@ -27,6 +27,13 @@ namespace Presistence.Repositories
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-
+        public async Task<IEnumerable<CoursePrerequisite>> GetPrerequisitesAsync(int courseId)
+        {
+            return await _dbContext.CoursePrerequisites
+                .Where(cp => cp.CourseId == courseId)
+                .Include(cp => cp.PrerequisiteCourse)
+                .AsNoTracking()
+                .ToListAsync();
+        }
     }
 }

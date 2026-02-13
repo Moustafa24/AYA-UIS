@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AYA_UIS.Core.Domain.Entities.Models;
-using Domain.enums;
+using AYA_UIS.Core.Domain.Enums;
 
 namespace AYA_UIS.Application.Contracts
 {
