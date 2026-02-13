@@ -33,6 +33,16 @@ namespace Presistence.Data.Configurations
             builder.Property(a => a.Url)
                    .IsRequired()
                    .HasMaxLength(500);
+
+            builder.HasOne(a => a.Semester)
+                   .WithMany(s => s.AcademicSchedules)
+                   .HasForeignKey(a => a.SemesterId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(a => a.StudyYear)
+                   .WithMany(sy => sy.AcademicSchedules)
+                   .HasForeignKey(a => a.StudyYearId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

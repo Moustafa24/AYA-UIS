@@ -16,5 +16,6 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public ICollection<DepartmentFee> DepartmentFees { get; set; } = new List<DepartmentFee>();
         public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
         public ICollection<SemesterGPA> SemesterGPAs { get; set; } = new List<SemesterGPA>();
+        public ICollection<AcademicSchedule> AcademicSchedules { get; set; } = new List<AcademicSchedule>();
     }
 }

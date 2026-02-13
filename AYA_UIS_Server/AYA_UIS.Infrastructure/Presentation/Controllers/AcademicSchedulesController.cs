@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AYA_UIS.Application.Commands.AcademicSchedules;
@@ -47,10 +48,13 @@ namespace Presentation.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreateAcademicScheduleCommand command)
+        [HttpPost("study-year/{studyYearId}/department/{departmentId}/semester/{semesterId}")]
+        public async Task<IActionResult> Create(int studyYearId, int departmentId, int semesterId, CreateSemesterAcademicScheduleDto createAcademicScheduleDto)
         {
-            await _mediator.Send(command);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))                
+                return Unauthorized();
+            await _mediator.Send(new CreateSemesterAcademicScheduleCommand(userId, studyYearId, departmentId, semesterId, createAcademicScheduleDto));
             return Ok();
         }
 

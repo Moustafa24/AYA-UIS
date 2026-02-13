@@ -21,7 +21,7 @@ namespace AYA_UIS.Application.Mapping
 
             // AcademicSchedule mappings
             CreateMap<AcademicSchedule, AcademicSchedulesDto>().ReverseMap();
-            CreateMap<CreateAcademicScheduleDto, AcademicSchedule>();
+            CreateMap<CreateSemesterAcademicScheduleDto, AcademicSchedule>();
 
             // DepartmentFee mappings
             CreateMap<DepartmentFee, DepartmentFeeDto>()

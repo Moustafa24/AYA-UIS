@@ -7,6 +7,7 @@ using AYA_UIS.Core.Domain.Entities.Identity;
 
 namespace AYA_UIS.Core.Domain.Entities.Models
 {
+    // Represents the academic schedule for a specific semester and academic year, associated with a department.
     public class AcademicSchedule : BaseEntities<int>
     {
         public string Title { get; set; } = string.Empty;
@@ -17,6 +18,10 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public Department Department { get; set; } = null!;
         public string UploadedByUserId { get; set; } = string.Empty;
         public User UploadedBy { get; set; } = null!;
+        public int SemesterId { get; set; } // Foreign key to Semester
+        public Semester Semester { get; set; } = null!; // semester for which this schedule is relevant (lectures, finals, etc.)
+        public int StudyYearId { get; set; } // Foreign key to StudyYear
+        public StudyYear StudyYear { get; set; } = null!; // 2023-2024, 2024-2025, etc.
         public DateTime ScheduleDate { get; set; } // Date when the schedule is effective or published
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;

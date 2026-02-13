@@ -58,12 +58,20 @@ public class DataSeeding : IDataSeeding
                 var departments = await _dbContext.Departments.ToListAsync();
                 var studyYears = new List<StudyYear>();
 
+                // Seed actual calendar study years from 2018-2019 up to 2025-2026
+                int startFrom = 2018;
+                int endAt = 2025; // last StartYear → 2025-2026
+
                 foreach (var dept in departments)
                 {
-                    int maxYears = dept.Name == "Engineering" ? 5 : 4;
-                    for (int y = 1; y <= maxYears; y++)
+                    for (int year = startFrom; year <= endAt; year++)
                     {
-                        studyYears.Add(new StudyYear { StartYear = y, EndYear = y + 1, DepartmentId = dept.Id });
+                        studyYears.Add(new StudyYear
+                        {
+                            StartYear = year,
+                            EndYear = year + 1,
+                            DepartmentId = dept.Id
+                        });
                     }
                 }
 
@@ -76,30 +84,30 @@ public class DataSeeding : IDataSeeding
             {
                 var departments = await _dbContext.Departments.ToListAsync();
                 var semesters = new List<Semester>();
-                int baseYear = 2024; // Starting academic year
 
                 foreach (var dept in departments)
                 {
-                    var deptStudyYears = await _dbContext.StudyYears.Where(sy => sy.DepartmentId == dept.Id).ToListAsync();
+                    var deptStudyYears = await _dbContext.StudyYears
+                        .Where(sy => sy.DepartmentId == dept.Id)
+                        .ToListAsync();
+
                     foreach (var studyYear in deptStudyYears)
                     {
-                        int currentYear = baseYear + (studyYear.StartYear - 1); // Convert academic level to calendar year
-                        
-                        // Semester1 (Fall)
+                        // Semester1 (Fall) — Sep to Dec of StartYear
                         semesters.Add(new Semester
                         {
                             Title = SemesterEnums.Semester1,
-                            StartDate = new DateTime(currentYear, 9, 1),
-                            EndDate = new DateTime(currentYear, 12, 31),
+                            StartDate = new DateTime(studyYear.StartYear, 9, 1),
+                            EndDate = new DateTime(studyYear.StartYear, 12, 31),
                             DepartmentId = dept.Id
                         });
 
-                        // Semester2 (Spring)
+                        // Semester2 (Spring) — Jan to May of EndYear
                         semesters.Add(new Semester
                         {
                             Title = SemesterEnums.Semester2,
-                            StartDate = new DateTime(currentYear + 1, 1, 1),
-                            EndDate = new DateTime(currentYear + 1, 5, 31),
+                            StartDate = new DateTime(studyYear.EndYear, 1, 1),
+                            EndDate = new DateTime(studyYear.EndYear, 5, 31),
                             DepartmentId = dept.Id
                         });
                     }

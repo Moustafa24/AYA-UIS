@@ -24,5 +24,11 @@ namespace Presistence.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<AcademicSchedule?> UploadSemesterAcademicScheduleAsync(AcademicSchedule schedule)
+        {
+            await _dbContext.AcademicSchedules.AddAsync(schedule);
+            return schedule;
+        }
     }
 }
