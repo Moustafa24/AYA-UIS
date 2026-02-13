@@ -17,11 +17,11 @@ namespace Presentation.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class AcademicSchedulesController : ControllerBase
+    public class AcademicScheduleController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public AcademicSchedulesController(IMediator mediator)
+        public AcademicScheduleController(IMediator mediator)
         {
             _mediator = mediator;
         }

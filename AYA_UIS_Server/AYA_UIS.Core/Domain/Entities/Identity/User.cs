@@ -18,6 +18,8 @@ namespace AYA_UIS.Core.Domain.Entities.Identity
         public int TotalCredits { get; set; } // the total credits that the student has registered for in the current study year
         public int AllowedCredits { get; set; } // the total credits updated every semester depend on gpa and the level of the student
         public float TotalGPA { get; set; } // the gpa of the student updated every semester
+        // if he study eng will prep year any other will start from first year second year he choose his specialization and the department will be the one of the specialization
+        public string Specialization { get; set; } = string.Empty; // e.g., Computer Science, Information Systems, etc.
         public int DepartmentId { get; set; }
         public Department Department { get; set; } = null!;
 

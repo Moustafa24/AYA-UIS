@@ -8,7 +8,7 @@ namespace Presistence.Identity
         public IdentityAYADbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<IdentityAYADbContext>();
-            optionsBuilder.UseSqlServer("Server=localhost;Database=university_user_db;User Id=sa;Password=Yossef_2004;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=university_users_db;User Id=sa;Password=Yossef_2004;TrustServerCertificate=True;");
 
             return new IdentityAYADbContext(optionsBuilder.Options);
         }
