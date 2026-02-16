@@ -70,7 +70,7 @@ namespace AYA_UIS.Core.Services.Implementations
 
 
         // RegisterAsync
-        public async Task<UserResultDto> RegisterAsync(RegisterDto registerDto)
+        public async Task<UserResultDto> RegisterAsync(RegisterDto registerDto, string role = "Student")
         {
             var ChekInputValidation = new List<string>();
 
@@ -107,10 +107,69 @@ namespace AYA_UIS.Core.Services.Implementations
             }
 
             
-            // Add default role as "Student" if no role specified
-            var defaultRole = "Student";
-            if (await _roleManager.RoleExistsAsync(defaultRole))
-                await _userManager.AddToRoleAsync(user, defaultRole);
+            // Add specified role
+            if (await _roleManager.RoleExistsAsync(role))
+                await _userManager.AddToRoleAsync(user, role);
+
+          
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var token = await CreateTokenAsync(user);
+            return new UserResultDto(
+                user.DisplayName,
+                token,
+                user.Email,
+                roles.FirstOrDefault(),
+                user.Academic_Code,
+                user.UserName
+            );
+        }
+
+        public async Task<UserResultDto> RegisterStudentAsync(int departmentId, RegisterStudentDto registerStudentDto)
+        {
+            var ChekInputValidation = new List<string>();
+
+            if (await _userManager.Users.AnyAsync(u => u.Academic_Code == registerStudentDto.Academic_Code))
+                ChekInputValidation.Add("Academic Code already exists.");
+
+            if (await _userManager.Users.AnyAsync(u => u.UserName == registerStudentDto.UserName))
+                ChekInputValidation.Add("UserName already exists.");
+
+            if (await _userManager.Users.AnyAsync(u => u.Email == registerStudentDto.Email))
+                ChekInputValidation.Add("Email already exists.");
+
+
+            if (ChekInputValidation.Any())
+                throw new ValidationException(ChekInputValidation);
+
+
+            var user = new User
+            {
+                DisplayName = registerStudentDto.DisplayName,
+                Email = registerStudentDto.Email,
+                UserName = registerStudentDto.UserName,   
+                PhoneNumber = registerStudentDto.PhoneNumber,
+                Academic_Code = registerStudentDto.Academic_Code,
+                Level = registerStudentDto.Level,
+                TotalCredits = 0,
+                AllowedCredits = 0,
+                TotalGPA = 0,
+                DepartmentId = departmentId
+            };
+
+
+
+            var result = await _userManager.CreateAsync(user, registerStudentDto.Password);
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description).ToList();
+                throw new ValidationException(errors);
+            }
+
+            
+            // Add Student role
+            if (await _roleManager.RoleExistsAsync("Student"))
+                await _userManager.AddToRoleAsync(user, "Student");
 
           
             var roles = await _userManager.GetRolesAsync(user);

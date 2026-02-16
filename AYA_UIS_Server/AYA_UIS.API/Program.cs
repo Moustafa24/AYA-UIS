@@ -24,6 +24,7 @@ using AYA_UIS.Core.Domain.Entities.Identity;
 using AYA_UIS.Core.Services.Implementations;
 using AYA_UIS.Application.Mapping;
 using Infrastructure.Services;
+using System.Text.Json.Serialization;
 
 namespace AYA_UIS
 {
@@ -35,7 +36,10 @@ namespace AYA_UIS
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            }); ;
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -45,13 +49,14 @@ namespace AYA_UIS
 
             #region Auth
             builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
-             var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
+            var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;    
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-            }).AddJwtBearer(options=> {
+            }).AddJwtBearer(options =>
+            {
 
                 var publicKey = File.ReadAllText("Keys/public_key.pem");
 
@@ -70,11 +75,11 @@ namespace AYA_UIS
 
 
                 };
-            
-            });
-            
 
-            
+            });
+
+
+
 
 
             builder.Services.AddAuthorization();
@@ -94,7 +99,7 @@ namespace AYA_UIS
             })
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<IdentityAYADbContext>()
-            .AddDefaultTokenProviders(); 
+            .AddDefaultTokenProviders();
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 
             // Rate Limit 
@@ -107,15 +112,15 @@ namespace AYA_UIS
                         partitionKey: httpContext.Connection.RemoteIpAddress!.ToString(),
                         factory: key => new FixedWindowRateLimiterOptions
                         {
-                            PermitLimit = 3,     
+                            PermitLimit = 3,
                             Window = TimeSpan.FromMinutes(1),
                             QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                            QueueLimit = 2                   
+                            QueueLimit = 2
                         });
                 });
             });
 
-            
+
 
             #endregion
 
@@ -123,10 +128,10 @@ namespace AYA_UIS
             {
                 options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidationErrorResponse;
             });
-            
+
             // MediatR for CQRS
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AYA_UIS.Application.AssemblyReference).Assembly));
-            
+
             // AutoMapper
             builder.Services.AddAutoMapper(cfg =>
             {
@@ -144,42 +149,42 @@ namespace AYA_UIS
 
             // Infrastructure Services
             builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
-            
+
             // GPA Calculation Service
             builder.Services.AddScoped<IGpaCalculationService, GpaCalculationService>();
-            
+
             builder.Services.AddHttpContextAccessor();
 
 
             #region Auth In Swagger
 
-                  builder.Services.AddSwaggerGen(option =>
+            builder.Services.AddSwaggerGen(option =>
+            {
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter a valid token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
                   {
-                            option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
-                            option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                            {
-                                   In = ParameterLocation.Header,
-                                   Description = "Please enter a valid token",
-                                   Name = "Authorization",
-                                   Type = SecuritySchemeType.Http,
-                                   BearerFormat = "JWT",
-                                   Scheme = "Bearer"
-                            });
-                        option.AddSecurityRequirement(new OpenApiSecurityRequirement
-                        {
                             {
                                 new OpenApiSecurityScheme
                                 {
                                        Reference = new OpenApiReference
-                                       { 
+                                       {
                                              Type=ReferenceType.SecurityScheme,
                                               Id="Bearer"
                                        }
                                 },
                                      new string[]{}
                             }
-                        });
                   });
+            });
 
 
 
@@ -206,7 +211,7 @@ namespace AYA_UIS
 
             var app = builder.Build();
 
-            
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -22,15 +22,28 @@ namespace Presentation.Controllers
         [HttpPost("Register")]
 
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<UserResultDto>> RegisterAsync(RegisterDto registerDto)
+        public async Task<ActionResult<UserResultDto>> RegisterAsync(RegisterDto registerDto, string role = "Student")
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
             }
-            await _serviceManager.AuthenticationService.RegisterAsync(registerDto);
+            var userResult = await _serviceManager.AuthenticationService.RegisterAsync(registerDto, role);
 
-            return Ok($"Email {registerDto.Email} Already Created ");
+            return Ok(userResult);
+        }
+
+        [HttpPost("register-student/{departmentId}/department")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<UserResultDto>> RegisterStudentAsync(int departmentId, RegisterStudentDto registerStudentDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+            var userResult = await _serviceManager.AuthenticationService.RegisterStudentAsync(departmentId, registerStudentDto);
+
+            return Ok(userResult);
         }
 
         // Post = >  Login 
