@@ -27,6 +27,7 @@ namespace AYA_UIS.Core.Domain.Entities.Identity
         public ICollection<AcademicSchedule> AcademicSchedules { get; set; } = new List<AcademicSchedule>();
         public ICollection<CourseUpload> CourseUpload { get; set; } = new List<CourseUpload>();
         public ICollection<SemesterGPA> SemesterGPAs { get; set; } = new List<SemesterGPA>();
+        public ICollection<UserStudyYear> UserStudyYears { get; set; } = new List<UserStudyYear>();
 
     }
 }

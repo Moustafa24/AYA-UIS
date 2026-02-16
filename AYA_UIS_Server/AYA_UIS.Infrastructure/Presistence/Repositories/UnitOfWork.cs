@@ -24,6 +24,7 @@ namespace Presistence.Repositories
         private IRegistrationRepository? _registrations;
         private ICourseUploadsRepository? _courseUploads;
         private ISemesterRepository? _semesters;
+        private IUserStudyYearRepository? _userStudyYears;
 
         public UnitOfWork(AYA_UIS_InfoDbContext dbContext)
         {
@@ -57,6 +58,9 @@ namespace Presistence.Repositories
 
         public ISemesterRepository Semesters
             => _semesters ??= new SemesterRepository(_dbContext);
+
+        public IUserStudyYearRepository UserStudyYears
+            => _userStudyYears ??= new UserStudyYearRepository(_dbContext);
 
         public IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : BaseEntities<TKey>
             => (IGenericRepository<TEntity, TKey>)_repositories.GetOrAdd(

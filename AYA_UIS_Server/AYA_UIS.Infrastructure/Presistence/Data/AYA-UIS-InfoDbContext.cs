@@ -31,6 +31,7 @@ namespace Presistence.Data
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<CourseUpload> CourseUploads { get; set; }
         public DbSet<SemesterGPA> SemesterGPAs { get; set; }
+        public DbSet<UserStudyYear> UserStudyYears { get; set; }
 
     }
 }

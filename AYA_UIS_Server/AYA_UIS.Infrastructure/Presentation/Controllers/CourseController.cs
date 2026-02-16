@@ -81,5 +81,17 @@ namespace Presentation.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [Authorize]
+        [HttpGet("{departmentId}/department-courses")]
+        public async Task<IActionResult> DeparmentCourses(int departmentId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var result = await _mediator.Send(new GetDepartmentCoursesQuery(departmentId));
+            return Ok(result);
+        }
     }
 }

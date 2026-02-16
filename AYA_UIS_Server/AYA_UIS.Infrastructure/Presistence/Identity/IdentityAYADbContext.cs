@@ -33,7 +33,8 @@ namespace Presistence.Identity
                    .Ignore(u => u.AcademicSchedules)
                    .Ignore(u => u.CourseUpload)
                    .Ignore(u => u.Department)
-                   .Ignore(u => u.SemesterGPAs);
+                   .Ignore(u => u.SemesterGPAs)
+                   .Ignore(u => u.UserStudyYears);
 
         }
 

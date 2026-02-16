@@ -35,5 +35,14 @@ namespace Presistence.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public Task<IEnumerable<Course>> GetDepartmentCoursesAsync(int departmentId)
+        {
+            return _dbContext.Courses
+                .Where(c => c.DepartmentId == departmentId)
+                .AsNoTracking()
+                .ToListAsync()
+                .ContinueWith(t => t.Result.AsEnumerable());
+        }
     }
 }

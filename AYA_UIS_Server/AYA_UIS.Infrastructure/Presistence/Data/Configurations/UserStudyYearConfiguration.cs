@@ -1,0 +1,37 @@
+using AYA_UIS.Core.Domain.Entities.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Presistence.Data.Configurations
+{
+    public class UserStudyYearConfiguration : IEntityTypeConfiguration<UserStudyYear>
+    {
+        public void Configure(EntityTypeBuilder<UserStudyYear> builder)
+        {
+            builder.HasKey(usy => usy.Id);
+
+            // Unique constraint: one record per user per study year
+            builder.HasIndex(usy => new { usy.UserId, usy.StudyYearId })
+                   .IsUnique();
+
+            // User lives in a separate Identity database, so no FK constraint
+            builder.Ignore(usy => usy.User);
+
+            builder.Property(usy => usy.UserId)
+                   .IsRequired()
+                   .HasMaxLength(450);
+
+            builder.Property(usy => usy.Level)
+                   .IsRequired();
+
+            builder.Property(usy => usy.IsCurrent)
+                   .IsRequired()
+                   .HasDefaultValue(false);
+
+            builder.HasOne(usy => usy.StudyYear)
+                   .WithMany(sy => sy.UserStudyYears)
+                   .HasForeignKey(usy => usy.StudyYearId)
+                   .OnDelete(DeleteBehavior.Restrict);
+        }
+    }
+}
