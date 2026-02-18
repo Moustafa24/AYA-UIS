@@ -4,6 +4,7 @@ using AYA_UIS.Core.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using AYA_UIS.Core.Services.Implementations; // Fix: Change from Services.Implementatios
 using Shared.Common;
 
 namespace AYA_UIS.Core.Services.Implementations
@@ -12,20 +13,25 @@ namespace AYA_UIS.Core.Services.Implementations
     {
         private readonly Lazy<IAuthenticationService> _authService;
         private readonly Lazy<IRoleService> _roleService;
+        private readonly Lazy<IUserService> _userService;
 
         public ServiceManager(
             UserManager<User> userManager,
             IOptions<JwtOptions> options,
             RoleManager<IdentityRole> roleManager,
+            IUserService userService, // Fix: Use the interface instead of concrete class
             ILogger<AuthenticationService> logger)
         {
             _authService = new Lazy<IAuthenticationService>(
                 () => new AuthenticationService(userManager, options, roleManager, logger));
             _roleService = new Lazy<IRoleService>(
                 () => new RoleService(roleManager, userManager));
+            _userService = new Lazy<IUserService>(
+                () => userService);
         }
 
         public IAuthenticationService AuthenticationService => _authService.Value;
         public IRoleService RoleService => _roleService.Value;
+        public IUserService UserService => _userService.Value;
     }
 }

@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
-using Shared.Dtos.Info_Module.RegistrationDtos;
 using Shared.Respones;
 
 namespace AYA_UIS.Application.Commands.Registrations
 {
-    public class UpdateRegistrationCommand : IRequest<Response<bool>>
+    public class DeleteRegistrationCommand : IRequest<Response<bool>>
     {
         public int RegistrationId { get; set; }
-        public UpdateRegistrationDto UpdateDto { get; set; } = null!;
 
-        public UpdateRegistrationCommand(int registrationId, UpdateRegistrationDto updateDto)
+        public DeleteRegistrationCommand(int registrationId)
         {
             RegistrationId = registrationId;
-            UpdateDto = updateDto;
         }
     }
 }

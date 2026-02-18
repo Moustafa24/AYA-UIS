@@ -10,7 +10,7 @@ namespace AYA_UIS.Core.Domain.Entities.Models
 {
     public class Semester : BaseEntities<int>
     {
-        public SemesterEnums Title { get; set; }
+        public SemesterEnum Title { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int DepartmentId { get; set; }

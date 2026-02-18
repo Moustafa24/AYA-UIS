@@ -16,5 +16,6 @@ namespace Shared.Dtos.Auth_Module
         public string DisplayName { get; set; } = string.Empty;
         public string Academic_Code { get; set; } = string.Empty;     
         public Levels Level { get; set; }
+        public Gender Gender { get; set; }
     }
 }

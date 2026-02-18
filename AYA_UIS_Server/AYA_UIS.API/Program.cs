@@ -25,6 +25,7 @@ using AYA_UIS.Core.Services.Implementations;
 using AYA_UIS.Application.Mapping;
 using Infrastructure.Services;
 using System.Text.Json.Serialization;
+using Services.Implementatios;
 
 namespace AYA_UIS
 {
@@ -143,6 +144,7 @@ namespace AYA_UIS
 
             // Service Manager (Auth + Roles)
             builder.Services.AddScoped<IServiceManager, ServiceManager>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             // Configure Cloudinary Settings
             builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));

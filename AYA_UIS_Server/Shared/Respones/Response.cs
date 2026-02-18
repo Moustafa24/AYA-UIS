@@ -9,7 +9,8 @@ namespace Shared.Respones
     {
         public bool Success { get; set; }
         public T? Data { get; set; }
-        public string? Error { get; set; }
+        public string? Errors { get; set; }
+        public string? Message { get; set; }
 
         // Success response
         public static Response<T> SuccessResponse(T data)
@@ -18,7 +19,8 @@ namespace Shared.Respones
             {
                 Success = true,
                 Data = data,
-                Error = null
+                Errors = null,
+                Message = "Operation completed successfully"
             };
         }
 
@@ -29,7 +31,8 @@ namespace Shared.Respones
             {
                 Success = false,
                 Data = default(T),
-                Error = error
+                Errors = error,
+                Message = "Operation failed"
             };
         }
     }

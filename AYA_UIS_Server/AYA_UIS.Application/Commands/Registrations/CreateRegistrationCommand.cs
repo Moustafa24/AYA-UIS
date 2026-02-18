@@ -8,7 +8,7 @@ using Shared.Respones;
 
 namespace AYA_UIS.Application.Commands.Registrations
 {
-    public class CreateRegistrationCommand : IRequest<Response<RegistrationDto>>
+    public class CreateRegistrationCommand : IRequest<Response<int>>
     {
         public CreateRegistrationDto RegistrationDto { get; set; } = null!;
         public string UserId { get; set; } = string.Empty;

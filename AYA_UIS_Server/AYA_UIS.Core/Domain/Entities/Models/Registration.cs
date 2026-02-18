@@ -10,9 +10,10 @@ namespace AYA_UIS.Core.Domain.Entities.Models
 {
     public class Registration : BaseEntities<int>
     {
-        public Statuses Status { get; set; }
+        public RegistrationStatus Status { get; set; }
         public string? Reason { get; set; } // the reason for pending or canceling the registration
         public Grads Grade { get; set; } // null if the course is not yet completed, otherwise it holds the grade received
+        public bool IsPassed { get; set; } // This property indicates whether the course has been passed by the student or not. It can be used to determine if the student has met the prerequisites for other courses. 
         public string UserId { get; set; } = string.Empty;
         public User User { get; set; } = null!;
         public int CourseId { get; set; }

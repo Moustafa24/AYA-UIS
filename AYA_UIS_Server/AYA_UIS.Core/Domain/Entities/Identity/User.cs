@@ -14,6 +14,7 @@ namespace AYA_UIS.Core.Domain.Entities.Identity
         public string DisplayName { get; set; } = string.Empty;
         public string ProfilePicture { get; set; } = string.Empty;
         public string Academic_Code { get; set; } = string.Empty;
+        public Gender Gender { get; set; }
         public Levels Level { get; set; } // if he study eng will prep year any other will start from first year
         public int TotalCredits { get; set; } // the total credits that the student has registered for in the current study year
         public int AllowedCredits { get; set; } // the total credits updated every semester depend on gpa and the level of the student
@@ -22,7 +23,6 @@ namespace AYA_UIS.Core.Domain.Entities.Identity
         public string Specialization { get; set; } = string.Empty; // e.g., Computer Science, Information Systems, etc.
         public int DepartmentId { get; set; }
         public Department Department { get; set; } = null!;
-
         public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
         public ICollection<AcademicSchedule> AcademicSchedules { get; set; } = new List<AcademicSchedule>();
         public ICollection<CourseUpload> CourseUpload { get; set; } = new List<CourseUpload>();

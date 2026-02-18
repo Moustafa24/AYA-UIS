@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Presistence.Data;
 
@@ -11,9 +12,11 @@ using Presistence.Data;
 namespace Presistence.Migrations
 {
     [DbContext(typeof(AYA_UIS_InfoDbContext))]
-    partial class AYA_UIS_InfoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260218212336_UpdateModelsAndRemoveUserTable")]
+    partial class UpdateModelsAndRemoveUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

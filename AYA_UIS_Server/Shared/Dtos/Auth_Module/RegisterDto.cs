@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AYA_UIS.Core.Domain.Enums;
 
 namespace Shared.Dtos.Auth_Module
 {
@@ -31,6 +32,8 @@ namespace Shared.Dtos.Auth_Module
         public string Academic_Code { get; set; } = string.Empty;
         [Required]
         public string DisplayName { get; set; } = string.Empty;
+        [Required]
+        public Gender Gender { get; set; }
 
     }
 }

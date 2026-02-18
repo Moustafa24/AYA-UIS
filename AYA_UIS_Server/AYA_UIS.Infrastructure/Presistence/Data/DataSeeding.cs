@@ -96,7 +96,7 @@ public class DataSeeding : IDataSeeding
                         // Semester1 (Fall) — Sep to Dec of StartYear
                         semesters.Add(new Semester
                         {
-                            Title = SemesterEnums.Semester1,
+                            Title = SemesterEnum.First_Semester,
                             StartDate = new DateTime(studyYear.StartYear, 9, 1),
                             EndDate = new DateTime(studyYear.StartYear, 12, 31),
                             DepartmentId = dept.Id
@@ -105,7 +105,7 @@ public class DataSeeding : IDataSeeding
                         // Semester2 (Spring) — Jan to May of EndYear
                         semesters.Add(new Semester
                         {
-                            Title = SemesterEnums.Semester2,
+                            Title = SemesterEnum.Second_Semester,
                             StartDate = new DateTime(studyYear.EndYear, 1, 1),
                             EndDate = new DateTime(studyYear.EndYear, 5, 31),
                             DepartmentId = dept.Id

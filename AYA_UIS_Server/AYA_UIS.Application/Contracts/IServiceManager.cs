@@ -4,5 +4,6 @@ namespace AYA_UIS.Application.Contracts
     {
         IAuthenticationService AuthenticationService { get; }
         IRoleService RoleService { get; }
+        IUserService UserService { get; }
     }
 }

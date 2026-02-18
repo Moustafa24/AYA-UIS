@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Common;
 using Shared.Dtos.Auth_Module;
+using AYA_UIS.Shared.Exceptions;
 
 namespace AYA_UIS.Core.Services.Implementations
 {
@@ -54,16 +55,45 @@ namespace AYA_UIS.Core.Services.Implementations
             var validPassword = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!validPassword) throw new UnauthorizedAccessException();
 
+            var department = (await _userManager.Users.Include(u => u.Department).FirstOrDefaultAsync(u => u.Id == user.Id));
+            if (department == null)
+            {
+                // this case it is admin or stuff member
+                return new UserResultDto
+                {
+                    Id = user.Id,
+                    DisplayName = user.DisplayName,
+                    Email = user.Email,
+                    Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault(),
+                    AcademicCode = user.Academic_Code,
+                    UserName = user.UserName,
+                    TotalCredits = null, // null he is not student
+                    AllowedCredits = null, // null he is not student
+                    TotalGPA = null, // null he is not student
+                    Specialization = null, // null he is not student
+                    Level = user.Level, // null he is not student
+                    PhoneNumber = user.PhoneNumber,
+                    DepartmentName = null // // null he is not student
+                };
+            }
+
             var roles = await _userManager.GetRolesAsync(user);
 
-            return new UserResultDto(
-                user.DisplayName,
-                await CreateTokenAsync(user),
-                user.Email,
-                roles.FirstOrDefault(),
-                user.Academic_Code,
-                user.UserName
-            );
+            return new UserResultDto{
+                Id = user.Id,
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Role = roles.FirstOrDefault(),
+                AcademicCode = user.Academic_Code,
+                UserName = user.UserName,
+                TotalCredits = null, // null he is not student
+                AllowedCredits = null, // null he is not student
+                TotalGPA = null, // null he is not student
+                Specialization = null, // null he is not student
+                Level = user.Level, // null he is not student
+                PhoneNumber = user.PhoneNumber,
+                DepartmentName = null // // null he is not student
+            };
         }
         #endregion
 
@@ -94,7 +124,8 @@ namespace AYA_UIS.Core.Services.Implementations
                 Email = registerDto.Email,
                 UserName = registerDto.UserName,   
                 PhoneNumber = registerDto.PhoneNumber,
-                Academic_Code = registerDto.Academic_Code
+                Academic_Code = registerDto.Academic_Code,
+                Gender = registerDto.Gender
             };
 
 
@@ -115,14 +146,23 @@ namespace AYA_UIS.Core.Services.Implementations
             var roles = await _userManager.GetRolesAsync(user);
 
             var token = await CreateTokenAsync(user);
-            return new UserResultDto(
-                user.DisplayName,
-                token,
-                user.Email,
-                roles.FirstOrDefault(),
-                user.Academic_Code,
-                user.UserName
-            );
+            return new UserResultDto
+            {
+                Id = user.Id,
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Token = token,
+                AcademicCode = user.Academic_Code,
+                Role = roles.FirstOrDefault(),
+                UserName = user.UserName,
+                TotalCredits = null, // null he is not student
+                AllowedCredits = user.AllowedCredits, // null he is not student
+                TotalGPA = user.TotalGPA, // null he is not student
+                Specialization = user.Specialization, // null he is not student
+                Level = user.Level, // null he is not student
+                PhoneNumber = user.PhoneNumber,
+                DepartmentName = null // // null he is not student
+            };
         }
 
         public async Task<UserResultDto> RegisterStudentAsync(int departmentId, RegisterStudentDto registerStudentDto)
@@ -154,7 +194,8 @@ namespace AYA_UIS.Core.Services.Implementations
                 TotalCredits = 0,
                 AllowedCredits = 0,
                 TotalGPA = 0,
-                DepartmentId = departmentId
+                DepartmentId = departmentId,
+                Gender = registerStudentDto.Gender
             };
 
 
@@ -174,15 +215,27 @@ namespace AYA_UIS.Core.Services.Implementations
           
             var roles = await _userManager.GetRolesAsync(user);
 
+            var DepartmentName = (await _userManager.Users.Include(u => u.Department).FirstOrDefaultAsync(u => u.Id == user.Id))?.Department.Name;
+
             var token = await CreateTokenAsync(user);
-            return new UserResultDto(
-                user.DisplayName,
-                token,
-                user.Email,
-                roles.FirstOrDefault(),
-                user.Academic_Code,
-                user.UserName
-            );
+            return new UserResultDto
+            {
+                Id = user.Id,
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Token = token,
+                AcademicCode = user.Academic_Code,
+                Role = roles.FirstOrDefault(),
+                UserName = user.UserName,
+                TotalCredits = user.TotalCredits, 
+                AllowedCredits = user.AllowedCredits, 
+                TotalGPA = user.TotalGPA, 
+                Specialization = user.Specialization, 
+                Level = user.Level, 
+                PhoneNumber = user.PhoneNumber,
+                DepartmentName = DepartmentName,
+                ProfilePicture = user.ProfilePicture
+            };
         }
 
 
