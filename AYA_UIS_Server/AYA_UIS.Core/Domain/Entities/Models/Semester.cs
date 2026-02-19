@@ -15,6 +15,8 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public DateTime EndDate { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; } = null!;
+        public int StudyYearId { get; set; }
+        public StudyYear StudyYear { get; set; } = null!;
         public ICollection<AcademicSchedule> AcademicSchedules { get; set; } = new List<AcademicSchedule>();
         public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
         public ICollection<SemesterGPA> SemesterGPAs { get; set; } = new List<SemesterGPA>();

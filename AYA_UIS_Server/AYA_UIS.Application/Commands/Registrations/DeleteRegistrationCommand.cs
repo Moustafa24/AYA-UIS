@@ -7,7 +7,7 @@ using Shared.Respones;
 
 namespace AYA_UIS.Application.Commands.Registrations
 {
-    public class DeleteRegistrationCommand : IRequest<Response<bool>>
+    public class DeleteRegistrationCommand : IRequest<Unit>
     {
         public int RegistrationId { get; set; }
 

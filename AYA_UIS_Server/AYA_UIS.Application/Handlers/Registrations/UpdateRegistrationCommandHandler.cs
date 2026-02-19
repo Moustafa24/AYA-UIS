@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AYA_UIS.Application.Commands.Registrations;
+using AYA_UIS.Shared.Exceptions;
 using Domain.Contracts;
 using MediatR;
 using Shared.Respones;
 
 namespace AYA_UIS.Application.Handlers.Registrations
 {
-    public class UpdateRegistrationCommandHandler : IRequestHandler<UpdateRegistrationCommand, Response<bool>>
+    public class UpdateRegistrationCommandHandler : IRequestHandler<UpdateRegistrationCommand,  Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
         public UpdateRegistrationCommandHandler(IUnitOfWork unitOfWork)
@@ -17,18 +18,11 @@ namespace AYA_UIS.Application.Handlers.Registrations
             _unitOfWork = unitOfWork;
         }
         
-        public async Task<Response<bool>> Handle(UpdateRegistrationCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateRegistrationCommand request, CancellationToken cancellationToken)
         {
             var registration = await _unitOfWork.Registrations.GetByIdAsync(request.RegistrationId);
             if (registration == null)
-            {
-                return new Response<bool>
-                {
-                    Success = false,
-                    Message = "Registration not found",
-                    Data = false
-                };
-            }
+                throw new NotFoundException("Registration not found");
 
             registration.Status = request.UpdateDto.Status;
             registration.Reason = request.UpdateDto.Reason;
@@ -36,12 +30,7 @@ namespace AYA_UIS.Application.Handlers.Registrations
             _unitOfWork.Registrations.Update(registration);
             await _unitOfWork.SaveChangesAsync();
 
-            return new Response<bool>
-            {
-                Success = true,
-                Message = "Registration updated successfully",
-                Data = true
-            };
+            return Unit.Value;
         }
     }
 }

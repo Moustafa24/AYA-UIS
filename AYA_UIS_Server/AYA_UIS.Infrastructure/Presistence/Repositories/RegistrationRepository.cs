@@ -44,6 +44,15 @@ namespace Presistence.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Registration>> GetByUserAndStudyYearAndSemseterAsync(string userId, int studyYearId, int semesterId)
+        {
+            return await _dbContext.Registrations
+                .Where(r => r.UserId == userId && r.StudyYearId == studyYearId && r.SemesterId == semesterId)
+                .Include(r => r.Course)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Registration>> GetByUserAsync(string userId, int? studyYearId = null)
         {
             var query = _dbContext.Registrations

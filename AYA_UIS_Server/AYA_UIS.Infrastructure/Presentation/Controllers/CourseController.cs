@@ -5,7 +5,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AYA_UIS.Application.Commands.Courses;
 using AYA_UIS.Application.Commands.CourseUploads;
+using AYA_UIS.Application.Queries.CoursePrequisites;
 using AYA_UIS.Application.Queries.Courses;
+using AYA_UIS.Application.Queries.Registrations;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -93,66 +95,22 @@ namespace Presentation.Controllers
             var result = await _mediator.Send(new GetDepartmentCoursesQuery(departmentId));
             return Ok(result);
         }
+     
+        [Authorize]
+        [HttpGet("prequisites/{courseId}")]
+        public async Task<IActionResult> GetCoursePrequisites(int courseId)
+        {
+            var result = await _mediator.Send(new GetCoursePrequisitesQuery(courseId));
+            return Ok(result);
+        }
 
-        // [Authorize]
-        // [HttpGet("registered")]
-        // public async Task<IActionResult> GetRegisteredCourses()
-        // {
-        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //     if (string.IsNullOrEmpty(userId))
-        //         return Unauthorized();
-
-        //     var result = await _mediator.Send(new GetRegisteredCoursesQuery(userId));
-        //     return Ok(result);
-        // }
-
-        // [Authorize]
-        // [HttpGet("registered/{studyYearId}/year")]
-        // public async Task<IActionResult> GetRegisteredYearCourses(int studyYearId)
-        // {
-        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //     if (string.IsNullOrEmpty(userId))
-        //         return Unauthorized();
-
-        //     var result = await _mediator.Send(new GetRegisteredYearCoursesQuery(studyYearId, userId));
-        //     return Ok(result);
-        // }
-
-        // [Authorize]
-        // [HttpGet("registered/{studyYearId}/year/{semesterId}/semester")]
-        // public async Task<IActionResult> GetRegisteredSemesterCourses(int studyYearId, int semesterId)
-        // {
-        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //     if (string.IsNullOrEmpty(userId))
-        //         return Unauthorized();
-
-        //     var result = await _mediator.Send(new GetRegisteredSemesterCoursesQuery(studyYearId, semesterId, userId));
-        //     return Ok(result);
-        // }
-
-        // [Authorize]
-        // [HttpGet("prequisites/{courseId}")]
-        // public async Task<IActionResult> GetCoursePrequisites(int courseId)
-        // {
-        //     var result = await _mediator.Send(new GetCoursePrequisitesQuery(courseId));
-        //     return Ok(result);
-        // }
-
-        // [Authorize]
-        // [HttpGet("dependencies/{courseId}")]
-        // public async Task<IActionResult> GetCourseDependencies(int courseId)
-        // {
-        //     var result = await _mediator.Send(new GetCourseDependenciesQuery(courseId));
-        //     return Ok(result);
-        // }
-
-        // [Authorize]
-        // [HttpGet("prerequisites-and-dependencies/{courseId}")]
-        // public async Task<IActionResult> GetCoursePrerequisitesAndDependencies(int courseId)
-        // {
-        //     var result = await _mediator.Send(new GetCoursePrerequisitesAndDependenciesQuery(courseId));
-        //     return Ok(result);
-        // }
+        [Authorize]
+        [HttpGet("dependencies/{courseId}")]
+        public async Task<IActionResult> GetCourseDependencies(int courseId)
+        {
+            var result = await _mediator.Send(new GetCourseDependenciesQuery(courseId));
+            return Ok(result);
+        }
 
 
     }

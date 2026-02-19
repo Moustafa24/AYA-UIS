@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using AYA_UIS.Core.Services.Implementations; // Fix: Change from Services.Implementatios
 using Shared.Common;
+using Domain.Contracts;
 
 namespace AYA_UIS.Core.Services.Implementations
 {
@@ -14,16 +15,17 @@ namespace AYA_UIS.Core.Services.Implementations
         private readonly Lazy<IAuthenticationService> _authService;
         private readonly Lazy<IRoleService> _roleService;
         private readonly Lazy<IUserService> _userService;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ServiceManager(
             UserManager<User> userManager,
             IOptions<JwtOptions> options,
             RoleManager<IdentityRole> roleManager,
             IUserService userService, // Fix: Use the interface instead of concrete class
-            ILogger<AuthenticationService> logger)
+            IUnitOfWork unitOfWork) // Fix: Add IUnitOfWork to the constructor
         {
             _authService = new Lazy<IAuthenticationService>(
-                () => new AuthenticationService(userManager, options, roleManager, logger));
+                () => new AuthenticationService(userManager, options, roleManager, unitOfWork));
             _roleService = new Lazy<IRoleService>(
                 () => new RoleService(roleManager, userManager));
             _userService = new Lazy<IUserService>(

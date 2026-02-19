@@ -4,5 +4,6 @@ namespace Domain.Contracts
 {
     public interface ISemesterRepository : IGenericRepository<Semester, int>
     {
+        public Task<IEnumerable<Semester>> GetByStudyYearIdAsync(int studyYearId);
     }
 }

@@ -6,6 +6,7 @@ using Shared.Dtos.Info_Module.CourseUploadDtos;
 using Shared.Dtos.Info_Module.DepartmentDtos;
 using Shared.Dtos.Info_Module.DepartmentFeeDtos;
 using Shared.Dtos.Info_Module.FeeDtos;
+using Shared.Dtos.Info_Module.RegistrationDtos;
 
 namespace AYA_UIS.Application.Mapping
 {
@@ -40,6 +41,9 @@ namespace AYA_UIS.Application.Mapping
             //CourseUpload mappings
             CreateMap<CourseUpload, CourseUploadDto>().ReverseMap();
             CreateMap<CreateCourseUploadDto, CourseUpload>();
+
+            //Registration mappings
+            CreateMap<Registration, RegistrationCourseDto>();
         }
     }
 }

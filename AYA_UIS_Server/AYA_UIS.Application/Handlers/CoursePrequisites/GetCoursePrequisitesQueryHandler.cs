@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using AYA_UIS.Application.Queries.CoursePrequisites;
+using Domain.Contracts;
+using MediatR;
+using Shared.Dtos.Info_Module.CourseDtos;
+
+namespace AYA_UIS.Application.Handlers.CoursePrequisites
+{
+    public class GetCoursePrequisitesQueryHandler : IRequestHandler<GetCoursePrequisitesQuery, List<CourseDto>>
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public GetCoursePrequisitesQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
+        public async Task<List<CourseDto>> Handle(GetCoursePrequisitesQuery request, CancellationToken cancellationToken)
+        {
+            var prerequisites = await _unitOfWork.Courses.GetCoursePrerequisitesAsync(request.CourseId);
+
+            var prerequisiteDtos = _mapper.Map<List<CourseDto>>(prerequisites);
+
+            return prerequisiteDtos;
+        }
+    }
+}

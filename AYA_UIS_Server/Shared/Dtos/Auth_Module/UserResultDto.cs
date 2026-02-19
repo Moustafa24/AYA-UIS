@@ -24,6 +24,7 @@ namespace Shared.Dtos.Auth_Module
         public Levels Level { get; set; }
         public string? DepartmentName { get; set; }
         public string? ProfilePicture { get; set; } = null;
+        public Gender Gender { get; set; }
     }
 
 }

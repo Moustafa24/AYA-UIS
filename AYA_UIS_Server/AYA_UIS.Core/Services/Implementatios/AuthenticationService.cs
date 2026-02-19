@@ -17,31 +17,28 @@ using Microsoft.IdentityModel.Tokens;
 using Shared.Common;
 using Shared.Dtos.Auth_Module;
 using AYA_UIS.Shared.Exceptions;
+using Domain.Contracts;
 
 namespace AYA_UIS.Core.Services.Implementations
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly ILogger<AuthenticationService> _logger;
         private readonly UserManager<User> _userManager;
         private readonly IOptions<JwtOptions> _options;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IUnitOfWork _unitOfWork;
 
         public AuthenticationService(
             UserManager<User> userManager,
             IOptions<JwtOptions> options,
             RoleManager<IdentityRole> roleManager,
-            ILogger<AuthenticationService> logger)
+            IUnitOfWork unitOfWork)
         {
-            _logger = logger;
             _userManager = userManager;
             _options = options;
             _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
         }
-
-
-
-
 
         // LoginAsync
         #region Before Security 
@@ -55,7 +52,7 @@ namespace AYA_UIS.Core.Services.Implementations
             var validPassword = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!validPassword) throw new UnauthorizedAccessException();
 
-            var department = (await _userManager.Users.Include(u => u.Department).FirstOrDefaultAsync(u => u.Id == user.Id));
+            var department = await _unitOfWork.Departments.GetByIdAsync(user.DepartmentId); // check from deparment beacasue identity db separate from main db and user can be admin or stuff member without department
             if (department == null)
             {
                 // this case it is admin or stuff member
@@ -63,6 +60,7 @@ namespace AYA_UIS.Core.Services.Implementations
                 {
                     Id = user.Id,
                     DisplayName = user.DisplayName,
+                    Token = await CreateTokenAsync(user),
                     Email = user.Email,
                     Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault(),
                     AcademicCode = user.Academic_Code,
@@ -73,7 +71,9 @@ namespace AYA_UIS.Core.Services.Implementations
                     Specialization = null, // null he is not student
                     Level = user.Level, // null he is not student
                     PhoneNumber = user.PhoneNumber,
-                    DepartmentName = null // // null he is not student
+                    DepartmentName = null, // // null he is not student,
+                    Gender = user.Gender
+                    
                 };
             }
 
@@ -82,6 +82,7 @@ namespace AYA_UIS.Core.Services.Implementations
             return new UserResultDto{
                 Id = user.Id,
                 DisplayName = user.DisplayName,
+                Token = await CreateTokenAsync(user),
                 Email = user.Email,
                 Role = roles.FirstOrDefault(),
                 AcademicCode = user.Academic_Code,
@@ -92,7 +93,8 @@ namespace AYA_UIS.Core.Services.Implementations
                 Specialization = null, // null he is not student
                 Level = user.Level, // null he is not student
                 PhoneNumber = user.PhoneNumber,
-                DepartmentName = null // // null he is not student
+                DepartmentName = department.Name,
+                Gender = user.Gender
             };
         }
         #endregion
