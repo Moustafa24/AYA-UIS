@@ -13,6 +13,7 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public SemesterEnum Title { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public bool IsActive { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; } = null!;
         public int StudyYearId { get; set; }

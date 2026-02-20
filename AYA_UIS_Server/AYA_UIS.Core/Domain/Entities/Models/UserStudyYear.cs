@@ -10,6 +10,9 @@ namespace AYA_UIS.Core.Domain.Entities.Models
     /// </summary>
     public class UserStudyYear : BaseEntities<int>
     {
+        // This entity represents a user's enrollment in a specific study year, tracking their academic level and status during that year.
+        // so it can prevent issues like registering for courses in the wrong study year or semester, and allows us to maintain a full history of the user's academic journey.
+        public bool IsActive { get; set; }
         public string UserId { get; set; } = string.Empty;
         public User User { get; set; } = null!;
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AYA_UIS.Application.Contracts;
 using AYA_UIS.Core.Domain.Entities.Identity;
 using AYA_UIS.Shared.Exceptions;
+using Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -15,12 +16,14 @@ namespace Services.Implementatios
     public class UserService : IUserService
     {
         private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ICloudinaryService _cloudinaryService;
 
-        public UserService(UserManager<User> userManager, ILogger<UserService> logger, ICloudinaryService cloudinaryService)
+        public UserService(UserManager<User> userManager, ILogger<UserService> logger, ICloudinaryService cloudinaryService, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _cloudinaryService = cloudinaryService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<userProfileDetailsDto> GetUserProfileByAcademicCodeAsync(string academicCode)
@@ -28,13 +31,15 @@ namespace Services.Implementatios
             try
             {
                 var user = await _userManager.Users
-                    .Include(u => u.Department)
-                    .Include(u => u.SemesterGPAs)
-                    .Include(u => u.UserStudyYears)
+                    
                     .FirstOrDefaultAsync(u => u.Academic_Code == academicCode);
 
                 if (user == null)
                     throw new NotFoundException($"User with academic code '{academicCode}' not found.");
+
+                var department = await _unitOfWork.Departments.GetByIdAsync(user.DepartmentId);
+                if(department == null)
+                    throw new NotFoundException($"Department with ID '{user.DepartmentId}' not found.");
 
                 var roles = await _userManager.GetRolesAsync(user);
 
@@ -52,7 +57,7 @@ namespace Services.Implementatios
                     AllowedCredits = user.AllowedCredits,
                     TotalGPA = user.TotalGPA,
                     Specialization = user.Specialization,
-                    DepartmentName = user.Department?.Name,
+                    DepartmentName = department.Name,
                     Role = roles.FirstOrDefault(),
                     
                 };

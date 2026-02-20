@@ -10,6 +10,9 @@ namespace Presistence.Data.Configurations
         {
             builder.HasKey(s => s.Id);
 
+            builder.Property(s => s.IsActive)
+                   .HasDefaultValue(false);
+
             builder.HasOne(s => s.Department)
                    .WithMany()
                    .HasForeignKey(s => s.DepartmentId)

@@ -17,7 +17,7 @@ using Shared.Respones;
 
 namespace AYA_UIS.Application.Handlers.Registrations
 {
-    public class CreateRegistrationCommandHandler : IRequestHandler<CreateRegistrationCommand, Response<int>>
+    public class CreateRegistrationCommandHandler : IRequestHandler<CreateRegistrationCommand, int>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<User> _userManager;
@@ -30,12 +30,10 @@ namespace AYA_UIS.Application.Handlers.Registrations
             _userManager = userManager;
         }
 
-        public async Task<Response<int>> Handle(CreateRegistrationCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateRegistrationCommand request, CancellationToken cancellationToken)
         {
             // 1️⃣ Get user
-            var user = await _userManager.Users
-                .Include(u => u.Registrations)
-                .FirstOrDefaultAsync(u => u.Id == request.UserId);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == request.UserId);
 
             if (user == null)
                 throw new NotFoundException("User not found");
@@ -50,22 +48,27 @@ namespace AYA_UIS.Application.Handlers.Registrations
             if (course.Status != CourseStatus.Opened)
                 throw new BadRequestException("Course is closed");
 
+            var isRegistrationExists = await _unitOfWork.Registrations.IsUserRegisteredInCourseAsync(user.Id, course.Id);
+
             // 4️⃣ Already registered?
-            if (user.Registrations.Any(r => r.CourseId == request.RegistrationDto.CourseId))
+            if (isRegistrationExists)
                 throw new BadRequestException("Already registered in this course");
 
             // 5️⃣ Get prerequisite IDs
-            var prerequisiteIds = course.PrerequisiteFor
-                .Select(p => p.PrerequisiteCourseId)
-                .ToList();
+            var prerequisitesCourses = await _unitOfWork.Courses.GetCoursePrerequisitesAsync(course.Id);
 
             // 6️⃣ Get passed courses
-            var passedCourseIds = user.Registrations
-                .Where(r => r.IsPassed)
-                .Select(r => r.CourseId)
-                .ToList();
+            var passedCourseIds = new List<int>();
+            foreach (var preq in prerequisitesCourses)
+            {
+                var isPassed = await _unitOfWork.Registrations.IsCourseCompletedByUserAsync(user.Id, preq.Id);
+                if (isPassed)
+                {
+                    passedCourseIds.Add(preq.Id);
+                }
+            }
 
-            var missingCourses = prerequisiteIds.Except(passedCourseIds);
+            var missingCourses = prerequisitesCourses.Select(p => p.Id).Except(passedCourseIds);
 
             if (missingCourses.Any())
                 throw new BadRequestException("Prerequisites not completed");
@@ -74,26 +77,44 @@ namespace AYA_UIS.Application.Handlers.Registrations
             if (user.AllowedCredits < course.Credits)
                 throw new BadRequestException("Not enough credit hours");
 
-            // 8️⃣ Create registration
+            // 8️⃣ Validate current study year and semester
+            var currentUserStudyYear = await _unitOfWork.UserStudyYears
+                .GetCurrentByUserIdAsync(user.Id);
+
+            if (currentUserStudyYear == null)
+                throw new BadRequestException("No active study year found for user");
+
+            if (currentUserStudyYear.StudyYearId != request.RegistrationDto.StudyYearId)
+                throw new BadRequestException("You can only register in your current study year");
+
+            // Verify the semester belongs to the current study year
+            var semester = await _unitOfWork.Semesters.GetByIdAsync(request.RegistrationDto.SemesterId);
+            
+            if (semester == null)
+                throw new NotFoundException("Semester not found");
+
+            if (semester.StudyYearId != currentUserStudyYear.StudyYearId)
+                throw new BadRequestException("This semester does not belong to your current study year");
+
+            if (!semester.IsActive)
+                throw new BadRequestException("Cannot register in an inactive semester. Registration is only allowed in the current active semester");
+
+            // 9️⃣ Create registration
             var registration = new Registration
             {
                 UserId = user.Id,
                 CourseId = course.Id,
                 StudyYearId = request.RegistrationDto.StudyYearId,
                 SemesterId = request.RegistrationDto.SemesterId,
-                Status = RegistrationStatus.Pending
+                Status = RegistrationStatus.Pending,
+                Grade = null,
+                IsPassed = false
             };
 
             await _unitOfWork.Registrations.AddAsync(registration);
             await _unitOfWork.SaveChangesAsync();
 
-            return new Response<int>()
-            {
-                Data = registration.Id,
-                Success = true,
-                Errors = null,
-                Message = "Registration created successfully"
-            };
+            return registration.Id;
         }
     }
 }

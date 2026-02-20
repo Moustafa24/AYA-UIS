@@ -1,4 +1,5 @@
 using AYA_UIS.Core.Domain.Entities.Models;
+using AYA_UIS.Core.Domain.Enums;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Presistence.Data;
@@ -33,6 +34,18 @@ namespace Presistence.Repositories
         {
             return await _dbContext.Registrations
                 .FirstOrDefaultAsync(r => r.UserId == userId && r.CourseId == courseId && r.StudyYearId == studyYearId);
+        }
+
+        public async Task<bool> IsUserRegisteredInCourseAsync(string userId, int courseId)
+        {
+            return await _dbContext.Registrations
+                .AnyAsync(r => r.UserId == userId && r.CourseId == courseId);
+        }
+
+        public async Task<bool> IsCourseCompletedByUserAsync(string userId, int courseId)
+        {
+            return await _dbContext.Registrations
+                .AnyAsync(r => r.UserId == userId && r.CourseId == courseId && r.IsPassed && r.Progress == CourseProgress.Completed);
         }
 
         public async Task<IEnumerable<Registration>> GetByUserAndStudyYearAsync(string userId, int studyYearId)

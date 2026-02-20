@@ -19,5 +19,13 @@ namespace Presistence.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<Semester?> GetActiveSemesterByStudyYearIdAsync(int studyYearId)
+        {
+            return await _dbContext.Semesters
+                .Where(s => s.StudyYearId == studyYearId && s.IsActive)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
     }
 }

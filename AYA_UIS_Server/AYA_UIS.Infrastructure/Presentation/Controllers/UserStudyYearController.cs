@@ -112,5 +112,25 @@ namespace Presentation.Controllers
             var result = await _mediator.Send(query);
             return result.Success ? Ok(result) : BadRequest(result);
         }
+
+        // Assign all user that are students that are not graduated yet from first year to second year, from second year to third year, and from third year to fourth year (Admin only).
+        [Authorize(Roles = "Admin")]
+        [HttpPost("promote-all")]
+        public async Task<IActionResult> PromoteAllStudents()
+        {
+            var command = new PromoteAllStudentsCommand();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("promote-student/{acadenicCode}")]
+        public async Task<IActionResult> PromoteStudent(string acadenicCode)
+        {
+            var command = new PromoteStudentCommand(acadenicCode);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
     }
 }

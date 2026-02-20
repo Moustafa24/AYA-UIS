@@ -51,7 +51,7 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
-           [Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetRegisteredCourses()
         {

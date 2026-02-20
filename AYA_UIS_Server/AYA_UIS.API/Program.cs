@@ -37,6 +37,17 @@ namespace AYA_UIS
 
             // Add services to the container.
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                });
+            });
+
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -221,6 +232,7 @@ namespace AYA_UIS
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowFrontend");
             app.UseMiddleware<GlobalExceptionHandlingMiddelWare>();
 
             var scope = app.Services.CreateScope();

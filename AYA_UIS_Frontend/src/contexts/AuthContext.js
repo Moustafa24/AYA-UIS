@@ -1,197 +1,99 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { authService } from '../services/authService';
-import { STATUS } from '../constants';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useCallback,
+  useEffect,
+} from 'react';
+import authService from '../services/authService';
+import { STATUS, USER_ROLES } from '../constants';
 
-// Auth Context
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
-// Auth reducer
-const authReducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_LOADING':
-      return { ...state, status: STATUS.LOADING };
-    
-    case 'LOGIN_SUCCESS':
-      return {
-        ...state,
-        status: STATUS.SUCCESS,
-        user: action.payload.user,
-        isAuthenticated: true,
-        error: null,
-      };
-    
-    case 'LOGIN_ERROR':
-      return {
-        ...state,
-        status: STATUS.ERROR,
-        error: action.payload.error,
-        isAuthenticated: false,
-        user: null,
-      };
-    
-    case 'LOGOUT':
-      return {
-        ...state,
-        status: STATUS.IDLE,
-        user: null,
-        isAuthenticated: false,
-        error: null,
-      };
-    
-    case 'SET_USER':
-      return {
-        ...state,
-        user: action.payload.user,
-        isAuthenticated: true,
-      };
-    
-    case 'CLEAR_ERROR':
-      return { ...state, error: null };
-    
-    default:
-      return state;
-  }
-};
-
-// Initial state
 const initialState = {
-  user: null,
-  isAuthenticated: false,
+  user: authService.getCurrentUser(),
+  isAuthenticated: authService.isAuthenticated(),
   status: STATUS.IDLE,
   error: null,
 };
 
-// Auth Provider Component
-export const AuthProvider = ({ children }) => {
+function authReducer(state, action) {
+  switch (action.type) {
+    case 'LOADING':
+      return { ...state, status: STATUS.LOADING, error: null };
+    case 'LOGIN_SUCCESS':
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+        status: STATUS.SUCCESS,
+        error: null,
+      };
+    case 'LOGOUT':
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+        status: STATUS.IDLE,
+        error: null,
+      };
+    case 'ERROR':
+      return { ...state, status: STATUS.ERROR, error: action.payload };
+    case 'CLEAR_ERROR':
+      return { ...state, error: null, status: STATUS.IDLE };
+    default:
+      return state;
+  }
+}
+
+export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Initialize authentication state
-  useEffect(() => {
-    const initializeAuth = () => {
-      if (authService.isAuthenticated()) {
-        const user = authService.getCurrentUser();
-        if (user) {
-          dispatch({
-            type: 'SET_USER',
-            payload: { user },
-          });
-        }
-      }
-    };
-
-    initializeAuth();
+  const login = useCallback(async (email, password) => {
+    dispatch({ type: 'LOADING' });
+    try {
+      const data = await authService.login(email, password);
+      dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+      return data;
+    } catch (err) {
+      dispatch({
+        type: 'ERROR',
+        payload: err?.errorMessage || err?.ErrorMessage || 'Login failed',
+      });
+      throw err;
+    }
   }, []);
 
-  // Login function
-  const login = async (credentials) => {
-    try {
-      dispatch({ type: 'SET_LOADING' });
-      
-      const response = await authService.login(credentials);
-      
-      dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: { user: response.user },
-      });
-      
-      return response;
-    } catch (error) {
-      dispatch({
-        type: 'LOGIN_ERROR',
-        payload: { error: error.message },
-      });
-      throw error;
-    }
-  };
+  const logout = useCallback(() => {
+    authService.logout();
+    dispatch({ type: 'LOGOUT' });
+  }, []);
 
-  // Register function
-  const register = async (userData) => {
-    try {
-      dispatch({ type: 'SET_LOADING' });
-      
-      const response = await authService.register(userData);
-      
-      return response;
-    } catch (error) {
-      dispatch({
-        type: 'LOGIN_ERROR',
-        payload: { error: error.message },
-      });
-      throw error;
-    }
-  };
+  const clearError = useCallback(() => dispatch({ type: 'CLEAR_ERROR' }), []);
 
-  // Logout function
-  const logout = async () => {
-    try {
-      await authService.logout();
-      dispatch({ type: 'LOGOUT' });
-    } catch (error) {
-      console.error('Logout error:', error);
-      // Even if logout fails, clear local state
-      dispatch({ type: 'LOGOUT' });
-    }
-  };
-
-  // Reset password function
-  const resetPassword = async (email) => {
-    try {
-      dispatch({ type: 'SET_LOADING' });
-      
-      const response = await authService.resetPassword(email);
-      
-      return response;
-    } catch (error) {
-      dispatch({
-        type: 'LOGIN_ERROR',
-        payload: { error: error.message },
-      });
-      throw error;
-    }
-  };
-
-  // Clear error function
-  const clearError = () => {
-    dispatch({ type: 'CLEAR_ERROR' });
-  };
-
-  // Check user role
-  const hasRole = (role) => {
-    return authService.hasRole(role);
-  };
-
-  // Check multiple roles
-  const hasAnyRole = (roles) => {
-    return authService.hasAnyRole(roles);
-  };
-
-  const contextValue = {
-    ...state,
-    login,
-    register,
-    logout,
-    resetPassword,
-    clearError,
-    hasRole,
-    hasAnyRole,
-  };
+  const isAdmin = state.user?.role === USER_ROLES.ADMIN;
+  const isStudent = state.user?.role === USER_ROLES.STUDENT;
+  const isInstructor = state.user?.role === USER_ROLES.INSTRUCTOR;
 
   return (
-    <AuthContext.Provider value={contextValue}>
+    <AuthContext.Provider
+      value={{
+        ...state,
+        login,
+        logout,
+        clearError,
+        isAdmin,
+        isStudent,
+        isInstructor,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-// Custom hook to use Auth context
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  
-  return context;
-};
-
-export default AuthContext;
+export function useAuth() {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
+  return ctx;
+}

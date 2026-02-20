@@ -217,7 +217,10 @@ namespace AYA_UIS.Core.Services.Implementations
           
             var roles = await _userManager.GetRolesAsync(user);
 
-            var DepartmentName = (await _userManager.Users.Include(u => u.Department).FirstOrDefaultAsync(u => u.Id == user.Id))?.Department.Name;
+            var department = await _unitOfWork.Departments.GetByIdAsync(departmentId);
+            if(department == null) 
+                throw new NotFoundException($"There is no department with id '{departmentId}'.");
+
 
             var token = await CreateTokenAsync(user);
             return new UserResultDto
@@ -235,8 +238,9 @@ namespace AYA_UIS.Core.Services.Implementations
                 Specialization = user.Specialization, 
                 Level = user.Level, 
                 PhoneNumber = user.PhoneNumber,
-                DepartmentName = DepartmentName,
-                ProfilePicture = user.ProfilePicture
+                DepartmentName = department.Name,
+                ProfilePicture = user.ProfilePicture,
+                Gender = user.Gender
             };
         }
 

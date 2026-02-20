@@ -22,6 +22,11 @@ namespace Presistence.Repositories
                 .ToListAsync();
         }
 
+        public async Task AddRangeAsync(IEnumerable<UserStudyYear> userStudyYears)
+        {
+            await _dbContext.UserStudyYears.AddRangeAsync(userStudyYears);
+        }
+
         public async Task<UserStudyYear?> GetCurrentByUserIdAsync(string userId)
         {
             return await _dbContext.UserStudyYears

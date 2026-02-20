@@ -427,6 +427,11 @@ namespace Presistence.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -500,6 +505,9 @@ namespace Presistence.Migrations
                     b.Property<int>("EndYear")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsCurrent")
+                        .HasColumnType("bit");
+
                     b.Property<int>("StartYear")
                         .HasColumnType("int");
 
@@ -520,6 +528,9 @@ namespace Presistence.Migrations
 
                     b.Property<DateTime>("EnrolledAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsCurrent")
                         .ValueGeneratedOnAdd()

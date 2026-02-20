@@ -99,7 +99,8 @@ public class DataSeeding : IDataSeeding
                             Title = SemesterEnum.First_Semester,
                             StartDate = new DateTime(studyYear.StartYear, 9, 1),
                             EndDate = new DateTime(studyYear.StartYear, 12, 31),
-                            DepartmentId = dept.Id
+                            DepartmentId = dept.Id,
+                            StudyYearId = studyYear.Id
                         });
 
                         // Semester2 (Spring) — Jan to May of EndYear
@@ -108,7 +109,8 @@ public class DataSeeding : IDataSeeding
                             Title = SemesterEnum.Second_Semester,
                             StartDate = new DateTime(studyYear.EndYear, 1, 1),
                             EndDate = new DateTime(studyYear.EndYear, 5, 31),
-                            DepartmentId = dept.Id
+                            DepartmentId = dept.Id,
+                            StudyYearId = studyYear.Id
                         });
                     }
                 }

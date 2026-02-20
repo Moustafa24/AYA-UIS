@@ -1,137 +1,166 @@
-// Application Constants
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5282';
+
 export const API_ENDPOINTS = {
-  // Authentication endpoints
   AUTH: {
-    LOGIN: '/api/auth/login',
-    REGISTER: '/api/auth/register',
-    REFRESH: '/api/auth/refresh',
-    LOGOUT: '/api/auth/logout',
-    RESET_PASSWORD: '/api/auth/reset-password',
+    LOGIN: `${API_BASE}/Authentication/Login`,
+    REGISTER: `${API_BASE}/Authentication/Register`,
+    REGISTER_STUDENT: deptId =>
+      `${API_BASE}/Authentication/register-student/${deptId}/department`,
+    RESET_PASSWORD: `${API_BASE}/Authentication/reset-password`,
   },
-  
-  // Department endpoints
+  USER: {
+    BY_ACADEMIC_CODE: code => `${API_BASE}/User/${code}/academic`,
+    UPDATE_PROFILE_PICTURE: `${API_BASE}/User/update-profile-picture`,
+    UPDATE_SPECIALIZATION: `${API_BASE}/User/update-student-specialization`,
+  },
+  ROLES: {
+    BASE: `${API_BASE}/Roles`,
+    BY_ID: id => `${API_BASE}/Roles/${id}`,
+    BY_NAME: name => `${API_BASE}/Roles/by-name/${name}`,
+    UPDATE_BY_EMAIL: `${API_BASE}/Roles/update-user-role-by-email`,
+    UPDATE_BY_CODE: `${API_BASE}/Roles/update-user-role`,
+    USER_ROLE_INFO: code => `${API_BASE}/Roles/user-role-info/${code}`,
+  },
   DEPARTMENTS: {
-    GET_ALL: '/api/departments',
-    GET_BY_ID: '/api/departments',
-    CREATE: '/api/departments',
-    UPDATE: '/api/departments',
-    DELETE: '/api/departments',
+    BASE: `${API_BASE}/Departments`,
+    BY_ID: id => `${API_BASE}/Departments/${id}`,
   },
-  
-  // Course endpoints
   COURSES: {
-    GET_ALL: '/api/courses',
-    GET_BY_ID: '/api/courses',
-    CREATE: '/api/courses',
-    UPDATE: '/api/courses',
-    DELETE: '/api/courses',
+    BASE: `${API_BASE}/Course`,
+    UPLOADS: id => `${API_BASE}/Course/${id}/uploads`,
+    REGISTRATIONS: (id, yearId) =>
+      `${API_BASE}/Course/${id}/registrations/${yearId}`,
+    UPLOAD_FILE: courseId => `${API_BASE}/Course/${courseId}/upload`,
+    DEPT_COURSES: deptId =>
+      `${API_BASE}/Course/${deptId}/department-courses`,
+    PREREQUISITES: id => `${API_BASE}/Course/prequisites/${id}`,
+    DEPENDENCIES: id => `${API_BASE}/Course/dependencies/${id}`,
   },
-  
-  // Fee endpoints
-  FEES: {
-    GET_ALL: '/api/fees',
-    GET_BY_ID: '/api/fees',
-    CREATE: '/api/fees',
-    UPDATE: '/api/fees',
-    DELETE: '/api/fees',
+  REGISTRATIONS: {
+    BASE: `${API_BASE}/Registration`,
+    BY_ID: id => `${API_BASE}/Registration/${id}`,
+    BY_YEAR: yearId => `${API_BASE}/Registration/${yearId}/year`,
+    BY_SEMESTER: (yearId, semId) =>
+      `${API_BASE}/Registration/${yearId}/year/${semId}/semester`,
   },
-  
-  // Schedule endpoints
+  SEMESTERS: {
+    BY_YEAR: yearId => `${API_BASE}/Semester/${yearId}/study-year`,
+  },
+  STUDY_YEARS: {
+    BASE: `${API_BASE}/StudyYear`,
+  },
+  USER_STUDY_YEARS: {
+    BASE: `${API_BASE}/UserStudyYear`,
+    BY_ID: id => `${API_BASE}/UserStudyYear/${id}`,
+    MY_STUDY_YEARS: `${API_BASE}/UserStudyYear/my-study-years`,
+    MY_TIMELINE: `${API_BASE}/UserStudyYear/my-timeline`,
+    MY_CURRENT: `${API_BASE}/UserStudyYear/my-current`,
+    BY_USER: userId => `${API_BASE}/UserStudyYear/user/${userId}`,
+    USER_TIMELINE: userId =>
+      `${API_BASE}/UserStudyYear/user/${userId}/timeline`,
+    PROMOTE_ALL: `${API_BASE}/UserStudyYear/promote-all`,
+    PROMOTE_STUDENT: code =>
+      `${API_BASE}/UserStudyYear/promote-student/${code}`,
+  },
+  DEPARTMENT_FEES: {
+    BASE: `${API_BASE}/DepartmentFees`,
+    BY_DEPT_GRADE: (name, grade) =>
+      `${API_BASE}/DepartmentFees/${name}/${grade}`,
+  },
   SCHEDULES: {
-    GET_ALL: '/api/schedules',
-    GET_BY_ID: '/api/schedules',
-    CREATE: '/api/schedules',
-    UPDATE: '/api/schedules',
-    DELETE: '/api/schedules',
+    BASE: `${API_BASE}/AcademicSchedule`,
+    BY_ID: id => `${API_BASE}/AcademicSchedule/${id}`,
+    CREATE: (yearId, deptId, semId) =>
+      `${API_BASE}/AcademicSchedule/study-year/${yearId}/department/${deptId}/semester/${semId}`,
   },
 };
 
-// Application routes
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
-  REGISTER: '/register',
   DASHBOARD: '/dashboard',
-  
-  // Department routes
-  DEPARTMENTS: '/departments',
-  DEPARTMENTS_CREATE: '/departments/create',
-  DEPARTMENTS_EDIT: '/departments/edit',
-  
-  // Course routes
-  COURSES: '/courses',
-  COURSES_CREATE: '/courses/create',
-  COURSES_EDIT: '/courses/edit',
-  
-  // Fee routes
-  FEES: '/fees',
-  FEES_CREATE: '/fees/create',
-  FEES_EDIT: '/fees/edit',
-  
-  // Schedule routes
-  SCHEDULES: '/schedules',
-  SCHEDULES_CREATE: '/schedules/create',
-  SCHEDULES_EDIT: '/schedules/edit',
+  ADMIN: {
+    DEPARTMENTS: '/admin/departments',
+    COURSES: '/admin/courses',
+    STUDENTS: '/admin/students',
+    STUDY_YEARS: '/admin/study-years',
+    REGISTRATIONS: '/admin/registrations',
+    FEES: '/admin/fees',
+    SCHEDULES: '/admin/schedules',
+    ROLES: '/admin/roles',
+    PROMOTE_STUDENTS: '/admin/promote-students',
+  },
+  STUDENT: {
+    MY_COURSES: '/student/my-courses',
+    REGISTER_COURSES: '/student/register',
+    MY_TIMELINE: '/student/timeline',
+    MY_STUDY_YEARS: '/student/my-study-years',
+    STUDY_YEAR_SEMESTERS: '/student/study-year/:studyYearId/semesters',
+    SEMESTER_COURSES:
+      '/student/study-year/:studyYearId/semester/:semesterId/courses',
+    COURSE_UPLOADS: '/student/course/:courseId/uploads',
+    PROFILE: '/student/profile',
+    SCHEDULES: '/student/schedules',
+    FEES: '/student/fees',
+  },
 };
 
-// User roles
 export const USER_ROLES = {
   ADMIN: 'Admin',
-  FACULTY: 'Faculty', 
+  INSTRUCTOR: 'Instructor',
   STUDENT: 'Student',
-  STAFF: 'Staff',
 };
-
-// Application settings
-export const APP_CONFIG = {
-  NAME: 'AYA University Information System',
-  VERSION: '1.0.0',
-  COPYRIGHT: '© 2026 AYA University',
-};
-
-// Theme constants
-export const THEME = {
-  COLORS: {
-    PRIMARY: '#2563eb',
-    SECONDARY: '#64748b',
-    SUCCESS: '#10b981',
-    WARNING: '#f59e0b',
-    ERROR: '#ef4444',
-    INFO: '#3b82f6',
-  },
-  BREAKPOINTS: {
-    MOBILE: '768px',
-    TABLET: '1024px',
-    DESKTOP: '1280px',
-  },
-};
-
-// Form validation constants
-export const VALIDATION = {
-  EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  PASSWORD_MIN_LENGTH: 8,
-  PHONE_REGEX: /^\+?[\d\s-()]+$/,
-};
-
-// Local storage keys
-export const STORAGE_KEYS = {
-  AUTH_TOKEN: 'authToken',
-  REFRESH_TOKEN: 'refreshToken',
-  USER_DATA: 'userData',
-  THEME: 'theme',
-  LANGUAGE: 'language',
-};
-
-// Status constants
+export const STORAGE_KEYS = { TOKEN: 'authToken', USER: 'userData' };
 export const STATUS = {
   IDLE: 'idle',
   LOADING: 'loading',
   SUCCESS: 'success',
   ERROR: 'error',
 };
-
-// Pagination defaults
-export const PAGINATION = {
-  DEFAULT_PAGE_SIZE: 10,
-  PAGE_SIZE_OPTIONS: [10, 25, 50, 100],
+export const REGISTRATION_STATUS = {
+  PENDING: 'Pending',
+  APPROVED: 'Approved',
+  SUSPENDED: 'Suspended',
+  REJECTED: 'Rejected',
+};
+export const COURSE_PROGRESS = {
+  COMPLETED: 'Completed',
+  IN_PROGRESS: 'InProgress',
+  NOT_STARTED: 'NotStarted',
+};
+export const LEVELS = {
+  PREPARATORY: 'Preparatory_Year',
+  FIRST: 'First_Year',
+  SECOND: 'Second_Year',
+  THIRD: 'Third_Year',
+  FOURTH: 'Fourth_Year',
+  GRADUATE: 'Graduate',
+};
+export const LEVEL_LABELS = {
+  Preparatory_Year: 'Preparatory',
+  First_Year: '1st Year',
+  Second_Year: '2nd Year',
+  Third_Year: '3rd Year',
+  Fourth_Year: '4th Year',
+  Graduate: 'Graduate',
+};
+export const SEMESTER_TYPES = {
+  FIRST: 'First_Semester',
+  SECOND: 'Second_Semester',
+  SUMMER: 'Summer',
+};
+export const GRADE_LABELS = {
+  A_Plus: 'A+',
+  A: 'A',
+  A_Minus: 'A-',
+  B_Plus: 'B+',
+  B: 'B',
+  B_Minus: 'B-',
+  C_Plus: 'C+',
+  C: 'C',
+  C_Minus: 'C-',
+  D_Plus: 'D+',
+  D: 'D',
+  D_Minus: 'D-',
+  F: 'F',
 };

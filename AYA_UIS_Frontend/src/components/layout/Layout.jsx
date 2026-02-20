@@ -1,100 +1,175 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import { ROUTES } from '../../constants';
+import {
+  FiHome,
+  FiBook,
+  FiUsers,
+  FiCalendar,
+  FiDollarSign,
+  FiGrid,
+  FiFileText,
+  FiLogOut,
+  FiMenu,
+  FiX,
+  FiUser,
+  FiShield,
+  FiClipboard,
+  FiLayers,
+  FiChevronDown,
+  FiArrowUp,
+} from 'react-icons/fi';
+import logo from '../../assets/images/logo.svg';
 import './Layout.css';
 
-const Layout = ({ children, sidebar = true }) => {
+export default function Layout() {
+  const { user, logout, isAdmin, isStudent } = useAuth();
+  const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [profileOpen, setProfileOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate(ROUTES.LOGIN);
+  };
+
+  const adminNav = [
+    { to: ROUTES.DASHBOARD, icon: <FiHome />, label: 'Dashboard' },
+    { to: ROUTES.ADMIN.DEPARTMENTS, icon: <FiGrid />, label: 'Departments' },
+    { to: ROUTES.ADMIN.COURSES, icon: <FiBook />, label: 'Courses' },
+    { to: ROUTES.ADMIN.STUDENTS, icon: <FiUsers />, label: 'Students' },
+    {
+      to: ROUTES.ADMIN.STUDY_YEARS,
+      icon: <FiCalendar />,
+      label: 'Study Years',
+    },
+    {
+      to: ROUTES.ADMIN.REGISTRATIONS,
+      icon: <FiClipboard />,
+      label: 'Registrations',
+    },
+    { to: ROUTES.ADMIN.FEES, icon: <FiDollarSign />, label: 'Fees' },
+    { to: ROUTES.ADMIN.SCHEDULES, icon: <FiFileText />, label: 'Schedules' },
+    { to: ROUTES.ADMIN.ROLES, icon: <FiShield />, label: 'Roles' },
+    {
+      to: ROUTES.ADMIN.PROMOTE_STUDENTS,
+      icon: <FiArrowUp />,
+      label: 'Promote',
+    },
+  ];
+
+  const studentNav = [
+    { to: ROUTES.DASHBOARD, icon: <FiHome />, label: 'Dashboard' },
+    { to: ROUTES.STUDENT.MY_COURSES, icon: <FiBook />, label: 'My Courses' },
+    {
+      to: ROUTES.STUDENT.REGISTER_COURSES,
+      icon: <FiClipboard />,
+      label: 'Registration',
+    },
+    { to: ROUTES.STUDENT.MY_TIMELINE, icon: <FiLayers />, label: 'Timeline' },
+    {
+      to: ROUTES.STUDENT.MY_STUDY_YEARS,
+      icon: <FiCalendar />,
+      label: 'Study Years',
+    },
+    { to: ROUTES.STUDENT.SCHEDULES, icon: <FiFileText />, label: 'Schedules' },
+    { to: ROUTES.STUDENT.FEES, icon: <FiDollarSign />, label: 'Fees' },
+    { to: ROUTES.STUDENT.PROFILE, icon: <FiUser />, label: 'Profile' },
+  ];
+
+  const navItems = isAdmin ? adminNav : studentNav;
+
   return (
-    <div className="layout">
-      <header className="layout__header">
-        <div className="layout__header-content">
-          <div className="layout__logo">
-            <h1 className="layout__title">AYA University</h1>
-            <span className="layout__subtitle">Information System</span>
-          </div>
-          
-          <nav className="layout__nav">
-            <div className="layout__nav-items">
-              <a href="/dashboard" className="layout__nav-link">
-                Dashboard
-              </a>
-              <a href="/departments" className="layout__nav-link">
-                Departments
-              </a>
-              <a href="/courses" className="layout__nav-link">
-                Courses
-              </a>
-              <a href="/fees" className="layout__nav-link">
-                Fees
-              </a>
-              <a href="/schedules" className="layout__nav-link">
-                Schedules
-              </a>
-            </div>
-          </nav>
-
-          <div className="layout__user-menu">
-            <button className="layout__user-button">
-              <span className="layout__user-avatar">User</span>
-            </button>
-          </div>
+    <div className={`app-layout ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="sidebar-header">
+          <Link to={ROUTES.DASHBOARD} className="logo-link">
+            <img src={logo} alt="AYA Academy" className="logo-img" />
+            {sidebarOpen && <span className="logo-text">AYA Academy</span>}
+          </Link>
         </div>
-      </header>
+        <nav className="sidebar-nav">
+          {navItems.map(item => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                `nav-item ${isActive ? 'active' : ''}`
+              }
+            >
+              <span className="nav-icon">{item.icon}</span>
+              {sidebarOpen && <span className="nav-label">{item.label}</span>}
+            </NavLink>
+          ))}
+        </nav>
+        <div className="sidebar-footer">
+          <button className="nav-item logout-btn" onClick={handleLogout}>
+            <span className="nav-icon">
+              <FiLogOut />
+            </span>
+            {sidebarOpen && <span className="nav-label">Logout</span>}
+          </button>
+        </div>
+      </aside>
 
-      <div className="layout__container">
-        {sidebar && (
-          <aside className="layout__sidebar">
-            <nav className="layout__sidebar-nav">
-              <ul className="layout__sidebar-menu">
-                <li className="layout__sidebar-item">
-                  <a href="/dashboard" className="layout__sidebar-link">
-                    <span className="layout__sidebar-icon">📊</span>
-                    Dashboard
-                  </a>
-                </li>
-                <li className="layout__sidebar-item">
-                  <a href="/departments" className="layout__sidebar-link">
-                    <span className="layout__sidebar-icon">🏛️</span>
-                    Departments
-                  </a>
-                </li>
-                <li className="layout__sidebar-item">
-                  <a href="/courses" className="layout__sidebar-link">
-                    <span className="layout__sidebar-icon">📚</span>
-                    Courses
-                  </a>
-                </li>
-                <li className="layout__sidebar-item">
-                  <a href="/fees" className="layout__sidebar-link">
-                    <span className="layout__sidebar-icon">💰</span>
-                    Fees
-                  </a>
-                </li>
-                <li className="layout__sidebar-item">
-                  <a href="/schedules" className="layout__sidebar-link">
-                    <span className="layout__sidebar-icon">📅</span>
-                    Schedules
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </aside>
-        )}
-
-        <main className={`layout__main ${sidebar ? 'layout__main--with-sidebar' : ''}`}>
-          <div className="layout__content">
-            {children}
+      {/* Main */}
+      <div className="main-wrapper">
+        <header className="top-header">
+          <button
+            className="toggle-btn"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            {sidebarOpen ? <FiX /> : <FiMenu />}
+          </button>
+          <div className="header-right">
+            <div
+              className="profile-dropdown"
+              onClick={() => setProfileOpen(!profileOpen)}
+            >
+              <div className="avatar">
+                {user?.profilePicture ? (
+                  <img src={user.profilePicture} alt="" />
+                ) : (
+                  <span>{user?.displayName?.charAt(0) || 'U'}</span>
+                )}
+              </div>
+              {
+                <div className="profile-info">
+                  <span className="profile-name">{user?.displayName}</span>
+                  <span className="profile-role">{user?.role}</span>
+                </div>
+              }
+              <FiChevronDown />
+              {profileOpen && (
+                <div className="dropdown-menu">
+                  <div className="dropdown-header">
+                    <strong>{user?.displayName}</strong>
+                    <small>{user?.email}</small>
+                  </div>
+                  <div className="dropdown-divider" />
+                  {isStudent && (
+                    <Link
+                      to={ROUTES.STUDENT.PROFILE}
+                      className="dropdown-item"
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      <FiUser /> Profile
+                    </Link>
+                  )}
+                  <button className="dropdown-item" onClick={handleLogout}>
+                    <FiLogOut /> Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
+        </header>
+        <main className="main-content">
+          <Outlet />
         </main>
       </div>
-
-      <footer className="layout__footer">
-        <div className="layout__footer-content">
-          <p className="layout__footer-text">
-            © 2026 AYA University Information System. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   );
-};
-
-export default Layout;
+}

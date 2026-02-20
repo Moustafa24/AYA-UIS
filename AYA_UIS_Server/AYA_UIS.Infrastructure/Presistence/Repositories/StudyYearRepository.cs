@@ -18,5 +18,13 @@ namespace Presistence.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<StudyYear?> GetCurrentStudyYearAsync()
+        {
+            return await _dbContext.StudyYears
+                .Where(sy => sy.IsCurrent)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
     }
 }

@@ -11,5 +11,8 @@ namespace Domain.Contracts
         public Task<IEnumerable<Registration>> GetByUserAndStudyYearAndSemseterAsync(string userId, int studyYearId, int semesterId);
         Task<IEnumerable<Registration>> GetByUserAsync(string userId, int? studyYearId = null);
         Task<IEnumerable<Registration>> GetAllAsync(int? courseId = null, int? studyYearId = null, int? semesterId = null, string? userId = null);
+        public Task<bool> IsUserRegisteredInCourseAsync(string userId, int courseId);
+
+        public Task<bool> IsCourseCompletedByUserAsync(string userId, int courseId);
     }
 }
