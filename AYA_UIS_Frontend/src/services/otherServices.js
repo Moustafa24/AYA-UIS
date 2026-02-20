@@ -2,6 +2,7 @@ import api from './api';
 import { API_ENDPOINTS } from '../constants';
 
 export const studyYearService = {
+  getAll: () => api.get(API_ENDPOINTS.STUDY_YEARS.BASE),
   create: data => api.post(API_ENDPOINTS.STUDY_YEARS.BASE, data),
 };
 
@@ -21,15 +22,18 @@ export const userStudyYearService = {
   getUserTimeline: userId =>
     api.get(API_ENDPOINTS.USER_STUDY_YEARS.USER_TIMELINE(userId)),
   promoteAll: () => api.post(API_ENDPOINTS.USER_STUDY_YEARS.PROMOTE_ALL),
-  promoteStudent: code => api.post(API_ENDPOINTS.USER_STUDY_YEARS.PROMOTE_STUDENT(code)),
+  promoteStudent: code =>
+    api.post(API_ENDPOINTS.USER_STUDY_YEARS.PROMOTE_STUDENT(code)),
 };
 
 export const feeService = {
-  getAll: () => api.get(API_ENDPOINTS.DEPARTMENT_FEES.BASE),
-  getByDeptGrade: (name, grade) =>
-    api.get(API_ENDPOINTS.DEPARTMENT_FEES.BY_DEPT_GRADE(name, grade)),
-  update: (name, grade, fees) =>
-    api.put(API_ENDPOINTS.DEPARTMENT_FEES.BY_DEPT_GRADE(name, grade), fees),
+  create: data => api.post(API_ENDPOINTS.FEES.BASE, data),
+  getByStudyYear: studyYearId =>
+    api.get(API_ENDPOINTS.FEES.BY_STUDY_YEAR(studyYearId)),
+  getByDeptAndYear: (deptId, studyYearId) =>
+    api.get(API_ENDPOINTS.FEES.BY_DEPT_AND_YEAR(deptId, studyYearId)),
+  update: (id, data) => api.put(API_ENDPOINTS.FEES.BY_ID(id), data),
+  del: id => api.del(API_ENDPOINTS.FEES.BY_ID(id)),
 };
 
 export const scheduleService = {

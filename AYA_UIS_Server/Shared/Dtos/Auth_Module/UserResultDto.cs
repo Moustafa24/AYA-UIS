@@ -23,6 +23,7 @@ namespace Shared.Dtos.Auth_Module
         public string? Specialization { get; set; } = null;
         public Levels Level { get; set; }
         public string? DepartmentName { get; set; }
+        public int? DepartmentId { get; set; }
         public string? ProfilePicture { get; set; } = null;
         public Gender Gender { get; set; }
     }

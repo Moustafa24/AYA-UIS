@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AYA_UIS.Application.Commands.UserStudyYears;
 using AYA_UIS.Core.Domain.Entities.Identity;
+using AYA_UIS.Core.Domain.Enums;
 using Domain.Contracts;
 using MediatR;
 using AYA_UIS.Core.Domain.Entities.Models;
@@ -30,6 +31,9 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
             if (user == null)
                 throw new Exception("User not found");
 
+            if (user.Level == Levels.Graduate)
+                throw new Exception("Student has already graduated");
+
             var currentStudyYear = await _unitOfWork.StudyYears.GetCurrentStudyYearAsync();
 
             if (currentStudyYear == null)
@@ -38,12 +42,24 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
             var userStudyYear = await _unitOfWork.UserStudyYears.GetByUserAndStudyYearAsync(user.Id, currentStudyYear.Id);
 
             if (userStudyYear != null)
-                throw new Exception("User is already promoted for the current study year");
+                throw new Exception("User is already assigned to the current study year");
 
+            // Mark old current UserStudyYear as not current
+            var oldCurrent = await _unitOfWork.UserStudyYears.GetCurrentByUserIdAsync(user.Id);
+            if (oldCurrent != null)
+            {
+                oldCurrent.IsCurrent = false;
+                await _unitOfWork.UserStudyYears.Update(oldCurrent);
+            }
+
+            // Assign student to current study year with their existing level
             var newUserStudyYear = new UserStudyYear
             {
                 UserId = user.Id,
-                StudyYearId = currentStudyYear.Id
+                StudyYearId = currentStudyYear.Id,
+                Level = user.Level,
+                IsCurrent = true,
+                EnrolledAt = DateTime.UtcNow
             };
 
             await _unitOfWork.UserStudyYears.AddRangeAsync(new List<UserStudyYear> { newUserStudyYear });

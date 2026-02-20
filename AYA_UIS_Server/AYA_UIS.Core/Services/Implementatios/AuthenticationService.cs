@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using Shared.Common;
 using Shared.Dtos.Auth_Module;
 using AYA_UIS.Shared.Exceptions;
+using AYA_UIS.Core.Domain.Enums;
 using Domain.Contracts;
 
 namespace AYA_UIS.Core.Services.Implementations
@@ -72,8 +73,8 @@ namespace AYA_UIS.Core.Services.Implementations
                     Level = user.Level, // null he is not student
                     PhoneNumber = user.PhoneNumber,
                     DepartmentName = null, // // null he is not student,
-                    Gender = user.Gender
-                    
+                    Gender = user.Gender,
+                    DepartmentId = null
                 };
             }
 
@@ -94,7 +95,8 @@ namespace AYA_UIS.Core.Services.Implementations
                 Level = user.Level, // null he is not student
                 PhoneNumber = user.PhoneNumber,
                 DepartmentName = department.Name,
-                Gender = user.Gender
+                Gender = user.Gender,
+                DepartmentId = department.Id
             };
         }
         #endregion
@@ -163,7 +165,8 @@ namespace AYA_UIS.Core.Services.Implementations
                 Specialization = user.Specialization, // null he is not student
                 Level = user.Level, // null he is not student
                 PhoneNumber = user.PhoneNumber,
-                DepartmentName = null // // null he is not student
+                DepartmentName = null,// // null he is not student
+                DepartmentId = user.DepartmentId          
             };
         }
 
@@ -184,6 +187,14 @@ namespace AYA_UIS.Core.Services.Implementations
             if (ChekInputValidation.Any())
                 throw new ValidationException(ChekInputValidation);
 
+            // Determine starting level based on department
+            var department = await _unitOfWork.Departments.GetByIdAsync(departmentId);
+            if (department == null)
+                throw new NotFoundException($"There is no department with id '{departmentId}'.");
+
+            var startingLevel = department.HasPreparatoryYear
+                ? Levels.Preparatory_Year
+                : Levels.First_Year;
 
             var user = new User
             {
@@ -192,7 +203,7 @@ namespace AYA_UIS.Core.Services.Implementations
                 UserName = registerStudentDto.UserName,   
                 PhoneNumber = registerStudentDto.PhoneNumber,
                 Academic_Code = registerStudentDto.Academic_Code,
-                Level = registerStudentDto.Level,
+                Level = startingLevel,
                 TotalCredits = 0,
                 AllowedCredits = 0,
                 TotalGPA = 0,
@@ -216,11 +227,6 @@ namespace AYA_UIS.Core.Services.Implementations
 
           
             var roles = await _userManager.GetRolesAsync(user);
-
-            var department = await _unitOfWork.Departments.GetByIdAsync(departmentId);
-            if(department == null) 
-                throw new NotFoundException($"There is no department with id '{departmentId}'.");
-
 
             var token = await CreateTokenAsync(user);
             return new UserResultDto

@@ -18,7 +18,6 @@ namespace Presistence.Repositories
         private IDepartmentRepository? _departments;
         private ICourseRepository? _courses;
         private IAcademicScheduleRepository? _academicSchedules;
-        private IDepartmentFeeRepository? _departmentFees;
         private IFeeRepository? _fees;
         private IStudyYearRepository? _studyYears;
         private IRegistrationRepository? _registrations;
@@ -40,9 +39,6 @@ namespace Presistence.Repositories
 
         public IAcademicScheduleRepository AcademicSchedules
             => _academicSchedules ??= new AcademicScheduleRepository(_dbContext);
-
-        public IDepartmentFeeRepository DepartmentFees
-            => _departmentFees ??= new DepartmentFeeRepository(_dbContext);
 
         public IFeeRepository Fees
             => _fees ??= new FeeRepository(_dbContext);

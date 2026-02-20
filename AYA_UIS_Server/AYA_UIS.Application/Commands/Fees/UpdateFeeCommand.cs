@@ -4,14 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Shared.Dtos.Info_Module.FeeDtos;
+
 namespace AYA_UIS.Application.Commands.Fees
 {
-    public record CreateFeeCommand : IRequest<int>
+    public class UpdateFeeCommand : IRequest<Unit>
     {
-        public CreateFeeDto FeeDto { get; init; }
+        public int Id { get; set; }
+        public UpdateFeeDto FeeDto { get; set; }
 
-        public CreateFeeCommand(CreateFeeDto feeDto)
+        public UpdateFeeCommand(int id, UpdateFeeDto feeDto)
         {
+            Id = id;
             FeeDto = feeDto;
         }
     }

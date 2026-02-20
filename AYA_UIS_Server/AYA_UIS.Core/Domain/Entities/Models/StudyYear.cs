@@ -14,7 +14,7 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public bool IsCurrent { get; set; } // Indicates if this is the current study year
         public int DepartmentId { get; set; }
         public Department Department { get; set; } = null!;
-        public ICollection<DepartmentFee> DepartmentFees { get; set; } = new List<DepartmentFee>();
+        public ICollection<Fee> Fees { get; set; } = new List<Fee>(); // means the study year has multiple fees for different levels and departments
         public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
         public ICollection<Semester> Semesters { get; set; } = new List<Semester>();
         public ICollection<User> Users { get; set; } = new List<User>();

@@ -11,6 +11,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace AYA_UIS.Application.Handlers.UserStudyYears
 {
     public class PromoteAllStudentsCommandHandler : IRequestHandler<PromoteAllStudentsCommand, Unit>
@@ -26,22 +27,36 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
 
         public async Task<Unit> Handle(PromoteAllStudentsCommand request, CancellationToken cancellationToken)
         {
-            var allUngraduatedStudentsIds = await _userManager.Users.Where(u => u.Level != null && u.Level != Levels.Graduate).Select(u => new { u.Id }).ToListAsync();
-            if(allUngraduatedStudentsIds.Count == 0)
+            var allUngraduatedStudents = await _userManager.Users
+                .Where(u => u.Level != Levels.Graduate)
+                .ToListAsync();
+
+            if (allUngraduatedStudents.Count == 0)
                 throw new Exception("No ungraduated students found");
 
             var currentStudyYear = await _unitOfWork.StudyYears.GetCurrentStudyYearAsync();
             if (currentStudyYear == null)
                 throw new Exception("Current study year not found");
 
-
             var usersStudyYears = new List<UserStudyYear>();
-            foreach (var id in allUngraduatedStudentsIds)
+            foreach (var student in allUngraduatedStudents)
             {
+                // Mark old current UserStudyYear as not current
+                var oldCurrent = await _unitOfWork.UserStudyYears.GetCurrentByUserIdAsync(student.Id);
+                if (oldCurrent != null)
+                {
+                    oldCurrent.IsCurrent = false;
+                    await _unitOfWork.UserStudyYears.Update(oldCurrent);
+                }
+
+                // Re-assign student to the current study year keeping their existing level
                 usersStudyYears.Add(new UserStudyYear
                 {
-                    UserId = id.Id,
-                    StudyYearId = currentStudyYear!.Id
+                    UserId = student.Id,
+                    StudyYearId = currentStudyYear.Id,
+                    Level = student.Level,
+                    IsCurrent = true,
+                    EnrolledAt = DateTime.UtcNow
                 });
             }
 

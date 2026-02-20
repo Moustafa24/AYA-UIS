@@ -9,5 +9,6 @@ namespace Domain.Contracts
         Task<UserStudyYear?> GetByUserAndStudyYearAsync(string userId, int studyYearId);
         Task<IEnumerable<UserStudyYear>> GetByStudyYearIdAsync(int studyYearId);
         Task AddRangeAsync(IEnumerable<UserStudyYear> userStudyYears);
+        Task<IEnumerable<UserStudyYear>> GetStudyYearsByUserIdAsync(string userId);
     }
 }

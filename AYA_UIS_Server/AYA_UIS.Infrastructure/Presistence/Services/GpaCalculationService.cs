@@ -68,7 +68,8 @@ namespace Infrastructure.Services
 
                 foreach (var registration in registrations)
                 {
-                    decimal gradePoint = GetGradePoint(registration.Grade);
+                    if (registration.Grade is null) continue;
+                    decimal gradePoint = GetGradePoint(registration.Grade.Value);
                     int credits = registration.Course.Credits;
                     
                     totalWeightedPoints += gradePoint * credits;

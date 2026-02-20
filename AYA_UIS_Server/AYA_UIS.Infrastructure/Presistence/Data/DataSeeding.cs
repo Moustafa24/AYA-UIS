@@ -45,7 +45,7 @@ public class DataSeeding : IDataSeeding
                     new() { Name = "Business English", Code = "BE" },
                     new() { Name = "Business Arabic", Code = "BA" },
                     new() { Name = "Journalism", Code = "JR" },
-                    new() { Name = "Engineering", Code = "ENG" }
+                    new() { Name = "Engineering", Code = "ENG", HasPreparatoryYear = true }
                 };
 
                 await _dbContext.Departments.AddRangeAsync(departments);
@@ -116,20 +116,6 @@ public class DataSeeding : IDataSeeding
                 }
 
                 await _dbContext.Semesters.AddRangeAsync(semesters);
-                await _dbContext.SaveChangesAsync();
-            }
-
-            // ================= Department Fees =================
-            if (!_dbContext.DepartmentFees.Any())
-            {
-                var studyYears = await _dbContext.StudyYears.ToListAsync();
-                var fees = studyYears.Select(sy => new DepartmentFee
-                {
-                    DepartmentId = sy.DepartmentId,
-                    StudyYearId = sy.Id
-                }).ToList();
-
-                await _dbContext.DepartmentFees.AddRangeAsync(fees);
                 await _dbContext.SaveChangesAsync();
             }
 

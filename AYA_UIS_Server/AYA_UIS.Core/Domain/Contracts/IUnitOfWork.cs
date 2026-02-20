@@ -7,7 +7,6 @@ namespace Domain.Contracts
         IDepartmentRepository Departments { get; }
         ICourseRepository Courses { get; }
         IAcademicScheduleRepository AcademicSchedules { get; }
-        IDepartmentFeeRepository DepartmentFees { get; }
         IFeeRepository Fees { get; }
         IStudyYearRepository StudyYears { get; }
         IRegistrationRepository Registrations { get; }

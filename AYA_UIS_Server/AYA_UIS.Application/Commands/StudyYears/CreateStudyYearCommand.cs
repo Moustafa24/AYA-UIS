@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
-using Shared.Dtos.Info_Module.StdudyYearDtos;
+using Shared.Dtos.Info_Module.StudyYearDtos;
 using Shared.Dtos.Info_Module.UserStudyYearDtos;
 
 namespace AYA_UIS.Application.Commands.StudyYears

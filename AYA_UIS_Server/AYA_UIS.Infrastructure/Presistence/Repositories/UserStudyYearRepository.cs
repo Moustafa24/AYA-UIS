@@ -22,6 +22,16 @@ namespace Presistence.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<UserStudyYear>> GetStudyYearsByUserIdAsync(string userId)
+        {
+            // get user study year and study year details for a specific user
+            return await _dbContext.UserStudyYears
+                .Where(usy => usy.UserId == userId)
+                .Include(usy => usy.StudyYear)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
         public async Task AddRangeAsync(IEnumerable<UserStudyYear> userStudyYears)
         {
             await _dbContext.UserStudyYears.AddRangeAsync(userStudyYears);

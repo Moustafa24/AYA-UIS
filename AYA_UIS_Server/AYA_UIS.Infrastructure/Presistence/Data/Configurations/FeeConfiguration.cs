@@ -13,10 +13,15 @@ namespace Presistence.Data.Configurations
             builder.Property(f => f.Amount)
                    .HasPrecision(18, 2);
 
-            builder.HasOne(f => f.DepartmentFee)
-                   .WithMany(df => df.Fees)
-                   .HasForeignKey(f => f.DepartmentFeeId)
-                   .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(f => f.Department)
+                   .WithMany(d => d.Fees)
+                   .HasForeignKey(f => f.DepartmentId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(f => f.StudyYear)
+                   .WithMany(sy => sy.Fees)
+                   .HasForeignKey(f => f.StudyYearId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

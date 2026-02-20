@@ -4,9 +4,10 @@ using Shared.Dtos.Info_Module.AcademicSheduleDtos;
 using Shared.Dtos.Info_Module.CourseDtos;
 using Shared.Dtos.Info_Module.CourseUploadDtos;
 using Shared.Dtos.Info_Module.DepartmentDtos;
-using Shared.Dtos.Info_Module.DepartmentFeeDtos;
 using Shared.Dtos.Info_Module.FeeDtos;
 using Shared.Dtos.Info_Module.RegistrationDtos;
+using Shared.Dtos.Info_Module.StudyYearDtos;
+using Shared.Dtos.Info_Module.UserStudyYearDtos;
 
 namespace AYA_UIS.Application.Mapping
 {
@@ -25,10 +26,6 @@ namespace AYA_UIS.Application.Mapping
             CreateMap<CreateSemesterAcademicScheduleDto, AcademicSchedule>();
 
             // DepartmentFee mappings
-            CreateMap<DepartmentFee, DepartmentFeeDto>()
-                .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Department.Name))
-                .ForMember(d => d.StartYear, opt => opt.MapFrom(s => s.StudyYear.StartYear))
-                .ForMember(d => d.EndYear, opt => opt.MapFrom(s => s.StudyYear.EndYear));
 
             // Fee mappings
             CreateMap<Fee, FeeDto>().ReverseMap();
@@ -44,6 +41,19 @@ namespace AYA_UIS.Application.Mapping
 
             //Registration mappings
             CreateMap<Registration, RegistrationCourseDto>();
+
+            // Fee mappings
+            CreateMap<Fee, FeeDto>()
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department != null ? src.Department.Name : null))
+                .ReverseMap();
+            CreateMap<CreateFeeDto, Fee>();
+
+            // map study year to study year dto
+            CreateMap<StudyYear, StudyYearDto>().ReverseMap();
+
+            //user study year to user study year dto
+            CreateMap<UserStudyYear, UserStudyYearDetailsDto>();
+            
         }
     }
 }

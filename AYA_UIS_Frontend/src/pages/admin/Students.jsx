@@ -5,6 +5,7 @@ import authService from '../../services/authService';
 import departmentService from '../../services/departmentService';
 import { LEVEL_LABELS } from '../../constants';
 import { toast } from 'react-toastify';
+// Note: Level is auto-determined by backend based on department's HasPreparatoryYear flag
 
 export default function Students() {
   const [departments, setDepartments] = useState([]);
@@ -18,7 +19,6 @@ export default function Students() {
     phoneNumber: '',
     displayName: '',
     academic_Code: '',
-    level: 'First_Year',
     gender: 'Male',
     departmentId: '',
   });
@@ -250,20 +250,6 @@ export default function Students() {
                     {departments.map(d => (
                       <option key={d.id} value={d.id}>
                         {d.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Level</label>
-                  <select
-                    className="form-control"
-                    value={form.level}
-                    onChange={e => setForm({ ...form, level: e.target.value })}
-                  >
-                    {Object.entries(LEVEL_LABELS).map(([k, v]) => (
-                      <option key={k} value={k}>
-                        {v}
                       </option>
                     ))}
                   </select>

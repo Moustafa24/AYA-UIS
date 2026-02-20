@@ -73,8 +73,12 @@ export default function Layout() {
       icon: <FiCalendar />,
       label: 'Study Years',
     },
+    {
+      to: ROUTES.STUDENT.DEPARTMENT_COURSES,
+      icon: <FiGrid />,
+      label: 'Courses',
+    },
     { to: ROUTES.STUDENT.SCHEDULES, icon: <FiFileText />, label: 'Schedules' },
-    { to: ROUTES.STUDENT.FEES, icon: <FiDollarSign />, label: 'Fees' },
     { to: ROUTES.STUDENT.PROFILE, icon: <FiUser />, label: 'Profile' },
   ];
 

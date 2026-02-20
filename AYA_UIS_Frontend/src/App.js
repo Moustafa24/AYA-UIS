@@ -16,6 +16,7 @@ import Students from './pages/admin/Students';
 import Roles from './pages/admin/Roles';
 import Registrations from './pages/admin/Registrations';
 import PromoteStudents from './pages/admin/PromoteStudents';
+import StudyYearFees from './pages/admin/StudyYearFees';
 import Fees from './pages/fees/Fees';
 import Schedules from './pages/schedules/Schedules';
 import MyCourses from './pages/student/MyCourses';
@@ -26,6 +27,7 @@ import MyStudyYears from './pages/student/MyStudyYears';
 import StudyYearSemesters from './pages/student/StudyYearSemesters';
 import SemesterCourses from './pages/student/SemesterCourses';
 import CourseUploads from './pages/student/CourseUploads';
+import DepartmentCourses from './pages/student/DepartmentCourses';
 
 import './styles/globals.css';
 
@@ -83,6 +85,14 @@ function App() {
               element={
                 <ProtectedRoute roles={['Admin']}>
                   <StudyYears />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin/study-years/:studyYearId/fees"
+              element={
+                <ProtectedRoute roles={['Admin']}>
+                  <StudyYearFees />
                 </ProtectedRoute>
               }
             />
@@ -169,6 +179,14 @@ function App() {
               }
             />
             <Route
+              path="student/courses"
+              element={
+                <ProtectedRoute roles={['Student']}>
+                  <DepartmentCourses />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="student/study-year/:studyYearId/semesters"
               element={
                 <ProtectedRoute roles={['Student']}>
@@ -205,14 +223,6 @@ function App() {
               element={
                 <ProtectedRoute roles={['Student']}>
                   <Schedules isAdmin={false} />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="student/fees"
-              element={
-                <ProtectedRoute roles={['Student']}>
-                  <Fees />
                 </ProtectedRoute>
               }
             />

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FiLayers, FiCheck, FiClock } from 'react-icons/fi';
+import { FiLayers, FiCheck, FiClock, FiBook } from 'react-icons/fi';
 import { userStudyYearService } from '../../services/otherServices';
 import { LEVEL_LABELS } from '../../constants';
 import { toast } from 'react-toastify';
+
+// level comes as "First_Year" string from backend
+const formatLevel = level =>
+  LEVEL_LABELS[level] || level?.replace(/_/g, ' ') || '—';
 
 export default function Timeline() {
   const [timeline, setTimeline] = useState(null);
@@ -52,10 +56,17 @@ export default function Timeline() {
             <FiLayers />
           </div>
           <div className="stat-info">
-            <h3>
-              {timeline.currentLevelName || LEVEL_LABELS[timeline.currentLevel]}
-            </h3>
+            <h3>{formatLevel(timeline.currentLevel)}</h3>
             <p>Current Level</p>
+          </div>
+        </div>
+        <div className="card stat-card">
+          <div className="stat-icon purple">
+            <FiBook />
+          </div>
+          <div className="stat-info">
+            <h3>{timeline.departmentName || '—'}</h3>
+            <p>Department</p>
           </div>
         </div>
         <div className="card stat-card">
@@ -94,9 +105,9 @@ export default function Timeline() {
                 background: 'var(--border)',
               }}
             />
-            {timeline.studyYears.map((sy, i) => (
+            {timeline.studyYears.map(sy => (
               <div
-                key={sy.id}
+                key={sy.userStudyYearId}
                 style={{
                   position: 'relative',
                   paddingBottom: 24,
@@ -140,15 +151,21 @@ export default function Timeline() {
                         style={{
                           fontSize: '0.85rem',
                           color: 'var(--text-light)',
+                          marginTop: 4,
                         }}
                       >
-                        {sy.levelName || LEVEL_LABELS[sy.level]} ·{' '}
-                        {sy.departmentName}
+                        {formatLevel(sy.level)} · Enrolled{' '}
+                        {new Date(sy.enrolledAt).toLocaleDateString()}
                       </p>
                     </div>
-                    {sy.isCurrent && (
-                      <span className="badge badge-info">Current</span>
-                    )}
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      {sy.isCurrent && (
+                        <span className="badge badge-info">Current</span>
+                      )}
+                      {sy.isActive && (
+                        <span className="badge badge-success">Active</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

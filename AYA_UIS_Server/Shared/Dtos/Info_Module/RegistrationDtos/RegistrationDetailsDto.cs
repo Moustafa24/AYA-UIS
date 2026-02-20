@@ -6,7 +6,7 @@ using AYA_UIS.Core.Domain.Entities.Models;
 using AYA_UIS.Core.Domain.Enums;
 using Shared.Dtos.Info_Module.CourseDtos;
 using Shared.Dtos.Info_Module.SemesterDtos;
-using Shared.Dtos.Info_Module.StdudyYearDtos;
+using Shared.Dtos.Info_Module.StudyYearDtos;
 using Shared.Dtos.Info_Module.UserDtos;
 using Shared.Dtos.Info_Module.UserStudyYearDtos;
 

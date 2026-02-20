@@ -8,7 +8,6 @@ namespace AYA_UIS.Core.Abstractions.Contracts
 {
     public interface IServiceManager
     {
-        public IDepartmentFeeService DepartmentFeeService { get; }
         public IAcademicSchedulesService  AcademicSchedules { get; }
 
         public IAuthenticationService AuthenticationService { get; }

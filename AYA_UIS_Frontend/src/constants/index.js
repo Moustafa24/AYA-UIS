@@ -31,8 +31,7 @@ export const API_ENDPOINTS = {
     REGISTRATIONS: (id, yearId) =>
       `${API_BASE}/Course/${id}/registrations/${yearId}`,
     UPLOAD_FILE: courseId => `${API_BASE}/Course/${courseId}/upload`,
-    DEPT_COURSES: deptId =>
-      `${API_BASE}/Course/${deptId}/department-courses`,
+    DEPT_COURSES: deptId => `${API_BASE}/Course/${deptId}/department-courses`,
     PREREQUISITES: id => `${API_BASE}/Course/prequisites/${id}`,
     DEPENDENCIES: id => `${API_BASE}/Course/dependencies/${id}`,
   },
@@ -48,6 +47,14 @@ export const API_ENDPOINTS = {
   },
   STUDY_YEARS: {
     BASE: `${API_BASE}/StudyYear`,
+    BY_ID: id => `${API_BASE}/StudyYear/${id}`,
+  },
+  FEES: {
+    BASE: `${API_BASE}/Fee`,
+    BY_ID: id => `${API_BASE}/Fee/${id}`,
+    BY_STUDY_YEAR: studyYearId => `${API_BASE}/Fee/study-year/${studyYearId}`,
+    BY_DEPT_AND_YEAR: (deptId, studyYearId) =>
+      `${API_BASE}/Fee/department/${deptId}/study-year/${studyYearId}`,
   },
   USER_STUDY_YEARS: {
     BASE: `${API_BASE}/UserStudyYear`,
@@ -95,13 +102,13 @@ export const ROUTES = {
     REGISTER_COURSES: '/student/register',
     MY_TIMELINE: '/student/timeline',
     MY_STUDY_YEARS: '/student/my-study-years',
+    DEPARTMENT_COURSES: '/student/courses',
     STUDY_YEAR_SEMESTERS: '/student/study-year/:studyYearId/semesters',
     SEMESTER_COURSES:
       '/student/study-year/:studyYearId/semester/:semesterId/courses',
     COURSE_UPLOADS: '/student/course/:courseId/uploads',
     PROFILE: '/student/profile',
     SCHEDULES: '/student/schedules',
-    FEES: '/student/fees',
   },
 };
 
