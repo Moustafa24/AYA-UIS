@@ -1,0 +1,1773 @@
+{
+  "Version": 1,
+  "Hash": "U5HSqKR8mbHMM1Wupv8cXFqlr40wFlTLEtdV+Dhl+ek=",
+  "Source": "AYA-UIS",
+  "BasePath": "_content/AYA-UIS",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "AYA-UIS\\wwwroot",
+      "Source": "AYA-UIS",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\03e8f619-df3e-40fa-a1e5-0408ac29fc18_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/03e8f619-df3e-40fa-a1e5-0408ac29fc18_WhatsApp Image 2025-11-09 at 2.43.08 PM#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2n0haln8ke",
+      "Integrity": "fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\03e8f619-df3e-40fa-a1e5-0408ac29fc18_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\3118d073-b411-4488-beb4-01973c0e6c9d_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/3118d073-b411-4488-beb4-01973c0e6c9d_WhatsApp Image 2025-11-09 at 2.43.08 PM#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2n0haln8ke",
+      "Integrity": "fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\3118d073-b411-4488-beb4-01973c0e6c9d_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\41a89672-2c1e-4d81-b44f-e042609d7263_WhatsApp Image 2025-11-09 at 2.43.08 PM (1).jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/41a89672-2c1e-4d81-b44f-e042609d7263_WhatsApp Image 2025-11-09 at 2.43.08 PM (1)#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "plxj5nym3c",
+      "Integrity": "I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\41a89672-2c1e-4d81-b44f-e042609d7263_WhatsApp Image 2025-11-09 at 2.43.08 PM (1).jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\4b355114-ef18-4c8f-b874-170827c9b716_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/4b355114-ef18-4c8f-b874-170827c9b716_WhatsApp Image 2025-11-09 at 2.43.08 PM (2)#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "skcvkz22hx",
+      "Integrity": "lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\4b355114-ef18-4c8f-b874-170827c9b716_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\723628fb-2b18-4958-aa38-9679d8855806_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/723628fb-2b18-4958-aa38-9679d8855806_WhatsApp Image 2025-11-09 at 2.43.08 PM#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2n0haln8ke",
+      "Integrity": "fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\723628fb-2b18-4958-aa38-9679d8855806_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\927f2322-1953-41cd-a772-5353cc7b4bd6_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/927f2322-1953-41cd-a772-5353cc7b4bd6_WhatsApp Image 2025-11-09 at 2.43.08 PM (2)#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "skcvkz22hx",
+      "Integrity": "lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\927f2322-1953-41cd-a772-5353cc7b4bd6_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\a4845ba5-88fc-4d61-b55c-e5b15ee6efe1_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/a4845ba5-88fc-4d61-b55c-e5b15ee6efe1_WhatsApp Image 2025-11-09 at 2.43.08 PM (2)#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "skcvkz22hx",
+      "Integrity": "lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\a4845ba5-88fc-4d61-b55c-e5b15ee6efe1_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\bc164c3d-7693-486d-acf5-455a37692d0b_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/bc164c3d-7693-486d-acf5-455a37692d0b_WhatsApp Image 2025-11-09 at 2.43.08 PM#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2n0haln8ke",
+      "Integrity": "fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\bc164c3d-7693-486d-acf5-455a37692d0b_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\BS.jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/BS#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "plxj5nym3c",
+      "Integrity": "I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\BS.jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\c3e6ffb2-dccd-4ab7-b81f-82acc798aead_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/c3e6ffb2-dccd-4ab7-b81f-82acc798aead_WhatsApp Image 2025-11-09 at 2.43.08 PM (2)#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "skcvkz22hx",
+      "Integrity": "lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\c3e6ffb2-dccd-4ab7-b81f-82acc798aead_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\CS_LECScadual",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/CS_LECScadual#[.{fingerprint}]?",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2n0haln8ke",
+      "Integrity": "fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\CS_LECScadual"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\CS_Mid",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/CS_Mid#[.{fingerprint}]?",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2n0haln8ke",
+      "Integrity": "fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\CS_Mid"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\cssc",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/cssc#[.{fingerprint}]?",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "wy1j9tzzt1",
+      "Integrity": "SEJ0/5jOBLrH8+WpWPywbgj2c+x1c7ITJQmNBy3c+QY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cssc"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\d06544bb-7b56-413c-8cb5-8c10b9ec3bea_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/d06544bb-7b56-413c-8cb5-8c10b9ec3bea_WhatsApp Image 2025-11-09 at 2.43.08 PM (2)#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "skcvkz22hx",
+      "Integrity": "lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\d06544bb-7b56-413c-8cb5-8c10b9ec3bea_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\dff720f0-d1ef-4a08-98fa-d345297e9714_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/dff720f0-d1ef-4a08-98fa-d345297e9714_WhatsApp Image 2025-11-09 at 2.43.08 PM (2)#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "skcvkz22hx",
+      "Integrity": "lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\dff720f0-d1ef-4a08-98fa-d345297e9714_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\Eng.jpeg",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "images/Eng#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2n0haln8ke",
+      "Integrity": "fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Eng.jpeg"
+    },
+    {
+      "Identity": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\index.html",
+      "SourceId": "AYA-UIS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\",
+      "BasePath": "_content/AYA-UIS",
+      "RelativePath": "index#[.{fingerprint}]?.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "9q4fm61bcu",
+      "Integrity": "T7zBqiLBlMiz5N3zJmNTnLCyStt5Relg2C2nbET2rO8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "images/03e8f619-df3e-40fa-a1e5-0408ac29fc18_WhatsApp Image 2025-11-09 at 2.43.08 PM.2n0haln8ke.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\03e8f619-df3e-40fa-a1e5-0408ac29fc18_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:19:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2n0haln8ke"
+        },
+        {
+          "Name": "label",
+          "Value": "images/03e8f619-df3e-40fa-a1e5-0408ac29fc18_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/03e8f619-df3e-40fa-a1e5-0408ac29fc18_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\03e8f619-df3e-40fa-a1e5-0408ac29fc18_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:19:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/3118d073-b411-4488-beb4-01973c0e6c9d_WhatsApp Image 2025-11-09 at 2.43.08 PM.2n0haln8ke.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\3118d073-b411-4488-beb4-01973c0e6c9d_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 13:05:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2n0haln8ke"
+        },
+        {
+          "Name": "label",
+          "Value": "images/3118d073-b411-4488-beb4-01973c0e6c9d_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/3118d073-b411-4488-beb4-01973c0e6c9d_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\3118d073-b411-4488-beb4-01973c0e6c9d_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 13:05:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/41a89672-2c1e-4d81-b44f-e042609d7263_WhatsApp Image 2025-11-09 at 2.43.08 PM (1).jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\41a89672-2c1e-4d81-b44f-e042609d7263_WhatsApp Image 2025-11-09 at 2.43.08 PM (1).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "135095"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 12:47:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE="
+        }
+      ]
+    },
+    {
+      "Route": "images/41a89672-2c1e-4d81-b44f-e042609d7263_WhatsApp Image 2025-11-09 at 2.43.08 PM (1).plxj5nym3c.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\41a89672-2c1e-4d81-b44f-e042609d7263_WhatsApp Image 2025-11-09 at 2.43.08 PM (1).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "135095"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 12:47:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "plxj5nym3c"
+        },
+        {
+          "Name": "label",
+          "Value": "images/41a89672-2c1e-4d81-b44f-e042609d7263_WhatsApp Image 2025-11-09 at 2.43.08 PM (1).jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE="
+        }
+      ]
+    },
+    {
+      "Route": "images/4b355114-ef18-4c8f-b874-170827c9b716_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\4b355114-ef18-4c8f-b874-170827c9b716_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 27 Nov 2025 19:47:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/4b355114-ef18-4c8f-b874-170827c9b716_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).skcvkz22hx.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\4b355114-ef18-4c8f-b874-170827c9b716_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 27 Nov 2025 19:47:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "skcvkz22hx"
+        },
+        {
+          "Name": "label",
+          "Value": "images/4b355114-ef18-4c8f-b874-170827c9b716_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/723628fb-2b18-4958-aa38-9679d8855806_WhatsApp Image 2025-11-09 at 2.43.08 PM.2n0haln8ke.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\723628fb-2b18-4958-aa38-9679d8855806_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 11:17:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2n0haln8ke"
+        },
+        {
+          "Name": "label",
+          "Value": "images/723628fb-2b18-4958-aa38-9679d8855806_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/723628fb-2b18-4958-aa38-9679d8855806_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\723628fb-2b18-4958-aa38-9679d8855806_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 11:17:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/927f2322-1953-41cd-a772-5353cc7b4bd6_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\927f2322-1953-41cd-a772-5353cc7b4bd6_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:07:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/927f2322-1953-41cd-a772-5353cc7b4bd6_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).skcvkz22hx.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\927f2322-1953-41cd-a772-5353cc7b4bd6_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:07:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "skcvkz22hx"
+        },
+        {
+          "Name": "label",
+          "Value": "images/927f2322-1953-41cd-a772-5353cc7b4bd6_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/a4845ba5-88fc-4d61-b55c-e5b15ee6efe1_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\a4845ba5-88fc-4d61-b55c-e5b15ee6efe1_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 18:19:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/a4845ba5-88fc-4d61-b55c-e5b15ee6efe1_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).skcvkz22hx.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\a4845ba5-88fc-4d61-b55c-e5b15ee6efe1_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 18:19:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "skcvkz22hx"
+        },
+        {
+          "Name": "label",
+          "Value": "images/a4845ba5-88fc-4d61-b55c-e5b15ee6efe1_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/bc164c3d-7693-486d-acf5-455a37692d0b_WhatsApp Image 2025-11-09 at 2.43.08 PM.2n0haln8ke.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\bc164c3d-7693-486d-acf5-455a37692d0b_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 11:22:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2n0haln8ke"
+        },
+        {
+          "Name": "label",
+          "Value": "images/bc164c3d-7693-486d-acf5-455a37692d0b_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/bc164c3d-7693-486d-acf5-455a37692d0b_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\bc164c3d-7693-486d-acf5-455a37692d0b_WhatsApp Image 2025-11-09 at 2.43.08 PM.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 11:22:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/BS.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\BS.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "135095"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:00:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE="
+        }
+      ]
+    },
+    {
+      "Route": "images/BS.plxj5nym3c.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\BS.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "135095"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:00:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "plxj5nym3c"
+        },
+        {
+          "Name": "label",
+          "Value": "images/BS.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-I06QqD8rvgvDFE7dtisJsxuc5PigGZ5S70yZjPhotfE="
+        }
+      ]
+    },
+    {
+      "Route": "images/c3e6ffb2-dccd-4ab7-b81f-82acc798aead_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\c3e6ffb2-dccd-4ab7-b81f-82acc798aead_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 18:36:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/c3e6ffb2-dccd-4ab7-b81f-82acc798aead_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).skcvkz22hx.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\c3e6ffb2-dccd-4ab7-b81f-82acc798aead_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 18:36:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "skcvkz22hx"
+        },
+        {
+          "Name": "label",
+          "Value": "images/c3e6ffb2-dccd-4ab7-b81f-82acc798aead_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/CS_LECScadual",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\CS_LECScadual",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 18:45:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/CS_LECScadual.2n0haln8ke",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\CS_LECScadual",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 18:45:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2n0haln8ke"
+        },
+        {
+          "Name": "label",
+          "Value": "images/CS_LECScadual"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/CS_Mid",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\CS_Mid",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 19:52:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/CS_Mid.2n0haln8ke",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\CS_Mid",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 19:52:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2n0haln8ke"
+        },
+        {
+          "Name": "label",
+          "Value": "images/CS_Mid"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/cssc",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\cssc",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "310998"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SEJ0/5jOBLrH8+WpWPywbgj2c+x1c7ITJQmNBy3c+QY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 19:05:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SEJ0/5jOBLrH8+WpWPywbgj2c+x1c7ITJQmNBy3c+QY="
+        }
+      ]
+    },
+    {
+      "Route": "images/cssc.wy1j9tzzt1",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\cssc",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "310998"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SEJ0/5jOBLrH8+WpWPywbgj2c+x1c7ITJQmNBy3c+QY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 19:05:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "wy1j9tzzt1"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cssc"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SEJ0/5jOBLrH8+WpWPywbgj2c+x1c7ITJQmNBy3c+QY="
+        }
+      ]
+    },
+    {
+      "Route": "images/d06544bb-7b56-413c-8cb5-8c10b9ec3bea_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\d06544bb-7b56-413c-8cb5-8c10b9ec3bea_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:21:07 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/d06544bb-7b56-413c-8cb5-8c10b9ec3bea_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).skcvkz22hx.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\d06544bb-7b56-413c-8cb5-8c10b9ec3bea_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:21:07 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "skcvkz22hx"
+        },
+        {
+          "Name": "label",
+          "Value": "images/d06544bb-7b56-413c-8cb5-8c10b9ec3bea_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/dff720f0-d1ef-4a08-98fa-d345297e9714_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\dff720f0-d1ef-4a08-98fa-d345297e9714_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 29 Nov 2025 20:34:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/dff720f0-d1ef-4a08-98fa-d345297e9714_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).skcvkz22hx.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\dff720f0-d1ef-4a08-98fa-d345297e9714_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "341419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 29 Nov 2025 20:34:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "skcvkz22hx"
+        },
+        {
+          "Name": "label",
+          "Value": "images/dff720f0-d1ef-4a08-98fa-d345297e9714_WhatsApp Image 2025-11-09 at 2.43.08 PM (2).jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lA4lBzcBtdq/SREFoLS3MW7KlZGvbxHugvXHi3gkqeM="
+        }
+      ]
+    },
+    {
+      "Route": "images/Eng.2n0haln8ke.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\Eng.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:03:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2n0haln8ke"
+        },
+        {
+          "Name": "label",
+          "Value": "images/Eng.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "images/Eng.jpeg",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\images\\Eng.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "249296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 20 Nov 2025 20:03:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fktk07IwIbhtZhkFDtwVRD+UayE94iawT2e/th9T3p8="
+        }
+      ]
+    },
+    {
+      "Route": "index.9q4fm61bcu.html",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3742"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"T7zBqiLBlMiz5N3zJmNTnLCyStt5Relg2C2nbET2rO8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Nov 2025 18:53:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9q4fm61bcu"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-T7zBqiLBlMiz5N3zJmNTnLCyStt5Relg2C2nbET2rO8="
+        }
+      ]
+    },
+    {
+      "Route": "index.html",
+      "AssetFile": "D:\\Final Project\\AYA-UIS\\AYA-UIS\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3742"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"T7zBqiLBlMiz5N3zJmNTnLCyStt5Relg2C2nbET2rO8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Nov 2025 18:53:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-T7zBqiLBlMiz5N3zJmNTnLCyStt5Relg2C2nbET2rO8="
+        }
+      ]
+    }
+  ]
+}

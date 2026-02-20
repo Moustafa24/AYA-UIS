@@ -8,7 +8,7 @@ namespace Presistence.Data
         public AYA_UIS_InfoDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AYA_UIS_InfoDbContext>();
-            optionsBuilder.UseSqlServer("Server=localhost;Database=university_db;User Id=sa;Password=Yossef_2004;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=.;Database=Info_Database;Trusted_Connection=True;TrustServerCertificate=True;");
 
             return new AYA_UIS_InfoDbContext(optionsBuilder.Options);
         }
