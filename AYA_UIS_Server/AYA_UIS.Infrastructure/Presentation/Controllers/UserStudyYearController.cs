@@ -24,7 +24,7 @@ namespace Presentation.Controllers
         /// Assign a study year to a user (Admin/Instructor only).
         /// </summary>
         [HttpPost]
-        [Authorize(Roles = "Admin,Instructor")]
+        //[Authorize(Roles = "Admin,Instructor")]
         public async Task<IActionResult> CreateUserStudyYear(CreateUserStudyYearDto dto)
         {
             var command = new CreateUserStudyYearCommand(dto);
@@ -36,7 +36,7 @@ namespace Presentation.Controllers
         /// Update a user's study year record (e.g., promote level, set current).
         /// </summary>
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin,Instructor")]
+        //[Authorize(Roles = "Admin,Instructor")]
         public async Task<IActionResult> UpdateUserStudyYear(int id, UpdateUserStudyYearDto dto)
         {
             var command = new UpdateUserStudyYearCommand(id, dto);
@@ -93,7 +93,7 @@ namespace Presentation.Controllers
         /// Get all study years for a specific user (Admin/Instructor only).
         /// </summary>
         [HttpGet("user/{userId}")]
-        [Authorize(Roles = "Admin,Instructor")]
+        //[Authorize(Roles = "Admin,Instructor")]
         public async Task<IActionResult> GetUserStudyYears(string userId)
         {
             var query = new GetUserStudyYearsQuery(userId);
@@ -105,7 +105,7 @@ namespace Presentation.Controllers
         /// Get timeline for a specific user (Admin/Instructor only).
         /// </summary>
         [HttpGet("user/{userId}/timeline")]
-        [Authorize(Roles = "Admin,Instructor")]
+        //[Authorize(Roles = "Admin,Instructor")]
         public async Task<IActionResult> GetUserTimeline(string userId)
         {
             var query = new GetUserStudyYearTimelineQuery(userId);
@@ -114,7 +114,7 @@ namespace Presentation.Controllers
         }
 
         // Assign all user that are students that are not graduated yet from first year to second year, from second year to third year, and from third year to fourth year (Admin only).
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("promote-all")]
         public async Task<IActionResult> PromoteAllStudents()
         {
@@ -123,7 +123,7 @@ namespace Presentation.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("promote-student/{acadenicCode}")]
         public async Task<IActionResult> PromoteStudent(string acadenicCode)
         {

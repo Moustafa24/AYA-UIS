@@ -22,7 +22,7 @@ namespace Presentation.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllStudyYears()
         {
@@ -31,7 +31,7 @@ namespace Presentation.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateStudyYear([FromBody] CreateStudyYearDto studyYearDto)
         {

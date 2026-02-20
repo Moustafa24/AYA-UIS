@@ -42,7 +42,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPatch("update-student-specialization")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateStudentSpecialization([FromBody] UpdateStudentSpecializationDto updateStudentSpecializationDto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -8,7 +8,7 @@ namespace Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class RolesController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
@@ -22,7 +22,7 @@ namespace Presentation.Controllers
         /// Get all roles
         /// </summary>
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
 
         public async Task<ActionResult<IEnumerable<RoleDto>>> GetAllRoles()
         {
@@ -34,7 +34,7 @@ namespace Presentation.Controllers
         /// Get role by ID
         /// </summary>
         [HttpGet("{roleId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
 
         public async Task<ActionResult<RoleDto>> GetRoleById(string roleId)
         {
@@ -49,7 +49,7 @@ namespace Presentation.Controllers
         /// Get role by name
         /// </summary>
         [HttpGet("by-name/{roleName}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
 
         public async Task<ActionResult<RoleDto>> GetRoleByName(string roleName)
         {
@@ -64,7 +64,7 @@ namespace Presentation.Controllers
         /// Create a new role
         /// </summary>
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
 
         public async Task<ActionResult<RoleDto>> CreateRole([FromBody] CreateRoleDto createRoleDto)
         {
@@ -81,7 +81,7 @@ namespace Presentation.Controllers
         /// Update an existing role
         /// </summary>
         [HttpPut("{roleId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> UpdateRole(string roleId, [FromBody] UpdateRoleDto updateRoleDto)
         {
@@ -97,7 +97,7 @@ namespace Presentation.Controllers
         /// Delete a role
         /// </summary>
         [HttpDelete("{roleId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> DeleteRole(string roleId)
         {
@@ -113,7 +113,7 @@ namespace Presentation.Controllers
         /// Update user role by email
         /// </summary>
         [HttpPut("update-user-role-by-email")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUserRoleByEmail([FromBody] UpdateUserRoleByEmailDto dto)
         {
             var result = await _serviceManager.RoleService
@@ -134,7 +134,7 @@ namespace Presentation.Controllers
         /// Update user role by academic code
         /// </summary>
         [HttpPut("update-user-role{academicCode}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleDto dto)
         {
             var result = await _serviceManager.RoleService
@@ -153,7 +153,7 @@ namespace Presentation.Controllers
         /// Get user role info by academic code
         /// </summary>
         [HttpGet("user-role-info/{academicCode}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserRoleInfoDto>> GetUserRoleInfoByAcademicCode(string academicCode)
         {
             try

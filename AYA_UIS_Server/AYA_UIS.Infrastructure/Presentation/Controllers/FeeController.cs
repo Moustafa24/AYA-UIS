@@ -22,7 +22,7 @@ namespace Presentation.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateFee([FromBody] CreateFeeDto feeDto)
         {
@@ -32,7 +32,7 @@ namespace Presentation.Controllers
         }
 
         //Get department fees for the current study year to show them to students when they want to register for courses and see the fees they have to pay for the current study year
-        [Authorize(Roles = "Admin,Student")]
+        //[Authorize(Roles = "Admin,Student")]
         [HttpGet("department/{departmentId}/study-year/{studyYearId}")]
         public async Task<IActionResult> GetFeesByDepartment(int departmentId, int studyYearId)
         {
@@ -42,7 +42,7 @@ namespace Presentation.Controllers
         }
 
         //get studdy year fees for admin to show them when he wants to add or edit fees for the current study year
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("study-year/{studyYearId}")]
         public async Task<IActionResult> GetFeesByStudyYear(int studyYearId)
         {
@@ -51,7 +51,7 @@ namespace Presentation.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFee(int id)
         {            var command = new DeleteFeeCommand(id);
@@ -59,7 +59,7 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateFee(int id, [FromBody] UpdateFeeDto feeDto)
         {            

@@ -47,7 +47,7 @@ namespace Presentation.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("study-year/{studyYearId}/department/{departmentId}/semester/{semesterId}")]
         public async Task<IActionResult> Create(int studyYearId, int departmentId, int semesterId, CreateSemesterAcademicScheduleDto createAcademicScheduleDto)
         {
@@ -58,7 +58,7 @@ namespace Presentation.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(UpdateAcademicScheduleCommand command)
         {
@@ -67,7 +67,7 @@ namespace Presentation.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]DeleteAcademicScheduleByIdCommand command)
         {

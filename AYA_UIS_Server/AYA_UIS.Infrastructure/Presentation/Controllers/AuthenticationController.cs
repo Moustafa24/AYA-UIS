@@ -21,7 +21,7 @@ namespace Presentation.Controllers
         // Post =>  Register 
         [HttpPost("Register")]
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserResultDto>> RegisterAsync(RegisterDto registerDto, string role = "Student")
         {
             if (!ModelState.IsValid)
@@ -34,7 +34,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("register-student/{departmentId}/department")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserResultDto>> RegisterStudentAsync(int departmentId, RegisterStudentDto registerStudentDto)
         {
             if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace Presentation.Controllers
 
 
         [HttpPut("reset-password")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> ResetPasswordByAdmin(ResetPasswordDto resetPasswordDto)
         {
             if (!ModelState.IsValid)

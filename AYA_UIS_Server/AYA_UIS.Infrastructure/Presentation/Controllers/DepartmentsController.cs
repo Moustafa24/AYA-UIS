@@ -42,7 +42,7 @@ namespace Presentation.Controllers
         /// Create a new department
         /// </summary>
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateDepartmentDto department)
         {
             var result = await _mediator.Send(new CreateDepartmentCommand { Department = department });
@@ -53,7 +53,7 @@ namespace Presentation.Controllers
         /// Update an existing department
         /// </summary>
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateDepartmentDto department)
         {
             var result = await _mediator.Send(new UpdateDeparmentCommand(id, department));
@@ -64,7 +64,7 @@ namespace Presentation.Controllers
         /// Delete a department
         /// </summary>
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteDepartmentCommand(id));
