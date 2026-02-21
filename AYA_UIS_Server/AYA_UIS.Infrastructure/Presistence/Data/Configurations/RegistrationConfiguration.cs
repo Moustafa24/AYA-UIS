@@ -10,9 +10,6 @@ namespace Presistence.Data.Configurations
         {
             builder.HasKey(r => r.Id);
 
-            // User lives in a separate Identity database, so no FK constraint
-            builder.Ignore(r => r.User);
-
             builder.Property(r => r.UserId)
                    .IsRequired()
                    .HasMaxLength(450);

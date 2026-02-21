@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using AYA_UIS.Core.Domain.Entities;
 using Domain.Contracts;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly AYA_UIS_InfoDbContext _dbContext;
+        private readonly UniversityDbContext _dbContext;
         private readonly ConcurrentDictionary<string, object> _repositories;
 
         private IDepartmentRepository? _departments;
@@ -25,7 +25,7 @@ namespace Presistence.Repositories
         private ISemesterRepository? _semesters;
         private IUserStudyYearRepository? _userStudyYears;
 
-        public UnitOfWork(AYA_UIS_InfoDbContext dbContext)
+        public UnitOfWork(UniversityDbContext dbContext)
         {
             _dbContext = dbContext;
             _repositories = new();

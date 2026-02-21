@@ -43,7 +43,7 @@ namespace AYA_UIS.Application.Handlers.AcademicSchedules
                 DepartmentId = request.DepartmentId,
                 StudyYearId = request.StudyYearId,
                 SemesterId = request.SemesterId,
-                ScheduleDate = DateTime.UtcNow
+                ScheduleDate = DateTime.UtcNow,
             };
 
             await _unitOfWork.AcademicSchedules.AddAsync(entity);

@@ -21,8 +21,8 @@ namespace AYA_UIS.Core.Domain.Entities.Identity
         public float TotalGPA { get; set; } // the gpa of the student updated every semester
         // if he study eng will prep year any other will start from first year second year he choose his specialization and the department will be the one of the specialization
         public string Specialization { get; set; } = string.Empty; // e.g., Computer Science, Information Systems, etc.
-        public int DepartmentId { get; set; }
-        public Department Department { get; set; } = null!;
+        public int? DepartmentId { get; set; }
+        public Department? Department { get; set; }
         public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
         public ICollection<AcademicSchedule> AcademicSchedules { get; set; } = new List<AcademicSchedule>();
         public ICollection<CourseUpload> CourseUpload { get; set; } = new List<CourseUpload>();

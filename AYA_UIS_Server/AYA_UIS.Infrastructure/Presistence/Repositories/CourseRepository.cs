@@ -1,14 +1,13 @@
 using AYA_UIS.Core.Domain.Entities.Models;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Math.EC.Rfc7748;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class CourseRepository : GenericRepository<Course, int>, ICourseRepository
     {
-        public CourseRepository(AYA_UIS_InfoDbContext dbContext) : base(dbContext)
+        public CourseRepository(UniversityDbContext dbContext) : base(dbContext)
         {
         }
         public async Task<Course?> GetCourseUplaodsAsync(int id)

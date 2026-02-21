@@ -1,13 +1,13 @@
 using AYA_UIS.Core.Domain.Entities.Models;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class DepartmentRepository : GenericRepository<Department, int>, IDepartmentRepository
     {
-        public DepartmentRepository(AYA_UIS_InfoDbContext dbContext) : base(dbContext)
+        public DepartmentRepository(UniversityDbContext dbContext) : base(dbContext)
         {
         }
 

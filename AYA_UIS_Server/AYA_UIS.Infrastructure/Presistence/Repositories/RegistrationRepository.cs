@@ -2,13 +2,13 @@ using AYA_UIS.Core.Domain.Entities.Models;
 using AYA_UIS.Core.Domain.Enums;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class RegistrationRepository : GenericRepository<Registration, int>, IRegistrationRepository
     {
-        public RegistrationRepository(AYA_UIS_InfoDbContext dbContext) : base(dbContext)
+        public RegistrationRepository(UniversityDbContext dbContext) : base(dbContext)
         {
         }
 

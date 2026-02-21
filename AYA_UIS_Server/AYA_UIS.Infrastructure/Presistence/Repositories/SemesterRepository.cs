@@ -1,13 +1,13 @@
 using AYA_UIS.Core.Domain.Entities.Models;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class SemesterRepository : GenericRepository<Semester, int>, ISemesterRepository
     {
-        public SemesterRepository(AYA_UIS_InfoDbContext dbContext) : base(dbContext)
+        public SemesterRepository(UniversityDbContext dbContext) : base(dbContext)
         {
 
         }

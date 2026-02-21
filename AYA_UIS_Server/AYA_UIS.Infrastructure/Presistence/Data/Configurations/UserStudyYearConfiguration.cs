@@ -14,9 +14,6 @@ namespace Presistence.Data.Configurations
             builder.HasIndex(usy => new { usy.UserId, usy.StudyYearId })
                    .IsUnique();
 
-            // User lives in a separate Identity database, so no FK constraint
-            builder.Ignore(usy => usy.User);
-
             builder.Property(usy => usy.UserId)
                    .IsRequired()
                    .HasMaxLength(450);

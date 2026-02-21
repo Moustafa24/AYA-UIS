@@ -1,25 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using AYA_UIS.Core.Domain.Entities.Identity;
 using AYA_UIS.Core.Domain.Entities.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data.Configurations;
 
-namespace Presistence.Data
+namespace Presistence
 {
-    public class AYA_UIS_InfoDbContext : DbContext 
+    public class UniversityDbContext : IdentityDbContext<User>
     {
+        public UniversityDbContext(DbContextOptions<UniversityDbContext> options) : base(options) { }
 
-        public AYA_UIS_InfoDbContext(DbContextOptions<AYA_UIS_InfoDbContext> options) : base(options) { }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            builder.Entity<User>()
+                   .HasIndex(u => u.Academic_Code)
+                   .IsUnique();
         }
 
+        // Domain tables
         public DbSet<Department> Departments { get; set; }
         public DbSet<StudyYear> StudyYears { get; set; }
         public DbSet<Semester> Semesters { get; set; }
@@ -31,6 +33,5 @@ namespace Presistence.Data
         public DbSet<CourseUpload> CourseUploads { get; set; }
         public DbSet<SemesterGPA> SemesterGPAs { get; set; }
         public DbSet<UserStudyYear> UserStudyYears { get; set; }
-
     }
 }

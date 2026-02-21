@@ -17,7 +17,6 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public ICollection<Fee> Fees { get; set; } = new List<Fee>(); // means the study year has multiple fees for different levels and departments
         public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
         public ICollection<Semester> Semesters { get; set; } = new List<Semester>();
-        public ICollection<User> Users { get; set; } = new List<User>();
         public ICollection<SemesterGPA> SemesterGPAs { get; set; } = new List<SemesterGPA>();
         public ICollection<AcademicSchedule> AcademicSchedules { get; set; } = new List<AcademicSchedule>();
         public ICollection<UserStudyYear> UserStudyYears { get; set; } = new List<UserStudyYear>();

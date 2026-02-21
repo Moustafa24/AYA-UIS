@@ -1,13 +1,13 @@
 using AYA_UIS.Core.Domain.Entities.Models;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class CourseUploadsRepository : GenericRepository<CourseUpload, int>, ICourseUploadsRepository
     {
-        public CourseUploadsRepository(AYA_UIS_InfoDbContext dbContext) : base(dbContext)
+        public CourseUploadsRepository(UniversityDbContext dbContext) : base(dbContext)
         {
         }
 

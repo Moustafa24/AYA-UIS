@@ -39,7 +39,10 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
                 return Response<UserStudyYearTimelineDto>.ErrorResponse("No study year records found for this user.");
             
             //then get department related to his study years
-            var department = await _unitOfWork.Departments.GetByIdAsync(user.DepartmentId);
+            if (user.DepartmentId == null)
+                return Response<UserStudyYearTimelineDto>.ErrorResponse("Department not found for the user.");
+
+            var department = await _unitOfWork.Departments.GetByIdAsync(user.DepartmentId.Value);
             if(department == null)
                 return Response<UserStudyYearTimelineDto>.ErrorResponse("Department not found for the user.");
 

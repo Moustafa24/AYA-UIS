@@ -15,9 +15,6 @@ namespace Presistence.Data.Configurations
                    .HasForeignKey(cu => cu.CourseId)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            // User lives in a separate Identity database, so no FK constraint
-            builder.Ignore(cu => cu.UploadedBy);
-
             builder.Property(cu => cu.UploadedByUserId)
                    .IsRequired()
                    .HasMaxLength(450);

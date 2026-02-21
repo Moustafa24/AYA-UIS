@@ -1,13 +1,13 @@
 using AYA_UIS.Core.Domain.Entities.Models;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class FeeRepository : GenericRepository<Fee, int>, IFeeRepository
     {
-        public FeeRepository(AYA_UIS_InfoDbContext dbContext) : base(dbContext)
+        public FeeRepository(UniversityDbContext dbContext) : base(dbContext)
         {
         }
 

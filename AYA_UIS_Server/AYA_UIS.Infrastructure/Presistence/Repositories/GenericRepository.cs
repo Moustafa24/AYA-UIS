@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 using AYA_UIS.Core.Domain.Entities;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey>
         where TEntity : BaseEntities<TKey>
     {
-        protected readonly AYA_UIS_InfoDbContext _dbContext;
+        protected readonly UniversityDbContext _dbContext;
 
-        public GenericRepository(AYA_UIS_InfoDbContext dbContext)
+        public GenericRepository(UniversityDbContext dbContext)
         {
             _dbContext = dbContext;
         }

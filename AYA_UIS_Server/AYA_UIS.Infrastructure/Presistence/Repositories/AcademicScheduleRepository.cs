@@ -1,13 +1,13 @@
 using AYA_UIS.Core.Domain.Entities.Models;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
+using Presistence;
 
 namespace Presistence.Repositories
 {
     public class AcademicScheduleRepository : GenericRepository<AcademicSchedule, int>, IAcademicScheduleRepository
     {
-        public AcademicScheduleRepository(AYA_UIS_InfoDbContext dbContext) : base(dbContext)
+        public AcademicScheduleRepository(UniversityDbContext dbContext) : base(dbContext)
         {
         }
 

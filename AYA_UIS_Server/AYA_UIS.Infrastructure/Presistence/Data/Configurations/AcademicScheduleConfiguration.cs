@@ -15,8 +15,12 @@ namespace Presistence.Data.Configurations
                    .HasForeignKey(a => a.DepartmentId)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            // User lives in a separate Identity database, so no FK constraint
-            builder.Ignore(a => a.UploadedBy);
+            // Map UploadedBy → UploadedByUserId so EF does not generate a shadow UserId column
+            builder.HasOne(a => a.UploadedBy)
+                   .WithMany(u => u.AcademicSchedules)
+                   .HasForeignKey(a => a.UploadedByUserId)
+                   .OnDelete(DeleteBehavior.Restrict)
+                   .IsRequired(false);
 
             builder.Property(a => a.UploadedByUserId)
                    .IsRequired()

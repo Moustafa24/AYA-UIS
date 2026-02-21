@@ -2,14 +2,13 @@
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Presistence.Data;
+using Presistence;
 using Presistence.Repositories;
 using AYA_UIS.Application.Contracts;
 using AYA_UIS.MiddelWares;
 using Microsoft.AspNetCore.Mvc;
 using AYA_UIS.Factories;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Presistence.Identity;
 using Microsoft.AspNetCore.Identity;
 using Shared.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -55,8 +54,8 @@ namespace AYA_UIS
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<AYA_UIS_InfoDbContext>(options =>
-               options.UseSqlServer(builder.Configuration.GetConnectionString("InfoConnection"))
+            builder.Services.AddDbContext<UniversityDbContext>(options =>
+               options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
            );
 
             #region Auth
@@ -96,10 +95,6 @@ namespace AYA_UIS
 
             builder.Services.AddAuthorization();
 
-            builder.Services.AddDbContext<IdentityAYADbContext>(options =>
-               options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"))
-           );
-
             builder.Services.AddIdentityCore<User>(options =>
             {
                 options.Password.RequireNonAlphanumeric = true;
@@ -110,7 +105,7 @@ namespace AYA_UIS
 
             })
             .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<IdentityAYADbContext>()
+            .AddEntityFrameworkStores<UniversityDbContext>()
             .AddDefaultTokenProviders();
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 

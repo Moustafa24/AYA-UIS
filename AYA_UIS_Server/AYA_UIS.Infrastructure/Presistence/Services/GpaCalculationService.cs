@@ -6,15 +6,15 @@ using AYA_UIS.Application.Contracts;
 using AYA_UIS.Core.Domain.Entities.Models;
 using AYA_UIS.Core.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
+using Presistence;
 
 namespace Infrastructure.Services
 {
     public class GpaCalculationService : IGpaCalculationService
     {
-        private readonly AYA_UIS_InfoDbContext _dbContext;
+        private readonly UniversityDbContext _dbContext;
 
-        public GpaCalculationService(AYA_UIS_InfoDbContext dbContext)
+        public GpaCalculationService(UniversityDbContext dbContext)
         {
             _dbContext = dbContext;
         }

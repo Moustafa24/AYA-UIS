@@ -3,26 +3,22 @@ using AYA_UIS.Core.Domain.Entities.Models;
 using Domain.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
-using Presistence.Identity;
+using Presistence;
 using Shared.Dtos.Auth_Module;
 using AYA_UIS.Core.Domain.Enums;
 
 public class DataSeeding : IDataSeeding
 {
-    private readonly AYA_UIS_InfoDbContext _dbContext;
-    private readonly IdentityAYADbContext _identityDbContext;
+    private readonly UniversityDbContext _dbContext;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<User> _userManager;
 
     public DataSeeding(
-        AYA_UIS_InfoDbContext dbContext,
-        IdentityAYADbContext identityDbContext,
+        UniversityDbContext dbContext,
         RoleManager<IdentityRole> roleManager,
         UserManager<User> userManager)
     {
         _dbContext = dbContext;
-        _identityDbContext = identityDbContext;
         _roleManager = roleManager;
         _userManager = userManager;
     }
@@ -268,10 +264,10 @@ public class DataSeeding : IDataSeeding
 
     public async Task SeedIdentityDataAsync()
     {
-        // Ensure Identity database is migrated
-        var pendingMigrations = await _identityDbContext.Database.GetPendingMigrationsAsync();
+        // Ensure database is migrated
+        var pendingMigrations = await _dbContext.Database.GetPendingMigrationsAsync();
         if (pendingMigrations.Any())
-            await _identityDbContext.Database.MigrateAsync();
+            await _dbContext.Database.MigrateAsync();
 
         // Seed roles
         string[] roleNames = { "Admin", "Instructor", "Student" };

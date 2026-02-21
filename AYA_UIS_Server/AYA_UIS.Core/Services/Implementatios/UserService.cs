@@ -37,7 +37,9 @@ namespace Services.Implementatios
                 if (user == null)
                     throw new NotFoundException($"User with academic code '{academicCode}' not found.");
 
-                var department = await _unitOfWork.Departments.GetByIdAsync(user.DepartmentId);
+                var department = user.DepartmentId.HasValue
+                    ? await _unitOfWork.Departments.GetByIdAsync(user.DepartmentId.Value)
+                    : null;
                 if(department == null)
                     throw new NotFoundException($"Department with ID '{user.DepartmentId}' not found.");
 

@@ -53,7 +53,9 @@ namespace AYA_UIS.Core.Services.Implementations
             var validPassword = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!validPassword) throw new UnauthorizedAccessException();
 
-            var department = await _unitOfWork.Departments.GetByIdAsync(user.DepartmentId); // check from deparment beacasue identity db separate from main db and user can be admin or stuff member without department
+            var department = user.DepartmentId.HasValue
+                ? await _unitOfWork.Departments.GetByIdAsync(user.DepartmentId.Value) // check from department because identity db separate from main db and user can be admin or stuff member without department
+                : null;
             if (department == null)
             {
                 // this case it is admin or stuff member
