@@ -78,7 +78,7 @@ export default function Layout() {
       icon: <FiGrid />,
       label: 'Courses',
     },
-    { to: ROUTES.STUDENT.SCHEDULES, icon: <FiFileText />, label: 'Schedules' },
+    // Schedules removed — accessible per-semester inside Study Years
     { to: ROUTES.STUDENT.PROFILE, icon: <FiUser />, label: 'Profile' },
   ];
 

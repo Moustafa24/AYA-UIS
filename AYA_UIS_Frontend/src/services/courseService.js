@@ -12,6 +12,7 @@ const courseService = {
   getDeptCourses: deptId => api.get(API_ENDPOINTS.COURSES.DEPT_COURSES(deptId)),
   getPrerequisites: id => api.get(API_ENDPOINTS.COURSES.PREREQUISITES(id)),
   getDependencies: id => api.get(API_ENDPOINTS.COURSES.DEPENDENCIES(id)),
+  getDeptOpenCourses: deptId => api.get(API_ENDPOINTS.COURSES.OPEN_BY_DEPT(deptId)),
 };
 
 export default courseService;

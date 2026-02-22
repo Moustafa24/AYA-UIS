@@ -7,5 +7,6 @@ namespace Domain.Contracts
         Task<AcademicSchedule?> GetByTitleAsync(string title);
         Task<IEnumerable<AcademicSchedule>> GetAllWithDetailsAsync();
         Task<AcademicSchedule?> UploadSemesterAcademicScheduleAsync(AcademicSchedule schedule);
+        Task<AcademicSchedule?> GetBySemesterIdAsync(int semesterId);
     }
 }

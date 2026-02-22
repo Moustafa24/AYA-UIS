@@ -8,6 +8,7 @@ using AYA_UIS.Application.Commands.CourseUploads;
 using AYA_UIS.Application.Queries.CoursePrequisites;
 using AYA_UIS.Application.Queries.Courses;
 using AYA_UIS.Application.Queries.Registrations;
+using AYA_UIS.Core.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -85,7 +86,7 @@ namespace Presentation.Controllers
         }
 
         [Authorize]
-        [HttpGet("{departmentId}/department-courses")]
+        [HttpGet("department/{departmentId}")]
         public async Task<IActionResult> DeparmentCourses(int departmentId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -109,6 +110,14 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetCourseDependencies(int courseId)
         {
             var result = await _mediator.Send(new GetCourseDependenciesQuery(courseId));
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("open/department/{departmentId}")]
+        public async Task<IActionResult> GetDepartmentOpenCourses(int departmentId)
+        {
+            var result = await _mediator.Send(new GetDepartmentOpenCoursesQuery(departmentId));
             return Ok(result);
         }
 

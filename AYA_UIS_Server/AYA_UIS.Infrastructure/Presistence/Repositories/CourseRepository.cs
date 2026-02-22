@@ -1,4 +1,5 @@
 using AYA_UIS.Core.Domain.Entities.Models;
+using AYA_UIS.Core.Domain.Enums;
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Presistence;
@@ -52,6 +53,14 @@ namespace Presistence.Repositories
                 .Where(cp => cp.PrerequisiteCourseId == courseId)  // Fixed: Use PrerequisiteCourseId instead of RequiredCourseId
                 .Include(cp => cp.Course)
                 .Select(cp => cp.Course)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Course>> GetOpenCoursesAsync()
+        {
+            return await _dbContext.Courses
+                .Where(c => c.Status == CourseStatus.Opened)
+                .AsNoTracking()
                 .ToListAsync();
         }
 

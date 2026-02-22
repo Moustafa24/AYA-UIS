@@ -74,5 +74,13 @@ namespace Presentation.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [Authorize]
+        [HttpGet("semester/{semesterId}")]
+        public async Task<IActionResult> GetSemesterAcademicSchedules(int semesterId)
+        {
+            var result = await _mediator.Send(new GetAcademicSchedulesBySemesterIdQuery(semesterId));
+            return Ok(result);
+        }
     }
 }

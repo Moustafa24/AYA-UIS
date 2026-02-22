@@ -46,6 +46,7 @@ export const scheduleService = {
     ),
   update: (id, data) => api.put(API_ENDPOINTS.SCHEDULES.BY_ID(id), data),
   del: id => api.del(API_ENDPOINTS.SCHEDULES.BY_ID(id)),
+  getBySemester: semId => api.get(API_ENDPOINTS.SCHEDULES.BY_SEMESTER(semId)), // ← ADD
 };
 
 export const roleService = {

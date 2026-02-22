@@ -7,11 +7,11 @@ using Shared.Dtos.Info_Module.CourseDtos;
 
 namespace AYA_UIS.Application.Queries.Courses
 {
-    public class GetDepartmentCoursesQuery : IRequest<IEnumerable<CourseDto>>
+    public class GetDepartmentOpenCoursesQuery : IRequest<IEnumerable<CourseDto>>
     {
-        public int DepartmentId { get; set; }
+        public int DepartmentId {get; set;}
 
-        public GetDepartmentCoursesQuery(int departmentId)
+        public GetDepartmentOpenCoursesQuery(int departmentId)
         {
             DepartmentId = departmentId;
         }

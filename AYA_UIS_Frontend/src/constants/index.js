@@ -31,9 +31,10 @@ export const API_ENDPOINTS = {
     REGISTRATIONS: (id, yearId) =>
       `${API_BASE}/Course/${id}/registrations/${yearId}`,
     UPLOAD_FILE: courseId => `${API_BASE}/Course/${courseId}/upload`,
-    DEPT_COURSES: deptId => `${API_BASE}/Course/${deptId}/department-courses`,
+    DEPT_COURSES: deptId => `${API_BASE}/Course/department/${deptId}`,
     PREREQUISITES: id => `${API_BASE}/Course/prequisites/${id}`,
     DEPENDENCIES: id => `${API_BASE}/Course/dependencies/${id}`,
+    OPEN_BY_DEPT: deptId => `${API_BASE}/Course/open/department/${deptId}`,  // ← ADD
   },
   REGISTRATIONS: {
     BASE: `${API_BASE}/Registration`,
@@ -79,6 +80,7 @@ export const API_ENDPOINTS = {
     BY_ID: id => `${API_BASE}/AcademicSchedule/${id}`,
     CREATE: (yearId, deptId, semId) =>
       `${API_BASE}/AcademicSchedule/study-year/${yearId}/department/${deptId}/semester/${semId}`,
+    BY_SEMESTER: semId => `${API_BASE}/AcademicSchedule/semester/${semId}`, // ← ADD
   },
 };
 

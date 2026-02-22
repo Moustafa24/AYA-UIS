@@ -30,5 +30,13 @@ namespace Presistence.Repositories
             await _dbContext.AcademicSchedules.AddAsync(schedule);
             return schedule;
         }
+
+        public async Task<AcademicSchedule?> GetBySemesterIdAsync(int semesterId)
+        {
+            return await _dbContext.AcademicSchedules
+                .Where(a => a.SemesterId == semesterId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
     }
 }
