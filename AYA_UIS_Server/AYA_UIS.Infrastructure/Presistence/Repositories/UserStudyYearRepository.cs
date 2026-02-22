@@ -42,7 +42,7 @@ namespace Presistence.Repositories
             return await _dbContext.UserStudyYears
                 .Include(usy => usy.StudyYear)
                     .ThenInclude(sy => sy.Department)
-                .Where(usy => usy.UserId == userId && usy.IsCurrent)
+                .Where(usy => usy.UserId == userId && usy.StudyYear.IsCurrent)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
         }

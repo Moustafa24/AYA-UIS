@@ -14,11 +14,11 @@ namespace Shared.Dtos.Info_Module.UserDtos
         public string AcademicCode { get; set; }
         public string Role { get; set; }
         public string UserName { get; set; }
-        public int TotalCredits { get; set; }
-        public int AllowedCredits { get; set; }
-        public float TotalGPA { get; set; }
-        public string Specialization { get; set; }
-        public Levels Level { get; set; }
+        public int? TotalCredits { get; set; }
+        public int? AllowedCredits { get; set; }
+        public decimal? TotalGPA { get; set; }
+        public string? Specialization { get; set; }
+        public Levels? Level { get; set; }
         public string DepartmentName { get; set; }
         public string? PhoneNumber { get; set; }
         public string? ProfilePicture { get; set; }

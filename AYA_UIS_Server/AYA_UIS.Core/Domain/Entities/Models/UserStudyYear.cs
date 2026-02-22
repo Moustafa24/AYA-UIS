@@ -20,9 +20,7 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public StudyYear StudyYear { get; set; } = null!;
 
         public Levels Level { get; set; } // The academic level of the student in this study year
-
-        public bool IsCurrent { get; set; } // Whether this is the student's current active study year
-
+        // remove IsCurrent must be in study year entity only indicates that this is the crrently working study year
         public DateTime EnrolledAt { get; set; } = DateTime.UtcNow;
     }
 }

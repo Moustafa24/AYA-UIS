@@ -19,9 +19,9 @@ namespace Shared.Dtos.Auth_Module
         public string UserName { get; set; }
         public int? TotalCredits { get; set; } = null;
         public int? AllowedCredits { get; set; } = null;
-        public float? TotalGPA { get; set; } = null;
+        public decimal? TotalGPA { get; set; } = null;
         public string? Specialization { get; set; } = null;
-        public Levels Level { get; set; }
+        public Levels? Level { get; set; }
         public string? DepartmentName { get; set; }
         public int? DepartmentId { get; set; }
         public string? ProfilePicture { get; set; } = null;

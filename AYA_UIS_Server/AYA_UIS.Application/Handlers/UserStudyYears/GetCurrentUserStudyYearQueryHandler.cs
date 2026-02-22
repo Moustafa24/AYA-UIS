@@ -37,7 +37,7 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
                 DepartmentName = entity.StudyYear?.Department?.Name ?? string.Empty,
                 Level = entity.Level,
                 LevelName = entity.Level.ToString().Replace("_", " "),
-                IsCurrent = entity.IsCurrent,
+                IsCurrent = entity.StudyYear?.IsCurrent ?? false,
                 EnrolledAt = entity.EnrolledAt
             };
         }

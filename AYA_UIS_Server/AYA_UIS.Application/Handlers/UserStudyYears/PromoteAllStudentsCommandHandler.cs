@@ -41,21 +41,12 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
             var usersStudyYears = new List<UserStudyYear>();
             foreach (var student in allUngraduatedStudents)
             {
-                // Mark old current UserStudyYear as not current
-                var oldCurrent = await _unitOfWork.UserStudyYears.GetCurrentByUserIdAsync(student.Id);
-                if (oldCurrent != null)
-                {
-                    oldCurrent.IsCurrent = false;
-                    await _unitOfWork.UserStudyYears.Update(oldCurrent);
-                }
-
                 // Re-assign student to the current study year keeping their existing level
                 usersStudyYears.Add(new UserStudyYear
                 {
                     UserId = student.Id,
                     StudyYearId = currentStudyYear.Id,
-                    Level = student.Level,
-                    IsCurrent = true,
+                    Level = student.Level.GetValueOrDefault(),
                     EnrolledAt = DateTime.UtcNow
                 });
             }

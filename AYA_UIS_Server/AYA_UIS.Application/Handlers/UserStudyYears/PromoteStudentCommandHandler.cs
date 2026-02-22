@@ -44,21 +44,12 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
             if (userStudyYear != null)
                 throw new Exception("User is already assigned to the current study year");
 
-            // Mark old current UserStudyYear as not current
-            var oldCurrent = await _unitOfWork.UserStudyYears.GetCurrentByUserIdAsync(user.Id);
-            if (oldCurrent != null)
-            {
-                oldCurrent.IsCurrent = false;
-                await _unitOfWork.UserStudyYears.Update(oldCurrent);
-            }
-
             // Assign student to current study year with their existing level
             var newUserStudyYear = new UserStudyYear
             {
                 UserId = user.Id,
                 StudyYearId = currentStudyYear.Id,
-                Level = user.Level,
-                IsCurrent = true,
+                Level = user.Level.GetValueOrDefault(),
                 EnrolledAt = DateTime.UtcNow
             };
 

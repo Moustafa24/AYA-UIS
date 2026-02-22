@@ -13,7 +13,5 @@ namespace Shared.Dtos.Info_Module.UserStudyYearDtos
 
         [Required]
         public Levels Level { get; set; }
-
-        public bool IsCurrent { get; set; } = true;
     }
 }

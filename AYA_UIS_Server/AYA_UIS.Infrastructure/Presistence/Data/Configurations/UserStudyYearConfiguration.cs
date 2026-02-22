@@ -21,10 +21,6 @@ namespace Presistence.Data.Configurations
             builder.Property(usy => usy.Level)
                    .IsRequired();
 
-            builder.Property(usy => usy.IsCurrent)
-                   .IsRequired()
-                   .HasDefaultValue(false);
-
             builder.HasOne(usy => usy.StudyYear)
                    .WithMany(sy => sy.UserStudyYears)
                    .HasForeignKey(usy => usy.StudyYearId)

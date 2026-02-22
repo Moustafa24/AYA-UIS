@@ -31,28 +31,11 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
             if (existing is not null)
                 return Response<UserStudyYearDto>.ErrorResponse("User is already enrolled in this study year.");
 
-            // If this is set as current, unset any existing current study year for this user
-            if (dto.IsCurrent)
-            {
-                var currentRecord = await _unitOfWork.UserStudyYears.GetCurrentByUserIdAsync(dto.UserId);
-                if (currentRecord is not null)
-                {
-                    // Need to get tracked entity to update
-                    var tracked = await _unitOfWork.UserStudyYears.GetByIdAsync(currentRecord.Id);
-                    if (tracked is not null)
-                    {
-                        tracked.IsCurrent = false;
-                        await _unitOfWork.UserStudyYears.Update(tracked);
-                    }
-                }
-            }
-
             var entity = new UserStudyYear
             {
                 UserId = dto.UserId,
                 StudyYearId = dto.StudyYearId,
                 Level = dto.Level,
-                IsCurrent = dto.IsCurrent,
                 EnrolledAt = DateTime.UtcNow
             };
 
@@ -78,7 +61,7 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
                 DepartmentName = entity.StudyYear?.Department?.Name ?? string.Empty,
                 Level = entity.Level,
                 LevelName = entity.Level.ToString().Replace("_", " "),
-                IsCurrent = entity.IsCurrent,
+                IsCurrent = entity.StudyYear?.IsCurrent ?? false,
                 EnrolledAt = entity.EnrolledAt
             };
         }

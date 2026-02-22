@@ -47,11 +47,11 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
                 return Response<UserStudyYearTimelineDto>.ErrorResponse("Department not found for the user.");
 
             // get total completed years (non current)
-            var completedYears = userStudyYears.Where(sy => !sy.IsCurrent).ToList();
+            var completedYears = userStudyYears.Where(sy => !sy.StudyYear.IsCurrent).ToList();
             var timeline = new UserStudyYearTimelineDto
             {
                 UserId = request.UserId,
-                CurrentLevel = user.Level,
+                CurrentLevel = user.Level.GetValueOrDefault(),
                 TotalYearsCompleted = completedYears.Count,
                 IsGraduated = user.Level == Levels.Graduate,
                 DepartmentName = department.Name,

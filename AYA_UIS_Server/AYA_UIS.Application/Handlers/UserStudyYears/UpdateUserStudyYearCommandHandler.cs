@@ -27,25 +27,6 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
             if (dto.Level.HasValue)
                 entity.Level = dto.Level.Value;
 
-            if (dto.IsCurrent.HasValue)
-            {
-                // If setting as current, unset any other current record for this user
-                if (dto.IsCurrent.Value)
-                {
-                    var currentRecord = await _unitOfWork.UserStudyYears.GetCurrentByUserIdAsync(entity.UserId);
-                    if (currentRecord is not null && currentRecord.Id != entity.Id)
-                    {
-                        var trackedCurrent = await _unitOfWork.UserStudyYears.GetByIdAsync(currentRecord.Id);
-                        if (trackedCurrent is not null)
-                        {
-                            trackedCurrent.IsCurrent = false;
-                            await _unitOfWork.UserStudyYears.Update(trackedCurrent);
-                        }
-                    }
-                }
-                entity.IsCurrent = dto.IsCurrent.Value;
-            }
-
             await _unitOfWork.UserStudyYears.Update(entity);
             await _unitOfWork.SaveChangesAsync();
 
@@ -67,7 +48,7 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
                 DepartmentName = entity.StudyYear?.Department?.Name ?? string.Empty,
                 Level = entity.Level,
                 LevelName = entity.Level.ToString().Replace("_", " "),
-                IsCurrent = entity.IsCurrent,
+                IsCurrent = entity.StudyYear?.IsCurrent ?? false,
                 EnrolledAt = entity.EnrolledAt
             };
         }

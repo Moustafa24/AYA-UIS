@@ -289,7 +289,12 @@ public class DataSeeding : IDataSeeding
                 Email = "MoustafaEzzat@gmail.com",
                 UserName = "Moustafa02",
                 PhoneNumber = "01557703382",
-                Academic_Code = "2203071"
+                Academic_Code = "2203071",
+                Level = null,
+                Specialization = null,
+                TotalCredits = null,
+                DepartmentId = null,
+                AllowedCredits = null
             };
             
             var result = await _userManager.CreateAsync(adminUser, "Moustafa@123");
