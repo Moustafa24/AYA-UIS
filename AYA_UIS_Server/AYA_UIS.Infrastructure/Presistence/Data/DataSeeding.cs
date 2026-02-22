@@ -48,27 +48,20 @@ public class DataSeeding : IDataSeeding
                 await _dbContext.SaveChangesAsync();
             }
 
-            // ================= Study Years (per department) =================
+            // ================= Study Years (global, not per-department) =================
             if (!_dbContext.StudyYears.Any())
             {
-                var departments = await _dbContext.Departments.ToListAsync();
                 var studyYears = new List<StudyYear>();
 
-                // Seed actual calendar study years from 2018-2019 up to 2025-2026
-                int startFrom = 2018;
-                int endAt = 2025; // last StartYear → 2025-2026
-
-                foreach (var dept in departments)
+                // Seed global calendar study years from 2018-2019 up to 2025-2026
+                for (int year = 2018; year <= 2025; year++)
                 {
-                    for (int year = startFrom; year <= endAt; year++)
+                    studyYears.Add(new StudyYear
                     {
-                        studyYears.Add(new StudyYear
-                        {
-                            StartYear = year,
-                            EndYear = year + 1,
-                            DepartmentId = dept.Id
-                        });
-                    }
+                        StartYear = year,
+                        EndYear = year + 1,
+                        IsCurrent = year == 2025 // mark 2025-2026 as current
+                    });
                 }
 
                 await _dbContext.StudyYears.AddRangeAsync(studyYears);
@@ -78,37 +71,28 @@ public class DataSeeding : IDataSeeding
             // ================= Semesters =================
             if (!_dbContext.Semesters.Any())
             {
-                var departments = await _dbContext.Departments.ToListAsync();
+                var allStudyYears = await _dbContext.StudyYears.ToListAsync();
                 var semesters = new List<Semester>();
 
-                foreach (var dept in departments)
+                foreach (var studyYear in allStudyYears)
                 {
-                    var deptStudyYears = await _dbContext.StudyYears
-                        .Where(sy => sy.DepartmentId == dept.Id)
-                        .ToListAsync();
-
-                    foreach (var studyYear in deptStudyYears)
+                    // Semester1 (Fall) — Sep to Dec of StartYear
+                    semesters.Add(new Semester
                     {
-                        // Semester1 (Fall) — Sep to Dec of StartYear
-                        semesters.Add(new Semester
-                        {
-                            Title = SemesterEnum.First_Semester,
-                            StartDate = new DateTime(studyYear.StartYear, 9, 1),
-                            EndDate = new DateTime(studyYear.StartYear, 12, 31),
-                            DepartmentId = dept.Id,
-                            StudyYearId = studyYear.Id
-                        });
+                        Title = SemesterEnum.First_Semester,
+                        StartDate = new DateTime(studyYear.StartYear, 9, 1),
+                        EndDate = new DateTime(studyYear.StartYear, 12, 31),
+                        StudyYearId = studyYear.Id
+                    });
 
-                        // Semester2 (Spring) — Jan to May of EndYear
-                        semesters.Add(new Semester
-                        {
-                            Title = SemesterEnum.Second_Semester,
-                            StartDate = new DateTime(studyYear.EndYear, 1, 1),
-                            EndDate = new DateTime(studyYear.EndYear, 5, 31),
-                            DepartmentId = dept.Id,
-                            StudyYearId = studyYear.Id
-                        });
-                    }
+                    // Semester2 (Spring) — Jan to May of EndYear
+                    semesters.Add(new Semester
+                    {
+                        Title = SemesterEnum.Second_Semester,
+                        StartDate = new DateTime(studyYear.EndYear, 1, 1),
+                        EndDate = new DateTime(studyYear.EndYear, 5, 31),
+                        StudyYearId = studyYear.Id
+                    });
                 }
 
                 await _dbContext.Semesters.AddRangeAsync(semesters);

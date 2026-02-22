@@ -4,7 +4,7 @@ namespace Domain.Contracts
 {
     public interface IStudyYearRepository : IGenericRepository<StudyYear, int>
     {
-        Task<IEnumerable<StudyYear>> GetByDepartmentIdAsync(int departmentId);
         Task<StudyYear?> GetCurrentStudyYearAsync();
+        Task<bool> IsCurrentStudyYearAsync(int studyYearId);
     }
 }

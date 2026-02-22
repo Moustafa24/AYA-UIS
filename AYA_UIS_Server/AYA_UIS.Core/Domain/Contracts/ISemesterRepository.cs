@@ -6,5 +6,7 @@ namespace Domain.Contracts
     {
         public Task<IEnumerable<Semester>> GetByStudyYearIdAsync(int studyYearId);
         Task<Semester?> GetActiveSemesterByStudyYearIdAsync(int studyYearId);
+        Task<bool> IsActiveSemesterAsync(int semesterId);
+        Task<bool> IsSemesterBelongsToStudyYearAsync(int semesterId, int studyYearId);
     }
 }

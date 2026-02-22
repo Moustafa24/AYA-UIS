@@ -12,11 +12,6 @@ namespace Presistence.Data.Configurations
 
             builder.Property(s => s.IsActive)
                    .HasDefaultValue(false);
-
-            builder.HasOne(s => s.Department)
-                   .WithMany()
-                   .HasForeignKey(s => s.DepartmentId)
-                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

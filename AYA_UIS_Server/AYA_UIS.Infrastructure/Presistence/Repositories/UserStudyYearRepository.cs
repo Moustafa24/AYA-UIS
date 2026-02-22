@@ -15,7 +15,6 @@ namespace Presistence.Repositories
         {
             return await _dbContext.UserStudyYears
                 .Include(usy => usy.StudyYear)
-                    .ThenInclude(sy => sy.Department)
                 .Where(usy => usy.UserId == userId)
                 .OrderBy(usy => usy.StudyYear.StartYear)
                 .AsNoTracking()
@@ -41,7 +40,6 @@ namespace Presistence.Repositories
         {
             return await _dbContext.UserStudyYears
                 .Include(usy => usy.StudyYear)
-                    .ThenInclude(sy => sy.Department)
                 .Where(usy => usy.UserId == userId && usy.StudyYear.IsCurrent)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();

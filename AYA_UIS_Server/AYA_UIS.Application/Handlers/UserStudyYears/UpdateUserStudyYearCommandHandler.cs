@@ -45,7 +45,6 @@ namespace AYA_UIS.Application.Handlers.UserStudyYears
                 StudyYearId = entity.StudyYearId,
                 StartYear = entity.StudyYear?.StartYear ?? 0,
                 EndYear = entity.StudyYear?.EndYear ?? 0,
-                DepartmentName = entity.StudyYear?.Department?.Name ?? string.Empty,
                 Level = entity.Level,
                 LevelName = entity.Level.ToString().Replace("_", " "),
                 IsCurrent = entity.StudyYear?.IsCurrent ?? false,

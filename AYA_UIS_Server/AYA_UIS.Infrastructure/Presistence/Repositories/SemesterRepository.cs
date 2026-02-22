@@ -27,5 +27,17 @@ namespace Presistence.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> IsActiveSemesterAsync(int semesterId)
+        {
+            return await _dbContext.Semesters
+                .AnyAsync(s => s.Id == semesterId && s.IsActive);
+        }
+
+        public async Task<bool> IsSemesterBelongsToStudyYearAsync(int semesterId, int studyYearId)
+        {
+            return await _dbContext.Semesters
+                .AnyAsync(s => s.Id == semesterId && s.StudyYearId == studyYearId);
+        }
     }
 }

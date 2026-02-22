@@ -11,20 +11,18 @@ namespace Presistence.Repositories
         {
         }
 
-        public async Task<IEnumerable<StudyYear>> GetByDepartmentIdAsync(int departmentId)
-        {
-            return await _dbContext.StudyYears
-                .Where(sy => sy.DepartmentId == departmentId)
-                .AsNoTracking()
-                .ToListAsync();
-        }
-
         public async Task<StudyYear?> GetCurrentStudyYearAsync()
         {
             return await _dbContext.StudyYears
                 .Where(sy => sy.IsCurrent)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> IsCurrentStudyYearAsync(int studyYearId)
+        {
+            return await _dbContext.StudyYears
+                .AnyAsync(sy => sy.Id == studyYearId && sy.IsCurrent);
         }
     }
 }

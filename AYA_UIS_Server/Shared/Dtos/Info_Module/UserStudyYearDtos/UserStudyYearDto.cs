@@ -9,7 +9,6 @@ namespace Shared.Dtos.Info_Module.UserStudyYearDtos
         public int StudyYearId { get; set; }
         public int StartYear { get; set; }
         public int EndYear { get; set; }
-        public string DepartmentName { get; set; } = string.Empty;
         public Levels Level { get; set; }
         public string LevelName { get; set; } = string.Empty;
         public bool IsCurrent { get; set; }

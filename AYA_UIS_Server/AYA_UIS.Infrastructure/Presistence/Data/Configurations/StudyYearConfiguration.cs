@@ -9,11 +9,6 @@ namespace Presistence.Data.Configurations
         public void Configure(EntityTypeBuilder<StudyYear> builder)
         {
             builder.HasKey(s => s.Id);
-
-            builder.HasOne(s => s.Department)
-                   .WithMany(d => d.StudyYears)
-                   .HasForeignKey(s => s.DepartmentId)
-                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

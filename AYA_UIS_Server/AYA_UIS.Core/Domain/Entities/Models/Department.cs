@@ -15,7 +15,6 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public string? Description { get; set; }
         public bool HasPreparatoryYear { get; set; } = false;
         public ICollection<Course> Courses { get; set; } = new List<Course>();
-        public ICollection<StudyYear> StudyYears { get; set; } = new List<StudyYear>();
         public ICollection<Fee> Fees { get; set; } = new List<Fee>(); // mean the depratment has multiple fees for different levels and academic years
         public ICollection<AcademicSchedule> AcademicSchedules { get; set; } = new List<AcademicSchedule>();
         public ICollection<User> Users { get; set; } = new List<User>();

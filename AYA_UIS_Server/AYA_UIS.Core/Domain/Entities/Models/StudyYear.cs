@@ -12,8 +12,6 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public int StartYear { get; set; } // e.g., 2024, 2025, etc.
         public int EndYear { get; set; } // e.g., 2025, 2026, etc. means if the term starts in 2024 and ends in 2025, then StartYear = 2024 and EndYear = 2025
         public bool IsCurrent { get; set; } // Indicates if this is the current study year
-        public int DepartmentId { get; set; }
-        public Department Department { get; set; } = null!;
         public ICollection<Fee> Fees { get; set; } = new List<Fee>(); // means the study year has multiple fees for different levels and departments
         public ICollection<Registration> Registrations { get; set; } = new List<Registration>();
         public ICollection<Semester> Semesters { get; set; } = new List<Semester>();

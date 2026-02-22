@@ -21,7 +21,6 @@ namespace Presistence.Repositories
         {
             return await _dbContext.Departments
                 .Include(d => d.Courses)
-                .Include(d => d.StudyYears)
                 .Include(d => d.Fees)
                 .Include(d => d.AcademicSchedules)
                 .FirstOrDefaultAsync(d => d.Id == id);
@@ -31,7 +30,6 @@ namespace Presistence.Repositories
         {
             return await _dbContext.Departments
                 .Include(d => d.Courses)
-                .Include(d => d.StudyYears)
                 .AsNoTracking()
                 .ToListAsync();
         }

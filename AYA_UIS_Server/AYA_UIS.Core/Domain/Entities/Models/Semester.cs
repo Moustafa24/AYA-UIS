@@ -14,8 +14,6 @@ namespace AYA_UIS.Core.Domain.Entities.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool IsActive { get; set; }
-        public int DepartmentId { get; set; }
-        public Department Department { get; set; } = null!;
         public int StudyYearId { get; set; }
         public StudyYear StudyYear { get; set; } = null!;
         public ICollection<AcademicSchedule> AcademicSchedules { get; set; } = new List<AcademicSchedule>();
