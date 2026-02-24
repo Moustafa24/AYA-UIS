@@ -12,8 +12,8 @@ using Presistence;
 namespace Presistence.Migrations
 {
     [DbContext(typeof(UniversityDbContext))]
-    [Migration("20260222201505_RemoveDepartmentFromStudyYear")]
-    partial class RemoveDepartmentFromStudyYear
+    [Migration("20260224132449_IntialCreate")]
+    partial class IntialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -418,9 +418,6 @@ namespace Presistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
@@ -439,8 +436,6 @@ namespace Presistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("StudyYearId");
 
@@ -827,19 +822,11 @@ namespace Presistence.Migrations
 
             modelBuilder.Entity("AYA_UIS.Core.Domain.Entities.Models.Semester", b =>
                 {
-                    b.HasOne("AYA_UIS.Core.Domain.Entities.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("AYA_UIS.Core.Domain.Entities.Models.StudyYear", "StudyYear")
                         .WithMany("Semesters")
                         .HasForeignKey("StudyYearId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Department");
 
                     b.Navigation("StudyYear");
                 });

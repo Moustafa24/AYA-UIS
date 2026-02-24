@@ -8,7 +8,7 @@ namespace Presistence
         public UniversityDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<UniversityDbContext>();
-            optionsBuilder.UseSqlServer("Server=localhost;Database=universitydb;User Id=sa;Password=Yossef_2004;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=.;Database=AYA_Database;Trusted_Connection=True;TrustServerCertificate=True");
 
             return new UniversityDbContext(optionsBuilder.Options);
         }

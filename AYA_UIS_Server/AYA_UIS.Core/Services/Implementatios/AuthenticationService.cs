@@ -313,6 +313,9 @@ namespace AYA_UIS.Core.Services.Implementations
             //0a6d8ce9afd9c2791f4028e6308550716cbe69b4d82ab0ae7640bbd76319643a
             var privateKey = await File.ReadAllTextAsync("Keys/private_key.pem");
 
+            //var privateKeyPath = Path.Combine(AppContext.BaseDirectory, "Keys", "private_key.pem");
+            //var privateKey = await File.ReadAllTextAsync(privateKeyPath);
+
             var rsa = RSA.Create();
             rsa.ImportFromPem(privateKey);
 

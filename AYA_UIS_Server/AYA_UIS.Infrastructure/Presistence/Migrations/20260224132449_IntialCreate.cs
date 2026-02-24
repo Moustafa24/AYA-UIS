@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Presistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class IntialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,6 +42,21 @@ namespace Presistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StudyYears",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StartYear = table.Column<int>(type: "int", nullable: false),
+                    EndYear = table.Column<int>(type: "int", nullable: false),
+                    IsCurrent = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudyYears", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -63,75 +78,6 @@ namespace Presistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Credits = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Courses_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
-                        principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StudyYears",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StartYear = table.Column<int>(type: "int", nullable: false),
-                    EndYear = table.Column<int>(type: "int", nullable: false),
-                    IsCurrent = table.Column<bool>(type: "bit", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudyYears", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_StudyYears_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
-                        principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CoursePrerequisites",
-                columns: table => new
-                {
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    PrerequisiteCourseId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CoursePrerequisites", x => new { x.CourseId, x.PrerequisiteCourseId });
-                    table.ForeignKey(
-                        name: "FK_CoursePrerequisites_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CoursePrerequisites_Courses_PrerequisiteCourseId",
-                        column: x => x.PrerequisiteCourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -140,13 +86,12 @@ namespace Presistence.Migrations
                     ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Academic_Code = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false),
-                    TotalCredits = table.Column<int>(type: "int", nullable: false),
-                    AllowedCredits = table.Column<int>(type: "int", nullable: false),
-                    TotalGPA = table.Column<float>(type: "real", nullable: false),
-                    Specialization = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
-                    StudyYearId = table.Column<int>(type: "int", nullable: true),
+                    Level = table.Column<int>(type: "int", nullable: true),
+                    TotalCredits = table.Column<int>(type: "int", nullable: true),
+                    AllowedCredits = table.Column<int>(type: "int", nullable: true),
+                    TotalGPA = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Specialization = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartmentId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -170,12 +115,30 @@ namespace Presistence.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Credits = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_StudyYears_StudyYearId",
-                        column: x => x.StudyYearId,
-                        principalTable: "StudyYears",
-                        principalColumn: "Id");
+                        name: "FK_Courses_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -218,18 +181,11 @@ namespace Presistence.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
                     StudyYearId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Semesters", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Semesters_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
-                        principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Semesters_StudyYears_StudyYearId",
                         column: x => x.StudyYearId,
@@ -324,38 +280,6 @@ namespace Presistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CourseUploads",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FileId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    UploadedByUserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    UploadedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CourseUploads", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CourseUploads_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_CourseUploads_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserStudyYears",
                 columns: table => new
                 {
@@ -365,7 +289,6 @@ namespace Presistence.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
                     StudyYearId = table.Column<int>(type: "int", nullable: false),
                     Level = table.Column<int>(type: "int", nullable: false),
-                    IsCurrent = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     EnrolledAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -381,6 +304,62 @@ namespace Presistence.Migrations
                         name: "FK_UserStudyYears_StudyYears_StudyYearId",
                         column: x => x.StudyYearId,
                         principalTable: "StudyYears",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CoursePrerequisites",
+                columns: table => new
+                {
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    PrerequisiteCourseId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CoursePrerequisites", x => new { x.CourseId, x.PrerequisiteCourseId });
+                    table.ForeignKey(
+                        name: "FK_CoursePrerequisites_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CoursePrerequisites_Courses_PrerequisiteCourseId",
+                        column: x => x.PrerequisiteCourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CourseUploads",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FileId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    UploadedByUserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    UploadedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseUploads", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CourseUploads_AspNetUsers_UploadedByUserId",
+                        column: x => x.UploadedByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CourseUploads_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -578,11 +557,6 @@ namespace Presistence.Migrations
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_StudyYearId",
-                table: "AspNetUsers",
-                column: "StudyYearId");
-
-            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -605,9 +579,9 @@ namespace Presistence.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseUploads_UserId",
+                name: "IX_CourseUploads_UploadedByUserId",
                 table: "CourseUploads",
-                column: "UserId");
+                column: "UploadedByUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Departments_Code",
@@ -662,19 +636,9 @@ namespace Presistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Semesters_DepartmentId",
-                table: "Semesters",
-                column: "DepartmentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Semesters_StudyYearId",
                 table: "Semesters",
                 column: "StudyYearId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudyYears_DepartmentId",
-                table: "StudyYears",
-                column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserStudyYears_StudyYearId",
